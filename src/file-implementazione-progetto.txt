@@ -1,0 +1,87 @@
+Requisiti del Linguaggio
+Definire un linguaggio imperativo tipizzato (staticamente o dinamicamente) con variabili
+e assegnamenti. Il linguaggio può essere generico (general-purpose), oppure specifico
+per un determinato dominio applicativo (DSL).
+In ogni caso, il linguaggio deve supportare almeno le espressioni aritmetico-logiche di
+base (addizione, sottrazione, moltiplicazione, divisione, uguaglianza, congiunzione, disgiunzione, negazione) con precedenza,
+almeno un costrutto iterativo (ciclo), almeno uncostrutto condizionale (scelta condizionata), blocchi di codice definiti
+ da due simboli delimitatori e visibilità riservata (con o senza shadowing), almeno tre tipi differenti oltre ai
+booleani e le stringhe, un comando per la stampa a video. Il linguaggio deve gestire in modo programmatico eventuali errori
+a tempo d’esecuzione.
+Inoltre, il linguaggio deve supportare almeno n delle seguenti funzionalità avanzate,
+dove n `e il numero di partecipanti al progetto. Ogni funzionalità avanzata `e assegnata un livello di complessità crescente:
+facile ≪ medio ≪ difficile.
+
+------------------------------------------------------------------------------------------------------------------------
+Grammatica antlr4
+Semantica ( interprete )
+Programmi di esempio ( uno per ogni componente e poi uno per test generale )
+Documentazione finale
+
+Funzionalità extra :
+
+- Array / struct   -------------->>>> SI
+- Funzioni con parametri e funzioni ricorsive
+- Conversione tipi
+- Flusso di controllo incondizionato
+    - Ottimizzazione delle condizioni ( if , ecc... )
+    - break ( chiusura ), exit e continue
+- Non determinismo ( esempio random che restituisce un operazione da eseguire ) , possibilità di prendere input da tastiera ------->>> SI
+- Variabile soltanto dichiarata ( tipo lazy )
+        int x = 7;
+        x fino a quando non la uso non vale nulla ---> x = null
+        se poi io faccio y = x + 1; ---> la variabile x prende valore e posso utilizzarla ( variabile fantasma che compare nel momento in cui viene usata)
+
+- Inlining del codice ( dentro al programma creare un blocco di richiamo a codice già esistente )
+- Flusso di controllo condizionato
+    - for + if o uno switch che contiene uno dei due :
+        - se non si blocca allora esegue un blocco di istruzioni ( consecutive al for )
+        - altrimenti salta il blocco di istruzioni
+- Zucchero sintattico : ----->>> SI
+    - operatore di incremento : += , ++, -- , -= (?) , x= , /=    ---> operazioni aritmetiche
+    - operatore ternario : condizione ? vero : falso
+    - supporto per le operazioni tra stringhe
+- Classi e Oggetti :
+    - oggetti con attributi e metodi
+    - visibilità privata e pubblica
+    - costruttori sempre vuoti
+    - niente ereditarietà
+
+------------------------------------------------------------------------------------------------------------------------
+
+Complessità delle funzionalità extra il linguaggio deve supportare almeno n delle seguenti funzionalità avanzate,
+dove n `e il numero di partecipanti al progetto. Ogni funzionalità avanzata `e assegnata un livello di complessità crescente: Facile << Normale << Difficile.
+
+Facile
+
+Strutture Dati  ----->> SI
+Conversione di Tipo
+Non Determinismo ------>> SI
+Valutazione Pigra
+Zucchero Sintattico  --------->> SI
+
+
+Normale
+
+Funzioni
+Flusso di Controllo Incondizionato
+Inlining di Codice
+Flusso di Controllo Condizionato ------->> SI ( COME ULTIMA COSA )
+
+
+Difficile
+
+Classi e Oggetti
+
+------------------------------------------------------------------------------------------------------------------------
+
+Per problemi con array dichiarazione linguaggio.g4 riga 38 mentre Interprete.java riga 53 e TypedImpTS riga 63
+
+
+Modifiche alla classe visitDecl ( commentata la vecchia e inserita la nuova versione, sia in Interprete che in TypedImp )
+tolte le sotto classi per ogni tipo di
+array e modifica ad ArrayValue , modifica in Mem ed ArrayType per le modifiche apportate in ArrayValue
+
+Aggiunti i due metododi visitArrayAccess, visitArrayAssign e visitArray nel file TypedImp , non da più errori in rosso quando si fa run
+
+Ricordarsi di non mettere righe vuote nei test , l'ultimo comando non deve avere il ;
