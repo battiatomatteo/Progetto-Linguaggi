@@ -10,6 +10,7 @@ public class TestInput extends GenericTest{
     public static final String test1 = 
             """
             string a;
+            print "Scriva il valore che desideri :";
             input a;
             print a
             """;

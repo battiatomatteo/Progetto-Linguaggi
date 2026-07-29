@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Test {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String TEST_SEPARATOR = "\n\n\n";
+    private static final String TEST_SEPARATOR = "\n------------------------------------------\n";
 
     public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001B[32m";

@@ -46,7 +46,7 @@ public class TestMenu {
         addEntry( 8,new TestNonDeterminismo(),"Operatore non deterministico           ");
         addEntry( 9,new TestOperatoreT(),"Operatore ternario                     ");
         addEntry(10,new TestCompleti(),"Test strutturati su piu' funzionalita'");
-
+        addEntry(11,new TestAutoCode(),"Test di Auto code                     ");
     }
 
     private void addEntry( int index, GenericTest classObj, String displayName){
