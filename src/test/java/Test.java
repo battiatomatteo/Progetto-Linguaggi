@@ -63,7 +63,7 @@ public class Test {
 
     private static boolean testSelection(GenericTest classObj){
         classObj.printTests();
-        System.out.print(CYAN + "► Selezionare il test: " + RESET);
+        System.out.print(YELLOW + "► Selezionare il test: " + RESET);
 
         int numeroTest = getConsoleChoice();
 
@@ -108,7 +108,7 @@ public class Test {
     }
 
     private static int getConsoleChoice() {
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().strip();
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {

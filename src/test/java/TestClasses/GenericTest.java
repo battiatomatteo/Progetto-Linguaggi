@@ -10,6 +10,7 @@ public abstract class GenericTest {
     public static final String PURPLE = "\u001B[35m";
 
     public void printTests(){
+        System.out.println();
         System.out.println(CYAN + "Test disponibili per la tipologia" + RESET);
         System.out.println(RED + "0 - Chiudi" + RESET);
     }

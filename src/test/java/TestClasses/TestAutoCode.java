@@ -1,7 +1,6 @@
 package TestClasses;
 
 import progetto.Interprete;
-
 import java.util.Scanner;
 
 public class TestAutoCode extends GenericTest{

@@ -22,13 +22,13 @@ public class TestCastArray extends GenericTest{
             c = [false,true];
             d = ["12","3"];
             a = (int[]) a;
-            print toStr(a);
+            print a;
             a = (int[]) b;
-            print toStr(a);
+            print a;
             a = (int[]) c;
-            print toStr(a);
+            print a;
             a = (int[]) d;
-            print toStr(a)
+            print a
             """;
 
     private static final String test2 =
@@ -43,13 +43,13 @@ public class TestCastArray extends GenericTest{
             c = [false,true];
             d = ["12","3"];
             b = (dec[]) b;
-            print toStr(b);
+            print b;
             b = (dec[]) a;
-            print toStr(b);
+            print b;
             b = (dec[]) c;
-            print toStr(b);
+            print b;
             b = (dec[]) d;
-            print toStr(b)
+            print b
             """;
 
     private static final String test3 =
@@ -64,13 +64,13 @@ public class TestCastArray extends GenericTest{
             c = [false,true];
             d = ["true","false"];
             c = (bool[]) c;
-            print toStr(c);
+            print c;
             c = (bool[]) a;
-            print toStr(c);
+            print c;
             c = (bool[]) b;
-            print toStr(c);
+            print c;
             c = (bool[]) d;
-            print toStr(c)
+            print c
             """;
     private static final String test4 =
             """
@@ -84,13 +84,13 @@ public class TestCastArray extends GenericTest{
             c = [false,true];
             d = ["12","3"];
             d = (string[]) d;
-            print toStr(d);
+            print d;
             d = (string[]) a;
-            print toStr(d);
+            print d;
             d = (string[]) b;
-            print toStr(d);
+            print d;
             d = (string[]) c;
-            print toStr(d)
+            print d
             """;
 
     private static final String test5 = """
@@ -106,9 +106,9 @@ public class TestCastArray extends GenericTest{
             c = "miao";
             print "test5 casi disperati";
             f = (int[]) a;
-            print toStr(f);
+            print f;
             g = (string[]) c;
-            print toStr(g)
+            print g
             """;
     @Override
     public void printTests() {

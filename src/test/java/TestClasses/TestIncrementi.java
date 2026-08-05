@@ -42,7 +42,7 @@ public class TestIncrementi extends GenericTest{
            print x;
            --x;
            print x;
-           print "corretto";
+           print "corretto"
            """;
 
     private static final String test3 =
