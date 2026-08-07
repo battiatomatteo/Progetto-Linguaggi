@@ -227,20 +227,18 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
     }
 
     @Override
-    public ComType visitIfStatement(LinguaggioParser.IfStatementContext ctx) {
-        String id = ctx.ID().getText();
-
-        ExpType varType = exists(id,ctx);
+    public ExpType visitIfStatement(LinguaggioParser.IfStatementContext ctx) {
 
         visitBoolExp(ctx.exp(0));
 
         ExpType expType = (ExpType) visit(ctx.exp(1));
-        checkAssign(ctx, id, varType, expType);
 
         ExpType exp2Type = (ExpType) visit(ctx.exp(2));
-        checkAssign(ctx, id, varType, exp2Type);
-
-        return ComType.INSTANCE;
+        if (!expType.isCompatible(exp2Type)) {
+            throw new TypeMismatchException(getError(ctx,
+                    "The two branches of the ternary operator must have the same type."));
+        }
+        return expType;
     }
 
     private ExpType exists(String id, LinguaggioParser.ComContext ctx) {

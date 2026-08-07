@@ -13,6 +13,7 @@ progetto\exception\CastException.class
 progetto\exception\SyntaxErrorException.class
 progetto\LinguaggioParser$MulDivModContext.class
 progetto\TypedImpTS.class
+progetto\utils\FormattedLogs.class
 progetto\LinguaggioParser$ArrayAccessContext.class
 progetto\value\DecValue.class
 progetto\LinguaggioParser$AssignContext.class
@@ -48,6 +49,7 @@ progetto\LinguaggioParser$AddSubContext.class
 progetto\LinguaggioParser$EqExpContext.class
 progetto\LinguaggioParser$VarDecContext.class
 progetto\LinguaggioParser$NopContext.class
+progetto\exception\InterpreterExitException.class
 progetto\LinguaggioParser$BreakCmdContext.class
 progetto\value\StringValue$1.class
 progetto\value\Value.class

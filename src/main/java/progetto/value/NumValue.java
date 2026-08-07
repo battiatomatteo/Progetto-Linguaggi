@@ -3,6 +3,7 @@ package progetto.value;
 import progetto.exception.CastException;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
+import progetto.utils.FormattedLogs;
 
 public class NumValue<T extends Number> extends ExpValue<T> {
 
@@ -26,16 +27,12 @@ public class NumValue<T extends Number> extends ExpValue<T> {
 
     protected boolean checkCast(ExpType destType) {
         SimpleType thisType = SimpleType.fromValue(this);
-        //System.out.println("checkCast thisType: " + thisType);
         if (!thisType.isCastable(destType)) {
-            //System.out.println("checkCast thisType is not castable");
             return false;
         }
-        //System.out.println("vado avanti");
         if (!isSafeCast(destType)) {
-            System.out.println("Unsafe cast from " + thisType + " to " + destType);
+            FormattedLogs.println(FormattedLogs.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
         }
-        //System.out.println("finito");
         return true;
     }
 

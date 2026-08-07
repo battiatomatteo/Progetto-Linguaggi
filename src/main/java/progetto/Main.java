@@ -66,16 +66,31 @@ public class Main {
 
     private static final String test =
             """
-            string x = "1.0";
-            char z = (char) x;
-            print z
+            int x;
+            int y;
+            int z;
+            int[] arr;
+            bool v;
+            int[] a;
+            int[] b;
+            a = [1,2,3];
+            b = [3,7];
+            v = true;
+            y = 5;
+            x = v ? 3 : 1;
+            z = (false or (x < 10 and y > 0)) ? a[0] + 5 : b[1] - 3;
+            arr = (z == 4) ? a : b;
+            print x;
+            print y;
+            print z;
+            print arr
             """;
 
 
 
     public static void main(String[] args) {
 
-        String prog = STRING_TEST;
+        String prog = test;
         CharStream cs = CharStreams.fromString(prog);
         LinguaggioLexer lexer = new LinguaggioLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream(lexer);

@@ -1,5 +1,7 @@
 package TestClasses;
 
+import progetto.utils.FormattedLogs;
+
 public class TestControlloCondizionato extends GenericTest {
 
     public static final int TEST_IN = 1;
@@ -7,8 +9,6 @@ public class TestControlloCondizionato extends GenericTest {
     public static final int TEST_IN3 = 3;
     public static final int TEST_IN4 = 4;
     public static final int TEST_IN5 = 5;
-    public static final String BRIGHT_GREEN   = "\u001B[92m";
-    public static final String RESET  = "\u001B[0m";
 
     public static final String test1 =
             """
@@ -123,12 +123,12 @@ public class TestControlloCondizionato extends GenericTest {
     @Override
     public void printTests() {
         super.printTests();
-        System.out.println(BRIGHT_GREEN + "SISTEMARE TEST 1, 2, 3" + RESET);
-        System.out.println(BRIGHT_GREEN + "1 - forElse e if + forElse e switch" + RESET);
-        System.out.println(BRIGHT_GREEN + "2 - forElse + break" + RESET);
-        System.out.println(BRIGHT_GREEN + "3 - forElse + switchCase" + RESET);
-        System.out.println(BRIGHT_GREEN + "4 - while + break" + RESET);
-        System.out.println(BRIGHT_GREEN + "5 - for annidato + break" + RESET);
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "SISTEMARE TEST 1, 2, 3");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - forElse e if + forElse e switch");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - forElse + break");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - forElse + switchCase");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "4 - while + break");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "5 - for annidato + break");
     }
 
     @Override

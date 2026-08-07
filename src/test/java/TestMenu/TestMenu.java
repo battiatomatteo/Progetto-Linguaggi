@@ -1,40 +1,33 @@
 package TestMenu;
 
 import TestClasses.*;
+import progetto.utils.FormattedLogs;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TestMenu {
     private final Map<Integer, TestMenuEntry> menu;
-    public static final String RESET = "\u001B[0m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String RED = "\u001B[31m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String PURPLE = "\u001B[35m";
 
     public TestMenu() {
         menu = new HashMap<Integer, TestMenuEntry>();
         setUpMenu();
     }
     // mettete in giallo tutti i warning dei codici
-    /* Testa da mettere apposto:
+    /* Test da mettere apposto:
     - operatore ternario
     - test 10
      */
     public void printMenu(){
-        System.out.println(CYAN + "\nScegliere il numero corrispondente alla tipologia di test da eseguire: " + RESET);
-
-        System.out.println(GREEN + "╔════════════════════════════════════════════════╗" + RESET);
-        System.out.println(GREEN + "║                 MENU PRINCIPALE                ║" + RESET);
-        System.out.println(GREEN + "╠════════════════════════════════════════════════╣" + RESET);
-        System.out.println(GREEN + "║ " + RED +  " 0 - Chiudi programma di test" + RESET + GREEN + "                  ║" + RESET);
+        FormattedLogs.println(FormattedLogs.GREEN,"\nScegliere il numero corrispondente alla tipologia di test da eseguire: ");
+        FormattedLogs.println(FormattedLogs.GREEN,"╔════════════════════════════════════════════════╗");
+        FormattedLogs.println(FormattedLogs.GREEN,"║                 MENU PRINCIPALE                ║");
+        FormattedLogs.println(FormattedLogs.GREEN,"╠════════════════════════════════════════════════╣");
+        FormattedLogs.printFramed("║  ",padRightString(  "0 - Chiudi programma di test",44), FormattedLogs.GREEN,FormattedLogs.RED);
         for (Map.Entry<Integer, TestMenuEntry> entry : menu.entrySet()) {
-            //System.out.println(GREEN + "║ " + entry.getKey() + " - " + entry.getValue().getDisplayName() + "    ║" + RESET);
-            System.out.println(GREEN + "║ " + String.format("%2d", entry.getKey()) + " - " + entry.getValue().getDisplayName() + "    ║" + RESET);
+            FormattedLogs.println(FormattedLogs.GREEN,"║ " + String.format("%2d", entry.getKey()) + " - " + entry.getValue().getDisplayName() + "    ║");
         }
-        System.out.println(GREEN + "╚════════════════════════════════════════════════╝" + RESET);
+        FormattedLogs.println(FormattedLogs.GREEN,"╚════════════════════════════════════════════════╝");
     }
 
     public TestMenuEntry getTestMenuEntry(int id){
@@ -56,8 +49,10 @@ public class TestMenu {
     }
 
     private void addEntry( int index, GenericTest classObj, String displayName){
-        int ROW_LEN = 38;
-        String formattedText = displayName + " ".repeat(ROW_LEN - displayName.length());
-        menu.put(index,new TestMenuEntry(classObj,formattedText));
+        menu.put(index,new TestMenuEntry(classObj,padRightString(displayName,38)));
+    }
+
+    private String padRightString(String string, int length){
+        return String.format("%1$-" + length + "s", string);
     }
 }

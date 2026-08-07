@@ -1,13 +1,13 @@
 package TestClasses;
 
+import progetto.utils.FormattedLogs;
+
 public class TestCastArray extends GenericTest{
     public final static int TEST_CAST_TO_INTEGER = 1;
     public final static int TEST_CAST_TO_DECIMAL = 2;
     public final static int TEST_CAST_TO_BOOLEAN = 3;
     public final static int TEST_CAST_TO_STRING  = 4;
     public final static int TEST_CAST_ERRORS  = 5;
-    public static final String BRIGHT_GREEN   = "\u001B[92m";
-    public static final String RESET  = "\u001B[0m";
 
 
     private static final String test1 =
@@ -94,6 +94,7 @@ public class TestCastArray extends GenericTest{
             """;
 
     private static final String test5 = """
+            /* commento inizio */
             int a;
             int[] b;
             string[] d;
@@ -105,19 +106,23 @@ public class TestCastArray extends GenericTest{
             d = ["ciao","bau"];
             c = "miao";
             print "test5 casi disperati";
-            f = (int[]) a;
-            print f;
-            g = (string[]) c;
-            print g
+            a = a * 2;
+            print a;
+            print "prova";
+            a = a / 2;
+            print "prova";
+            print a;
+            print "prova"
+            /* commento fine */
             """;
     @Override
     public void printTests() {
         super.printTests();
-        System.out.println(BRIGHT_GREEN + "1 - Cast di array verso int" + RESET);
-        System.out.println(BRIGHT_GREEN + "2 - Cast di array verso dec" + RESET);
-        System.out.println(BRIGHT_GREEN + "3 - Cast di array verso bool" + RESET);
-        System.out.println(BRIGHT_GREEN + "4 - Cast di array verso string" + RESET);
-        System.out.println(BRIGHT_GREEN + "5 - Cast di array verso char" + RESET);
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - Cast di array verso int");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - Cast di array verso dec");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - Cast di array verso bool");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "4 - Cast di array verso string");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "5 - Cast di array verso char");
     }
 
     @Override

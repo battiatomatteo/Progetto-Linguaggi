@@ -20,12 +20,12 @@ public class LinguaggioParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, ADD=6, SUB=7, MUL=8, DIV=9, MOD=10, 
 		POW=11, INCR=12, DECR=13, ADDEQ=14, SUBEQ=15, DIVEQ=16, MULEQ=17, EQQ=18, 
 		NEQ=19, LEQ=20, GEQ=21, LT=22, GT=23, NOT=24, AND=25, OR=26, DOLL=27, 
-		CONCAT=28, TOSTR=29, STRING_START=30, IF=31, ELSE=32, WHILE=33, ASSIGN=34, 
-		OUT=35, INPUT=36, NOP=37, FOR=38, FROM=39, TO=40, BREAK=41, SWITCH=42, 
-		CASE=43, DEFAULT=44, EXIT=45, DLOW=46, DGRT=47, COLON=48, QUESTIONMARK=49, 
-		LBRACK=50, RBRACK=51, LPAR=52, RPAR=53, LBRACE=54, RBRACE=55, COMMA=56, 
-		SEMICOLON=57, AT=58, STRING=59, BOOL=60, INT=61, DEC=62, CHAR=63, ID=64, 
-		COMMENT=65, COMMENT_ML=66, WS=67;
+		CONCAT=28, STRING_START=29, IF=30, ELSE=31, WHILE=32, ASSIGN=33, OUT=34, 
+		INPUT=35, NOP=36, FOR=37, FROM=38, TO=39, BREAK=40, SWITCH=41, CASE=42, 
+		DEFAULT=43, EXIT=44, DLOW=45, DGRT=46, COLON=47, QUESTIONMARK=48, LBRACK=49, 
+		RBRACK=50, LPAR=51, RPAR=52, LBRACE=53, RBRACE=54, COMMA=55, SEMICOLON=56, 
+		AT=57, STRING=58, BOOL=59, INT=60, DEC=61, CHAR=62, ID=63, COMMENT=64, 
+		COMMENT_ML=65, WS=66;
 	public static final int
 		RULE_main = 0, RULE_decl = 1, RULE_varDec = 2, RULE_com = 3, RULE_exp = 4, 
 		RULE_type = 5, RULE_baseType = 6, RULE_num = 7, RULE_switchBody = 8, RULE_caseBranch = 9, 
@@ -43,10 +43,10 @@ public class LinguaggioParser extends Parser {
 			null, "'int'", "'dec'", "'bool'", "'string'", "'char'", "'+'", "'-'", 
 			"'*'", "'/'", "'%'", "'^'", "'++'", "'--'", "'+='", "'-='", "'/='", "'*='", 
 			"'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'not'", "'and'", "'or'", 
-			"'$'", null, "'toStr'", null, "'if'", "'else'", "'while'", "'='", "'print'", 
-			"'input'", "'nop'", "'for'", "'from'", "'to'", "'break'", "'switch'", 
-			"'case'", "'default'", "'exit'", "'<<'", "'>>'", "':'", "'?'", "'['", 
-			"']'", "'('", "')'", "'{'", "'}'", "','", "';'", "'@'"
+			"'$'", null, null, "'if'", "'else'", "'while'", "'='", "'print'", "'input'", 
+			"'nop'", "'for'", "'from'", "'to'", "'break'", "'switch'", "'case'", 
+			"'default'", "'exit'", "'<<'", "'>>'", "':'", "'?'", "'['", "']'", "'('", 
+			"')'", "'{'", "'}'", "','", "';'", "'@'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -54,12 +54,12 @@ public class LinguaggioParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, "ADD", "SUB", "MUL", "DIV", "MOD", 
 			"POW", "INCR", "DECR", "ADDEQ", "SUBEQ", "DIVEQ", "MULEQ", "EQQ", "NEQ", 
-			"LEQ", "GEQ", "LT", "GT", "NOT", "AND", "OR", "DOLL", "CONCAT", "TOSTR", 
-			"STRING_START", "IF", "ELSE", "WHILE", "ASSIGN", "OUT", "INPUT", "NOP", 
-			"FOR", "FROM", "TO", "BREAK", "SWITCH", "CASE", "DEFAULT", "EXIT", "DLOW", 
-			"DGRT", "COLON", "QUESTIONMARK", "LBRACK", "RBRACK", "LPAR", "RPAR", 
-			"LBRACE", "RBRACE", "COMMA", "SEMICOLON", "AT", "STRING", "BOOL", "INT", 
-			"DEC", "CHAR", "ID", "COMMENT", "COMMENT_ML", "WS"
+			"LEQ", "GEQ", "LT", "GT", "NOT", "AND", "OR", "DOLL", "CONCAT", "STRING_START", 
+			"IF", "ELSE", "WHILE", "ASSIGN", "OUT", "INPUT", "NOP", "FOR", "FROM", 
+			"TO", "BREAK", "SWITCH", "CASE", "DEFAULT", "EXIT", "DLOW", "DGRT", "COLON", 
+			"QUESTIONMARK", "LBRACK", "RBRACK", "LPAR", "RPAR", "LBRACE", "RBRACE", 
+			"COMMA", "SEMICOLON", "AT", "STRING", "BOOL", "INT", "DEC", "CHAR", "ID", 
+			"COMMENT", "COMMENT_ML", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -352,25 +352,6 @@ public class LinguaggioParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class IfStatementContext extends ComContext {
-		public TerminalNode ID() { return getToken(LinguaggioParser.ID, 0); }
-		public TerminalNode ASSIGN() { return getToken(LinguaggioParser.ASSIGN, 0); }
-		public List<ExpContext> exp() {
-			return getRuleContexts(ExpContext.class);
-		}
-		public ExpContext exp(int i) {
-			return getRuleContext(ExpContext.class,i);
-		}
-		public TerminalNode QUESTIONMARK() { return getToken(LinguaggioParser.QUESTIONMARK, 0); }
-		public TerminalNode COLON() { return getToken(LinguaggioParser.COLON, 0); }
-		public IfStatementContext(ComContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LinguaggioVisitor ) return ((LinguaggioVisitor<? extends T>)visitor).visitIfStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
 	public static class SwitchCmdContext extends ComContext {
 		public TerminalNode SWITCH() { return getToken(LinguaggioParser.SWITCH, 0); }
 		public TerminalNode LPAR() { return getToken(LinguaggioParser.LPAR, 0); }
@@ -611,7 +592,7 @@ public class LinguaggioParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(135);
+			setState(127);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
@@ -761,189 +742,168 @@ public class LinguaggioParser extends Parser {
 				break;
 			case 8:
 				{
-				_localctx = new IfStatementContext(_localctx);
+				_localctx = new WhileContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(78);
-				match(ID);
+				match(WHILE);
 				setState(79);
-				match(ASSIGN);
+				match(LPAR);
 				setState(80);
 				exp(0);
 				setState(81);
-				match(QUESTIONMARK);
+				match(RPAR);
 				setState(82);
-				exp(0);
+				match(LBRACE);
 				setState(83);
-				match(COLON);
+				com(0);
 				setState(84);
-				exp(0);
+				match(RBRACE);
 				}
 				break;
 			case 9:
 				{
-				_localctx = new WhileContext(_localctx);
+				_localctx = new OutContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(86);
-				match(WHILE);
+				match(OUT);
 				setState(87);
-				match(LPAR);
-				setState(88);
 				exp(0);
-				setState(89);
-				match(RPAR);
-				setState(90);
-				match(LBRACE);
-				setState(91);
-				com(0);
-				setState(92);
-				match(RBRACE);
 				}
 				break;
 			case 10:
 				{
-				_localctx = new OutContext(_localctx);
+				_localctx = new NopContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(94);
-				match(OUT);
-				setState(95);
-				exp(0);
+				setState(88);
+				match(NOP);
 				}
 				break;
 			case 11:
 				{
-				_localctx = new NopContext(_localctx);
+				_localctx = new InputContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(96);
-				match(NOP);
+				setState(89);
+				match(INPUT);
+				setState(90);
+				match(ID);
 				}
 				break;
 			case 12:
 				{
-				_localctx = new InputContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(97);
-				match(INPUT);
-				setState(98);
-				match(ID);
-				}
-				break;
-			case 13:
-				{
 				_localctx = new NonDetContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(99);
+				setState(91);
 				match(DLOW);
-				setState(100);
+				setState(92);
 				com(0);
-				setState(103); 
+				setState(95); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(101);
+					setState(93);
 					match(AT);
-					setState(102);
+					setState(94);
 					com(0);
 					}
 					}
-					setState(105); 
+					setState(97); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==AT );
-				setState(107);
+				setState(99);
 				match(DGRT);
 				}
 				break;
-			case 14:
+			case 13:
 				{
 				_localctx = new ForWithFinalContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(109);
+				setState(101);
 				match(FOR);
-				setState(110);
+				setState(102);
 				match(ID);
-				setState(111);
+				setState(103);
 				match(FROM);
-				setState(112);
+				setState(104);
 				exp(0);
-				setState(113);
+				setState(105);
 				match(TO);
-				setState(114);
+				setState(106);
 				exp(0);
-				setState(115);
+				setState(107);
 				match(LBRACE);
-				setState(116);
+				setState(108);
 				com(0);
-				setState(117);
+				setState(109);
 				match(RBRACE);
-				setState(123);
+				setState(115);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 				case 1:
 					{
-					setState(118);
+					setState(110);
 					match(ELSE);
-					setState(119);
+					setState(111);
 					match(LBRACE);
-					setState(120);
+					setState(112);
 					com(0);
-					setState(121);
+					setState(113);
 					match(RBRACE);
 					}
 					break;
 				}
 				}
 				break;
-			case 15:
+			case 14:
 				{
 				_localctx = new BreakCmdContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(125);
+				setState(117);
 				match(BREAK);
 				}
 				break;
-			case 16:
+			case 15:
 				{
 				_localctx = new SwitchCmdContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(126);
+				setState(118);
 				match(SWITCH);
-				setState(127);
+				setState(119);
 				match(LPAR);
-				setState(128);
+				setState(120);
 				exp(0);
-				setState(129);
+				setState(121);
 				match(RPAR);
-				setState(130);
+				setState(122);
 				match(LBRACE);
-				setState(131);
+				setState(123);
 				switchBody();
-				setState(132);
+				setState(124);
 				match(RBRACE);
 				}
 				break;
-			case 17:
+			case 16:
 				{
 				_localctx = new ExitContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(134);
+				setState(126);
 				match(EXIT);
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(142);
+			setState(134);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -954,16 +914,16 @@ public class LinguaggioParser extends Parser {
 					{
 					_localctx = new SeqContext(new ComContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_com);
-					setState(137);
+					setState(129);
 					if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-					setState(138);
+					setState(130);
 					match(SEMICOLON);
-					setState(139);
+					setState(131);
 					com(10);
 					}
 					} 
 				}
-				setState(144);
+				setState(136);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -1087,6 +1047,23 @@ public class LinguaggioParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof LinguaggioVisitor ) return ((LinguaggioVisitor<? extends T>)visitor).visitConcat(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IfStatementContext extends ExpContext {
+		public List<ExpContext> exp() {
+			return getRuleContexts(ExpContext.class);
+		}
+		public ExpContext exp(int i) {
+			return getRuleContext(ExpContext.class,i);
+		}
+		public TerminalNode QUESTIONMARK() { return getToken(LinguaggioParser.QUESTIONMARK, 0); }
+		public TerminalNode COLON() { return getToken(LinguaggioParser.COLON, 0); }
+		public IfStatementContext(ExpContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LinguaggioVisitor ) return ((LinguaggioVisitor<? extends T>)visitor).visitIfStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1306,7 +1283,7 @@ public class LinguaggioParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(186);
+			setState(178);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
@@ -1315,13 +1292,13 @@ public class LinguaggioParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(146);
+				setState(138);
 				match(ID);
-				setState(147);
+				setState(139);
 				match(LBRACK);
-				setState(148);
+				setState(140);
 				exp(0);
-				setState(149);
+				setState(141);
 				match(RBRACK);
 				}
 				break;
@@ -1330,14 +1307,14 @@ public class LinguaggioParser extends Parser {
 				_localctx = new CastContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(151);
+				setState(143);
 				match(LPAR);
-				setState(152);
+				setState(144);
 				type();
-				setState(153);
+				setState(145);
 				match(RPAR);
-				setState(154);
-				exp(19);
+				setState(146);
+				exp(20);
 				}
 				break;
 			case 3:
@@ -1345,7 +1322,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new CharLiteralContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(156);
+				setState(148);
 				match(CHAR);
 				}
 				break;
@@ -1354,7 +1331,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new NumericContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(157);
+				setState(149);
 				num();
 				}
 				break;
@@ -1363,7 +1340,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new BooleanContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(158);
+				setState(150);
 				match(BOOL);
 				}
 				break;
@@ -1372,7 +1349,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new StringContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(159);
+				setState(151);
 				match(STRING);
 				}
 				break;
@@ -1381,11 +1358,11 @@ public class LinguaggioParser extends Parser {
 				_localctx = new ComplexStringContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(160);
+				setState(152);
 				match(STRING_START);
-				setState(161);
+				setState(153);
 				exp(0);
-				setState(162);
+				setState(154);
 				match(RBRACE);
 				}
 				break;
@@ -1394,11 +1371,11 @@ public class LinguaggioParser extends Parser {
 				_localctx = new ParExpContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(164);
+				setState(156);
 				match(LPAR);
-				setState(165);
+				setState(157);
 				exp(0);
-				setState(166);
+				setState(158);
 				match(RPAR);
 				}
 				break;
@@ -1407,10 +1384,10 @@ public class LinguaggioParser extends Parser {
 				_localctx = new NotContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(168);
+				setState(160);
 				match(NOT);
-				setState(169);
-				exp(11);
+				setState(161);
+				exp(12);
 				}
 				break;
 			case 10:
@@ -1418,7 +1395,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new IdContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(170);
+				setState(162);
 				match(ID);
 				}
 				break;
@@ -1427,27 +1404,27 @@ public class LinguaggioParser extends Parser {
 				_localctx = new ArrayContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(171);
+				setState(163);
 				match(LBRACK);
-				setState(172);
+				setState(164);
 				exp(0);
-				setState(177);
+				setState(169);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(173);
+					setState(165);
 					match(COMMA);
-					setState(174);
+					setState(166);
 					exp(0);
 					}
 					}
-					setState(179);
+					setState(171);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(180);
+				setState(172);
 				match(RBRACK);
 				}
 				break;
@@ -1456,7 +1433,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new PreDecrIncExpContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(182);
+				setState(174);
 				((PreDecrIncExpContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==INCR || _la==DECR) ) {
@@ -1467,7 +1444,7 @@ public class LinguaggioParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(183);
+				setState(175);
 				match(ID);
 				}
 				break;
@@ -1476,9 +1453,9 @@ public class LinguaggioParser extends Parser {
 				_localctx = new PostDecrIncExpContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(184);
+				setState(176);
 				match(ID);
-				setState(185);
+				setState(177);
 				((PostDecrIncExpContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==INCR || _la==DECR) ) {
@@ -1493,7 +1470,7 @@ public class LinguaggioParser extends Parser {
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(211);
+			setState(209);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1501,28 +1478,28 @@ public class LinguaggioParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(209);
+					setState(207);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 					case 1:
 						{
 						_localctx = new PowContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(188);
-						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
-						setState(189);
+						setState(180);
+						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
+						setState(181);
 						match(POW);
-						setState(190);
-						exp(12);
+						setState(182);
+						exp(13);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new MulDivModContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(191);
-						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(192);
+						setState(183);
+						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
+						setState(184);
 						((MulDivModContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1792L) != 0)) ) {
@@ -1533,17 +1510,17 @@ public class LinguaggioParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(193);
-						exp(11);
+						setState(185);
+						exp(12);
 						}
 						break;
 					case 3:
 						{
 						_localctx = new AddSubContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(194);
-						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(195);
+						setState(186);
+						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
+						setState(187);
 						((AddSubContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==ADD || _la==SUB) ) {
@@ -1554,17 +1531,17 @@ public class LinguaggioParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(196);
-						exp(10);
+						setState(188);
+						exp(11);
 						}
 						break;
 					case 4:
 						{
 						_localctx = new CmpExpContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(197);
-						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(198);
+						setState(189);
+						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
+						setState(190);
 						((CmpExpContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 15728640L) != 0)) ) {
@@ -1575,17 +1552,17 @@ public class LinguaggioParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(199);
-						exp(9);
+						setState(191);
+						exp(10);
 						}
 						break;
 					case 5:
 						{
 						_localctx = new EqExpContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(200);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(201);
+						setState(192);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						setState(193);
 						((EqExpContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==EQQ || _la==NEQ) ) {
@@ -1596,17 +1573,17 @@ public class LinguaggioParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(202);
-						exp(8);
+						setState(194);
+						exp(9);
 						}
 						break;
 					case 6:
 						{
 						_localctx = new AndOrContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(203);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(204);
+						setState(195);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(196);
 						((AndOrContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==AND || _la==OR) ) {
@@ -1617,26 +1594,42 @@ public class LinguaggioParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(205);
-						exp(7);
+						setState(197);
+						exp(8);
 						}
 						break;
 					case 7:
 						{
 						_localctx = new ConcatContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(206);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(207);
+						setState(198);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(199);
 						match(CONCAT);
-						setState(208);
-						exp(6);
+						setState(200);
+						exp(7);
+						}
+						break;
+					case 8:
+						{
+						_localctx = new IfStatementContext(new ExpContext(_parentctx, _parentState));
+						pushNewRecursionContext(_localctx, _startState, RULE_exp);
+						setState(201);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(202);
+						match(QUESTIONMARK);
+						setState(203);
+						exp(0);
+						setState(204);
+						match(COLON);
+						setState(205);
+						exp(5);
 						}
 						break;
 					}
 					} 
 				}
-				setState(213);
+				setState(211);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			}
@@ -1678,16 +1671,16 @@ public class LinguaggioParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(214);
+			setState(212);
 			baseType();
-			setState(217);
+			setState(215);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==LBRACK) {
 				{
-				setState(215);
+				setState(213);
 				match(LBRACK);
-				setState(216);
+				setState(214);
 				match(RBRACK);
 				}
 			}
@@ -1725,7 +1718,7 @@ public class LinguaggioParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(219);
+			setState(217);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 62L) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1785,14 +1778,14 @@ public class LinguaggioParser extends Parser {
 		NumContext _localctx = new NumContext(_ctx, getState());
 		enterRule(_localctx, 14, RULE_num);
 		try {
-			setState(223);
+			setState(221);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT:
 				_localctx = new IntNumContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(221);
+				setState(219);
 				match(INT);
 				}
 				break;
@@ -1800,7 +1793,7 @@ public class LinguaggioParser extends Parser {
 				_localctx = new DecNumContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(222);
+				setState(220);
 				match(DEC);
 				}
 				break;
@@ -1848,26 +1841,26 @@ public class LinguaggioParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(226); 
+			setState(224); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(225);
+				setState(223);
 				caseBranch();
 				}
 				}
-				setState(228); 
+				setState(226); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==CASE );
-			setState(231);
+			setState(229);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==DEFAULT) {
 				{
-				setState(230);
+				setState(228);
 				defaultBranch();
 				}
 			}
@@ -1913,15 +1906,15 @@ public class LinguaggioParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(233);
+			setState(231);
 			match(CASE);
-			setState(234);
+			setState(232);
 			exp(0);
-			setState(235);
+			setState(233);
 			match(COLON);
-			setState(236);
+			setState(234);
 			com(0);
-			setState(237);
+			setState(235);
 			match(SEMICOLON);
 			}
 		}
@@ -1960,11 +1953,11 @@ public class LinguaggioParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(239);
+			setState(237);
 			match(DEFAULT);
-			setState(240);
+			setState(238);
 			match(COLON);
-			setState(241);
+			setState(239);
 			com(0);
 			}
 		}
@@ -1998,25 +1991,27 @@ public class LinguaggioParser extends Parser {
 	private boolean exp_sempred(ExpContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 1:
-			return precpred(_ctx, 12);
+			return precpred(_ctx, 13);
 		case 2:
-			return precpred(_ctx, 10);
+			return precpred(_ctx, 11);
 		case 3:
-			return precpred(_ctx, 9);
+			return precpred(_ctx, 10);
 		case 4:
-			return precpred(_ctx, 8);
+			return precpred(_ctx, 9);
 		case 5:
-			return precpred(_ctx, 7);
+			return precpred(_ctx, 8);
 		case 6:
-			return precpred(_ctx, 6);
+			return precpred(_ctx, 7);
 		case 7:
+			return precpred(_ctx, 6);
+		case 8:
 			return precpred(_ctx, 5);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001C\u00f4\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001B\u00f2\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0001\u0000\u0001\u0000\u0001"+
@@ -2031,152 +2026,151 @@ public class LinguaggioParser extends Parser {
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0004\u0003`\b\u0003"+
+		"\u000b\u0003\f\u0003a\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0004\u0003h\b\u0003\u000b\u0003\f\u0003i\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0003\u0003|\b\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0003\u0003\u0088\b\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0005\u0003\u008d\b\u0003\n\u0003\f\u0003\u0090\t\u0003\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0005\u0004"+
-		"\u00b0\b\u0004\n\u0004\f\u0004\u00b3\t\u0004\u0001\u0004\u0001\u0004\u0001"+
-		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004\u00bb\b\u0004\u0001"+
+		"\u0003\u0003t\b\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0003\u0003\u0080\b\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0005\u0003"+
+		"\u0085\b\u0003\n\u0003\f\u0003\u0088\t\u0003\u0001\u0004\u0001\u0004\u0001"+
 		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
 		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
 		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
-		"\u0004\u0001\u0004\u0001\u0004\u0005\u0004\u00d2\b\u0004\n\u0004\f\u0004"+
-		"\u00d5\t\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005\u00da\b"+
-		"\u0005\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0003\u0007\u00e0"+
-		"\b\u0007\u0001\b\u0004\b\u00e3\b\b\u000b\b\f\b\u00e4\u0001\b\u0003\b\u00e8"+
-		"\b\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0001\n\u0000\u0002\u0006\b\u000b\u0000\u0002\u0004\u0006\b"+
-		"\n\f\u000e\u0010\u0012\u0014\u0000\b\u0001\u0000\f\r\u0001\u0000\u000e"+
-		"\u0011\u0001\u0000\b\n\u0001\u0000\u0006\u0007\u0001\u0000\u0014\u0017"+
-		"\u0001\u0000\u0012\u0013\u0001\u0000\u0019\u001a\u0001\u0000\u0001\u0005"+
-		"\u0115\u0000\u0016\u0001\u0000\u0000\u0000\u0002\u001d\u0001\u0000\u0000"+
-		"\u0000\u0004 \u0001\u0000\u0000\u0000\u0006\u0087\u0001\u0000\u0000\u0000"+
-		"\b\u00ba\u0001\u0000\u0000\u0000\n\u00d6\u0001\u0000\u0000\u0000\f\u00db"+
-		"\u0001\u0000\u0000\u0000\u000e\u00df\u0001\u0000\u0000\u0000\u0010\u00e2"+
-		"\u0001\u0000\u0000\u0000\u0012\u00e9\u0001\u0000\u0000\u0000\u0014\u00ef"+
-		"\u0001\u0000\u0000\u0000\u0016\u0017\u0003\u0002\u0001\u0000\u0017\u0018"+
-		"\u0003\u0006\u0003\u0000\u0018\u0019\u0005\u0000\u0000\u0001\u0019\u0001"+
-		"\u0001\u0000\u0000\u0000\u001a\u001c\u0003\u0004\u0002\u0000\u001b\u001a"+
-		"\u0001\u0000\u0000\u0000\u001c\u001f\u0001\u0000\u0000\u0000\u001d\u001b"+
-		"\u0001\u0000\u0000\u0000\u001d\u001e\u0001\u0000\u0000\u0000\u001e\u0003"+
-		"\u0001\u0000\u0000\u0000\u001f\u001d\u0001\u0000\u0000\u0000 !\u0003\n"+
-		"\u0005\u0000!$\u0005@\u0000\u0000\"#\u0005\"\u0000\u0000#%\u0003\b\u0004"+
-		"\u0000$\"\u0001\u0000\u0000\u0000$%\u0001\u0000\u0000\u0000%&\u0001\u0000"+
-		"\u0000\u0000&\'\u00059\u0000\u0000\'\u0005\u0001\u0000\u0000\u0000()\u0006"+
-		"\u0003\uffff\uffff\u0000)*\u0007\u0000\u0000\u0000*\u0088\u0005@\u0000"+
-		"\u0000+,\u0005@\u0000\u0000,\u0088\u0007\u0000\u0000\u0000-.\u0005@\u0000"+
-		"\u0000./\u0005\"\u0000\u0000/\u0088\u0003\b\u0004\u000001\u0005@\u0000"+
-		"\u000012\u0007\u0001\u0000\u00002\u0088\u0003\b\u0004\u000034\u0005@\u0000"+
-		"\u000045\u00052\u0000\u000056\u0003\b\u0004\u000067\u00053\u0000\u0000"+
-		"78\u0005\"\u0000\u000089\u0003\b\u0004\u00009\u0088\u0001\u0000\u0000"+
-		"\u0000:;\u0005\u001f\u0000\u0000;<\u00054\u0000\u0000<=\u0003\b\u0004"+
-		"\u0000=>\u00055\u0000\u0000>?\u00056\u0000\u0000?@\u0003\u0006\u0003\u0000"+
-		"@A\u00057\u0000\u0000A\u0088\u0001\u0000\u0000\u0000BC\u0005\u001f\u0000"+
-		"\u0000CD\u00054\u0000\u0000DE\u0003\b\u0004\u0000EF\u00055\u0000\u0000"+
-		"FG\u00056\u0000\u0000GH\u0003\u0006\u0003\u0000HI\u00057\u0000\u0000I"+
-		"J\u0005 \u0000\u0000JK\u00056\u0000\u0000KL\u0003\u0006\u0003\u0000LM"+
-		"\u00057\u0000\u0000M\u0088\u0001\u0000\u0000\u0000NO\u0005@\u0000\u0000"+
-		"OP\u0005\"\u0000\u0000PQ\u0003\b\u0004\u0000QR\u00051\u0000\u0000RS\u0003"+
-		"\b\u0004\u0000ST\u00050\u0000\u0000TU\u0003\b\u0004\u0000U\u0088\u0001"+
-		"\u0000\u0000\u0000VW\u0005!\u0000\u0000WX\u00054\u0000\u0000XY\u0003\b"+
-		"\u0004\u0000YZ\u00055\u0000\u0000Z[\u00056\u0000\u0000[\\\u0003\u0006"+
-		"\u0003\u0000\\]\u00057\u0000\u0000]\u0088\u0001\u0000\u0000\u0000^_\u0005"+
-		"#\u0000\u0000_\u0088\u0003\b\u0004\u0000`\u0088\u0005%\u0000\u0000ab\u0005"+
-		"$\u0000\u0000b\u0088\u0005@\u0000\u0000cd\u0005.\u0000\u0000dg\u0003\u0006"+
-		"\u0003\u0000ef\u0005:\u0000\u0000fh\u0003\u0006\u0003\u0000ge\u0001\u0000"+
-		"\u0000\u0000hi\u0001\u0000\u0000\u0000ig\u0001\u0000\u0000\u0000ij\u0001"+
-		"\u0000\u0000\u0000jk\u0001\u0000\u0000\u0000kl\u0005/\u0000\u0000l\u0088"+
-		"\u0001\u0000\u0000\u0000mn\u0005&\u0000\u0000no\u0005@\u0000\u0000op\u0005"+
-		"\'\u0000\u0000pq\u0003\b\u0004\u0000qr\u0005(\u0000\u0000rs\u0003\b\u0004"+
-		"\u0000st\u00056\u0000\u0000tu\u0003\u0006\u0003\u0000u{\u00057\u0000\u0000"+
-		"vw\u0005 \u0000\u0000wx\u00056\u0000\u0000xy\u0003\u0006\u0003\u0000y"+
-		"z\u00057\u0000\u0000z|\u0001\u0000\u0000\u0000{v\u0001\u0000\u0000\u0000"+
-		"{|\u0001\u0000\u0000\u0000|\u0088\u0001\u0000\u0000\u0000}\u0088\u0005"+
-		")\u0000\u0000~\u007f\u0005*\u0000\u0000\u007f\u0080\u00054\u0000\u0000"+
-		"\u0080\u0081\u0003\b\u0004\u0000\u0081\u0082\u00055\u0000\u0000\u0082"+
-		"\u0083\u00056\u0000\u0000\u0083\u0084\u0003\u0010\b\u0000\u0084\u0085"+
-		"\u00057\u0000\u0000\u0085\u0088\u0001\u0000\u0000\u0000\u0086\u0088\u0005"+
-		"-\u0000\u0000\u0087(\u0001\u0000\u0000\u0000\u0087+\u0001\u0000\u0000"+
-		"\u0000\u0087-\u0001\u0000\u0000\u0000\u00870\u0001\u0000\u0000\u0000\u0087"+
-		"3\u0001\u0000\u0000\u0000\u0087:\u0001\u0000\u0000\u0000\u0087B\u0001"+
-		"\u0000\u0000\u0000\u0087N\u0001\u0000\u0000\u0000\u0087V\u0001\u0000\u0000"+
-		"\u0000\u0087^\u0001\u0000\u0000\u0000\u0087`\u0001\u0000\u0000\u0000\u0087"+
-		"a\u0001\u0000\u0000\u0000\u0087c\u0001\u0000\u0000\u0000\u0087m\u0001"+
-		"\u0000\u0000\u0000\u0087}\u0001\u0000\u0000\u0000\u0087~\u0001\u0000\u0000"+
-		"\u0000\u0087\u0086\u0001\u0000\u0000\u0000\u0088\u008e\u0001\u0000\u0000"+
-		"\u0000\u0089\u008a\n\t\u0000\u0000\u008a\u008b\u00059\u0000\u0000\u008b"+
-		"\u008d\u0003\u0006\u0003\n\u008c\u0089\u0001\u0000\u0000\u0000\u008d\u0090"+
-		"\u0001\u0000\u0000\u0000\u008e\u008c\u0001\u0000\u0000\u0000\u008e\u008f"+
-		"\u0001\u0000\u0000\u0000\u008f\u0007\u0001\u0000\u0000\u0000\u0090\u008e"+
-		"\u0001\u0000\u0000\u0000\u0091\u0092\u0006\u0004\uffff\uffff\u0000\u0092"+
-		"\u0093\u0005@\u0000\u0000\u0093\u0094\u00052\u0000\u0000\u0094\u0095\u0003"+
-		"\b\u0004\u0000\u0095\u0096\u00053\u0000\u0000\u0096\u00bb\u0001\u0000"+
-		"\u0000\u0000\u0097\u0098\u00054\u0000\u0000\u0098\u0099\u0003\n\u0005"+
-		"\u0000\u0099\u009a\u00055\u0000\u0000\u009a\u009b\u0003\b\u0004\u0013"+
-		"\u009b\u00bb\u0001\u0000\u0000\u0000\u009c\u00bb\u0005?\u0000\u0000\u009d"+
-		"\u00bb\u0003\u000e\u0007\u0000\u009e\u00bb\u0005<\u0000\u0000\u009f\u00bb"+
-		"\u0005;\u0000\u0000\u00a0\u00a1\u0005\u001e\u0000\u0000\u00a1\u00a2\u0003"+
-		"\b\u0004\u0000\u00a2\u00a3\u00057\u0000\u0000\u00a3\u00bb\u0001\u0000"+
-		"\u0000\u0000\u00a4\u00a5\u00054\u0000\u0000\u00a5\u00a6\u0003\b\u0004"+
-		"\u0000\u00a6\u00a7\u00055\u0000\u0000\u00a7\u00bb\u0001\u0000\u0000\u0000"+
-		"\u00a8\u00a9\u0005\u0018\u0000\u0000\u00a9\u00bb\u0003\b\u0004\u000b\u00aa"+
-		"\u00bb\u0005@\u0000\u0000\u00ab\u00ac\u00052\u0000\u0000\u00ac\u00b1\u0003"+
-		"\b\u0004\u0000\u00ad\u00ae\u00058\u0000\u0000\u00ae\u00b0\u0003\b\u0004"+
-		"\u0000\u00af\u00ad\u0001\u0000\u0000\u0000\u00b0\u00b3\u0001\u0000\u0000"+
-		"\u0000\u00b1\u00af\u0001\u0000\u0000\u0000\u00b1\u00b2\u0001\u0000\u0000"+
-		"\u0000\u00b2\u00b4\u0001\u0000\u0000\u0000\u00b3\u00b1\u0001\u0000\u0000"+
-		"\u0000\u00b4\u00b5\u00053\u0000\u0000\u00b5\u00bb\u0001\u0000\u0000\u0000"+
-		"\u00b6\u00b7\u0007\u0000\u0000\u0000\u00b7\u00bb\u0005@\u0000\u0000\u00b8"+
-		"\u00b9\u0005@\u0000\u0000\u00b9\u00bb\u0007\u0000\u0000\u0000\u00ba\u0091"+
-		"\u0001\u0000\u0000\u0000\u00ba\u0097\u0001\u0000\u0000\u0000\u00ba\u009c"+
-		"\u0001\u0000\u0000\u0000\u00ba\u009d\u0001\u0000\u0000\u0000\u00ba\u009e"+
-		"\u0001\u0000\u0000\u0000\u00ba\u009f\u0001\u0000\u0000\u0000\u00ba\u00a0"+
-		"\u0001\u0000\u0000\u0000\u00ba\u00a4\u0001\u0000\u0000\u0000\u00ba\u00a8"+
-		"\u0001\u0000\u0000\u0000\u00ba\u00aa\u0001\u0000\u0000\u0000\u00ba\u00ab"+
-		"\u0001\u0000\u0000\u0000\u00ba\u00b6\u0001\u0000\u0000\u0000\u00ba\u00b8"+
-		"\u0001\u0000\u0000\u0000\u00bb\u00d3\u0001\u0000\u0000\u0000\u00bc\u00bd"+
-		"\n\f\u0000\u0000\u00bd\u00be\u0005\u000b\u0000\u0000\u00be\u00d2\u0003"+
-		"\b\u0004\f\u00bf\u00c0\n\n\u0000\u0000\u00c0\u00c1\u0007\u0002\u0000\u0000"+
-		"\u00c1\u00d2\u0003\b\u0004\u000b\u00c2\u00c3\n\t\u0000\u0000\u00c3\u00c4"+
-		"\u0007\u0003\u0000\u0000\u00c4\u00d2\u0003\b\u0004\n\u00c5\u00c6\n\b\u0000"+
-		"\u0000\u00c6\u00c7\u0007\u0004\u0000\u0000\u00c7\u00d2\u0003\b\u0004\t"+
-		"\u00c8\u00c9\n\u0007\u0000\u0000\u00c9\u00ca\u0007\u0005\u0000\u0000\u00ca"+
-		"\u00d2\u0003\b\u0004\b\u00cb\u00cc\n\u0006\u0000\u0000\u00cc\u00cd\u0007"+
-		"\u0006\u0000\u0000\u00cd\u00d2\u0003\b\u0004\u0007\u00ce\u00cf\n\u0005"+
-		"\u0000\u0000\u00cf\u00d0\u0005\u001c\u0000\u0000\u00d0\u00d2\u0003\b\u0004"+
-		"\u0006\u00d1\u00bc\u0001\u0000\u0000\u0000\u00d1\u00bf\u0001\u0000\u0000"+
-		"\u0000\u00d1\u00c2\u0001\u0000\u0000\u0000\u00d1\u00c5\u0001\u0000\u0000"+
-		"\u0000\u00d1\u00c8\u0001\u0000\u0000\u0000\u00d1\u00cb\u0001\u0000\u0000"+
-		"\u0000\u00d1\u00ce\u0001\u0000\u0000\u0000\u00d2\u00d5\u0001\u0000\u0000"+
-		"\u0000\u00d3\u00d1\u0001\u0000\u0000\u0000\u00d3\u00d4\u0001\u0000\u0000"+
-		"\u0000\u00d4\t\u0001\u0000\u0000\u0000\u00d5\u00d3\u0001\u0000\u0000\u0000"+
-		"\u00d6\u00d9\u0003\f\u0006\u0000\u00d7\u00d8\u00052\u0000\u0000\u00d8"+
-		"\u00da\u00053\u0000\u0000\u00d9\u00d7\u0001\u0000\u0000\u0000\u00d9\u00da"+
-		"\u0001\u0000\u0000\u0000\u00da\u000b\u0001\u0000\u0000\u0000\u00db\u00dc"+
-		"\u0007\u0007\u0000\u0000\u00dc\r\u0001\u0000\u0000\u0000\u00dd\u00e0\u0005"+
-		"=\u0000\u0000\u00de\u00e0\u0005>\u0000\u0000\u00df\u00dd\u0001\u0000\u0000"+
-		"\u0000\u00df\u00de\u0001\u0000\u0000\u0000\u00e0\u000f\u0001\u0000\u0000"+
-		"\u0000\u00e1\u00e3\u0003\u0012\t\u0000\u00e2\u00e1\u0001\u0000\u0000\u0000"+
-		"\u00e3\u00e4\u0001\u0000\u0000\u0000\u00e4\u00e2\u0001\u0000\u0000\u0000"+
-		"\u00e4\u00e5\u0001\u0000\u0000\u0000\u00e5\u00e7\u0001\u0000\u0000\u0000"+
-		"\u00e6\u00e8\u0003\u0014\n\u0000\u00e7\u00e6\u0001\u0000\u0000\u0000\u00e7"+
-		"\u00e8\u0001\u0000\u0000\u0000\u00e8\u0011\u0001\u0000\u0000\u0000\u00e9"+
-		"\u00ea\u0005+\u0000\u0000\u00ea\u00eb\u0003\b\u0004\u0000\u00eb\u00ec"+
-		"\u00050\u0000\u0000\u00ec\u00ed\u0003\u0006\u0003\u0000\u00ed\u00ee\u0005"+
-		"9\u0000\u0000\u00ee\u0013\u0001\u0000\u0000\u0000\u00ef\u00f0\u0005,\u0000"+
-		"\u0000\u00f0\u00f1\u00050\u0000\u0000\u00f1\u00f2\u0003\u0006\u0003\u0000"+
-		"\u00f2\u0015\u0001\u0000\u0000\u0000\u000e\u001d$i{\u0087\u008e\u00b1"+
-		"\u00ba\u00d1\u00d3\u00d9\u00df\u00e4\u00e7";
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0005\u0004\u00a8\b\u0004\n"+
+		"\u0004\f\u0004\u00ab\t\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0003\u0004\u00b3\b\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0005\u0004\u00d0\b\u0004\n\u0004\f\u0004\u00d3\t\u0004"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005\u00d8\b\u0005\u0001\u0006"+
+		"\u0001\u0006\u0001\u0007\u0001\u0007\u0003\u0007\u00de\b\u0007\u0001\b"+
+		"\u0004\b\u00e1\b\b\u000b\b\f\b\u00e2\u0001\b\u0003\b\u00e6\b\b\u0001\t"+
+		"\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0001\n\u0000\u0002\u0006\b\u000b\u0000\u0002\u0004\u0006\b\n\f\u000e"+
+		"\u0010\u0012\u0014\u0000\b\u0001\u0000\f\r\u0001\u0000\u000e\u0011\u0001"+
+		"\u0000\b\n\u0001\u0000\u0006\u0007\u0001\u0000\u0014\u0017\u0001\u0000"+
+		"\u0012\u0013\u0001\u0000\u0019\u001a\u0001\u0000\u0001\u0005\u0113\u0000"+
+		"\u0016\u0001\u0000\u0000\u0000\u0002\u001d\u0001\u0000\u0000\u0000\u0004"+
+		" \u0001\u0000\u0000\u0000\u0006\u007f\u0001\u0000\u0000\u0000\b\u00b2"+
+		"\u0001\u0000\u0000\u0000\n\u00d4\u0001\u0000\u0000\u0000\f\u00d9\u0001"+
+		"\u0000\u0000\u0000\u000e\u00dd\u0001\u0000\u0000\u0000\u0010\u00e0\u0001"+
+		"\u0000\u0000\u0000\u0012\u00e7\u0001\u0000\u0000\u0000\u0014\u00ed\u0001"+
+		"\u0000\u0000\u0000\u0016\u0017\u0003\u0002\u0001\u0000\u0017\u0018\u0003"+
+		"\u0006\u0003\u0000\u0018\u0019\u0005\u0000\u0000\u0001\u0019\u0001\u0001"+
+		"\u0000\u0000\u0000\u001a\u001c\u0003\u0004\u0002\u0000\u001b\u001a\u0001"+
+		"\u0000\u0000\u0000\u001c\u001f\u0001\u0000\u0000\u0000\u001d\u001b\u0001"+
+		"\u0000\u0000\u0000\u001d\u001e\u0001\u0000\u0000\u0000\u001e\u0003\u0001"+
+		"\u0000\u0000\u0000\u001f\u001d\u0001\u0000\u0000\u0000 !\u0003\n\u0005"+
+		"\u0000!$\u0005?\u0000\u0000\"#\u0005!\u0000\u0000#%\u0003\b\u0004\u0000"+
+		"$\"\u0001\u0000\u0000\u0000$%\u0001\u0000\u0000\u0000%&\u0001\u0000\u0000"+
+		"\u0000&\'\u00058\u0000\u0000\'\u0005\u0001\u0000\u0000\u0000()\u0006\u0003"+
+		"\uffff\uffff\u0000)*\u0007\u0000\u0000\u0000*\u0080\u0005?\u0000\u0000"+
+		"+,\u0005?\u0000\u0000,\u0080\u0007\u0000\u0000\u0000-.\u0005?\u0000\u0000"+
+		"./\u0005!\u0000\u0000/\u0080\u0003\b\u0004\u000001\u0005?\u0000\u0000"+
+		"12\u0007\u0001\u0000\u00002\u0080\u0003\b\u0004\u000034\u0005?\u0000\u0000"+
+		"45\u00051\u0000\u000056\u0003\b\u0004\u000067\u00052\u0000\u000078\u0005"+
+		"!\u0000\u000089\u0003\b\u0004\u00009\u0080\u0001\u0000\u0000\u0000:;\u0005"+
+		"\u001e\u0000\u0000;<\u00053\u0000\u0000<=\u0003\b\u0004\u0000=>\u0005"+
+		"4\u0000\u0000>?\u00055\u0000\u0000?@\u0003\u0006\u0003\u0000@A\u00056"+
+		"\u0000\u0000A\u0080\u0001\u0000\u0000\u0000BC\u0005\u001e\u0000\u0000"+
+		"CD\u00053\u0000\u0000DE\u0003\b\u0004\u0000EF\u00054\u0000\u0000FG\u0005"+
+		"5\u0000\u0000GH\u0003\u0006\u0003\u0000HI\u00056\u0000\u0000IJ\u0005\u001f"+
+		"\u0000\u0000JK\u00055\u0000\u0000KL\u0003\u0006\u0003\u0000LM\u00056\u0000"+
+		"\u0000M\u0080\u0001\u0000\u0000\u0000NO\u0005 \u0000\u0000OP\u00053\u0000"+
+		"\u0000PQ\u0003\b\u0004\u0000QR\u00054\u0000\u0000RS\u00055\u0000\u0000"+
+		"ST\u0003\u0006\u0003\u0000TU\u00056\u0000\u0000U\u0080\u0001\u0000\u0000"+
+		"\u0000VW\u0005\"\u0000\u0000W\u0080\u0003\b\u0004\u0000X\u0080\u0005$"+
+		"\u0000\u0000YZ\u0005#\u0000\u0000Z\u0080\u0005?\u0000\u0000[\\\u0005-"+
+		"\u0000\u0000\\_\u0003\u0006\u0003\u0000]^\u00059\u0000\u0000^`\u0003\u0006"+
+		"\u0003\u0000_]\u0001\u0000\u0000\u0000`a\u0001\u0000\u0000\u0000a_\u0001"+
+		"\u0000\u0000\u0000ab\u0001\u0000\u0000\u0000bc\u0001\u0000\u0000\u0000"+
+		"cd\u0005.\u0000\u0000d\u0080\u0001\u0000\u0000\u0000ef\u0005%\u0000\u0000"+
+		"fg\u0005?\u0000\u0000gh\u0005&\u0000\u0000hi\u0003\b\u0004\u0000ij\u0005"+
+		"\'\u0000\u0000jk\u0003\b\u0004\u0000kl\u00055\u0000\u0000lm\u0003\u0006"+
+		"\u0003\u0000ms\u00056\u0000\u0000no\u0005\u001f\u0000\u0000op\u00055\u0000"+
+		"\u0000pq\u0003\u0006\u0003\u0000qr\u00056\u0000\u0000rt\u0001\u0000\u0000"+
+		"\u0000sn\u0001\u0000\u0000\u0000st\u0001\u0000\u0000\u0000t\u0080\u0001"+
+		"\u0000\u0000\u0000u\u0080\u0005(\u0000\u0000vw\u0005)\u0000\u0000wx\u0005"+
+		"3\u0000\u0000xy\u0003\b\u0004\u0000yz\u00054\u0000\u0000z{\u00055\u0000"+
+		"\u0000{|\u0003\u0010\b\u0000|}\u00056\u0000\u0000}\u0080\u0001\u0000\u0000"+
+		"\u0000~\u0080\u0005,\u0000\u0000\u007f(\u0001\u0000\u0000\u0000\u007f"+
+		"+\u0001\u0000\u0000\u0000\u007f-\u0001\u0000\u0000\u0000\u007f0\u0001"+
+		"\u0000\u0000\u0000\u007f3\u0001\u0000\u0000\u0000\u007f:\u0001\u0000\u0000"+
+		"\u0000\u007fB\u0001\u0000\u0000\u0000\u007fN\u0001\u0000\u0000\u0000\u007f"+
+		"V\u0001\u0000\u0000\u0000\u007fX\u0001\u0000\u0000\u0000\u007fY\u0001"+
+		"\u0000\u0000\u0000\u007f[\u0001\u0000\u0000\u0000\u007fe\u0001\u0000\u0000"+
+		"\u0000\u007fu\u0001\u0000\u0000\u0000\u007fv\u0001\u0000\u0000\u0000\u007f"+
+		"~\u0001\u0000\u0000\u0000\u0080\u0086\u0001\u0000\u0000\u0000\u0081\u0082"+
+		"\n\t\u0000\u0000\u0082\u0083\u00058\u0000\u0000\u0083\u0085\u0003\u0006"+
+		"\u0003\n\u0084\u0081\u0001\u0000\u0000\u0000\u0085\u0088\u0001\u0000\u0000"+
+		"\u0000\u0086\u0084\u0001\u0000\u0000\u0000\u0086\u0087\u0001\u0000\u0000"+
+		"\u0000\u0087\u0007\u0001\u0000\u0000\u0000\u0088\u0086\u0001\u0000\u0000"+
+		"\u0000\u0089\u008a\u0006\u0004\uffff\uffff\u0000\u008a\u008b\u0005?\u0000"+
+		"\u0000\u008b\u008c\u00051\u0000\u0000\u008c\u008d\u0003\b\u0004\u0000"+
+		"\u008d\u008e\u00052\u0000\u0000\u008e\u00b3\u0001\u0000\u0000\u0000\u008f"+
+		"\u0090\u00053\u0000\u0000\u0090\u0091\u0003\n\u0005\u0000\u0091\u0092"+
+		"\u00054\u0000\u0000\u0092\u0093\u0003\b\u0004\u0014\u0093\u00b3\u0001"+
+		"\u0000\u0000\u0000\u0094\u00b3\u0005>\u0000\u0000\u0095\u00b3\u0003\u000e"+
+		"\u0007\u0000\u0096\u00b3\u0005;\u0000\u0000\u0097\u00b3\u0005:\u0000\u0000"+
+		"\u0098\u0099\u0005\u001d\u0000\u0000\u0099\u009a\u0003\b\u0004\u0000\u009a"+
+		"\u009b\u00056\u0000\u0000\u009b\u00b3\u0001\u0000\u0000\u0000\u009c\u009d"+
+		"\u00053\u0000\u0000\u009d\u009e\u0003\b\u0004\u0000\u009e\u009f\u0005"+
+		"4\u0000\u0000\u009f\u00b3\u0001\u0000\u0000\u0000\u00a0\u00a1\u0005\u0018"+
+		"\u0000\u0000\u00a1\u00b3\u0003\b\u0004\f\u00a2\u00b3\u0005?\u0000\u0000"+
+		"\u00a3\u00a4\u00051\u0000\u0000\u00a4\u00a9\u0003\b\u0004\u0000\u00a5"+
+		"\u00a6\u00057\u0000\u0000\u00a6\u00a8\u0003\b\u0004\u0000\u00a7\u00a5"+
+		"\u0001\u0000\u0000\u0000\u00a8\u00ab\u0001\u0000\u0000\u0000\u00a9\u00a7"+
+		"\u0001\u0000\u0000\u0000\u00a9\u00aa\u0001\u0000\u0000\u0000\u00aa\u00ac"+
+		"\u0001\u0000\u0000\u0000\u00ab\u00a9\u0001\u0000\u0000\u0000\u00ac\u00ad"+
+		"\u00052\u0000\u0000\u00ad\u00b3\u0001\u0000\u0000\u0000\u00ae\u00af\u0007"+
+		"\u0000\u0000\u0000\u00af\u00b3\u0005?\u0000\u0000\u00b0\u00b1\u0005?\u0000"+
+		"\u0000\u00b1\u00b3\u0007\u0000\u0000\u0000\u00b2\u0089\u0001\u0000\u0000"+
+		"\u0000\u00b2\u008f\u0001\u0000\u0000\u0000\u00b2\u0094\u0001\u0000\u0000"+
+		"\u0000\u00b2\u0095\u0001\u0000\u0000\u0000\u00b2\u0096\u0001\u0000\u0000"+
+		"\u0000\u00b2\u0097\u0001\u0000\u0000\u0000\u00b2\u0098\u0001\u0000\u0000"+
+		"\u0000\u00b2\u009c\u0001\u0000\u0000\u0000\u00b2\u00a0\u0001\u0000\u0000"+
+		"\u0000\u00b2\u00a2\u0001\u0000\u0000\u0000\u00b2\u00a3\u0001\u0000\u0000"+
+		"\u0000\u00b2\u00ae\u0001\u0000\u0000\u0000\u00b2\u00b0\u0001\u0000\u0000"+
+		"\u0000\u00b3\u00d1\u0001\u0000\u0000\u0000\u00b4\u00b5\n\r\u0000\u0000"+
+		"\u00b5\u00b6\u0005\u000b\u0000\u0000\u00b6\u00d0\u0003\b\u0004\r\u00b7"+
+		"\u00b8\n\u000b\u0000\u0000\u00b8\u00b9\u0007\u0002\u0000\u0000\u00b9\u00d0"+
+		"\u0003\b\u0004\f\u00ba\u00bb\n\n\u0000\u0000\u00bb\u00bc\u0007\u0003\u0000"+
+		"\u0000\u00bc\u00d0\u0003\b\u0004\u000b\u00bd\u00be\n\t\u0000\u0000\u00be"+
+		"\u00bf\u0007\u0004\u0000\u0000\u00bf\u00d0\u0003\b\u0004\n\u00c0\u00c1"+
+		"\n\b\u0000\u0000\u00c1\u00c2\u0007\u0005\u0000\u0000\u00c2\u00d0\u0003"+
+		"\b\u0004\t\u00c3\u00c4\n\u0007\u0000\u0000\u00c4\u00c5\u0007\u0006\u0000"+
+		"\u0000\u00c5\u00d0\u0003\b\u0004\b\u00c6\u00c7\n\u0006\u0000\u0000\u00c7"+
+		"\u00c8\u0005\u001c\u0000\u0000\u00c8\u00d0\u0003\b\u0004\u0007\u00c9\u00ca"+
+		"\n\u0005\u0000\u0000\u00ca\u00cb\u00050\u0000\u0000\u00cb\u00cc\u0003"+
+		"\b\u0004\u0000\u00cc\u00cd\u0005/\u0000\u0000\u00cd\u00ce\u0003\b\u0004"+
+		"\u0005\u00ce\u00d0\u0001\u0000\u0000\u0000\u00cf\u00b4\u0001\u0000\u0000"+
+		"\u0000\u00cf\u00b7\u0001\u0000\u0000\u0000\u00cf\u00ba\u0001\u0000\u0000"+
+		"\u0000\u00cf\u00bd\u0001\u0000\u0000\u0000\u00cf\u00c0\u0001\u0000\u0000"+
+		"\u0000\u00cf\u00c3\u0001\u0000\u0000\u0000\u00cf\u00c6\u0001\u0000\u0000"+
+		"\u0000\u00cf\u00c9\u0001\u0000\u0000\u0000\u00d0\u00d3\u0001\u0000\u0000"+
+		"\u0000\u00d1\u00cf\u0001\u0000\u0000\u0000\u00d1\u00d2\u0001\u0000\u0000"+
+		"\u0000\u00d2\t\u0001\u0000\u0000\u0000\u00d3\u00d1\u0001\u0000\u0000\u0000"+
+		"\u00d4\u00d7\u0003\f\u0006\u0000\u00d5\u00d6\u00051\u0000\u0000\u00d6"+
+		"\u00d8\u00052\u0000\u0000\u00d7\u00d5\u0001\u0000\u0000\u0000\u00d7\u00d8"+
+		"\u0001\u0000\u0000\u0000\u00d8\u000b\u0001\u0000\u0000\u0000\u00d9\u00da"+
+		"\u0007\u0007\u0000\u0000\u00da\r\u0001\u0000\u0000\u0000\u00db\u00de\u0005"+
+		"<\u0000\u0000\u00dc\u00de\u0005=\u0000\u0000\u00dd\u00db\u0001\u0000\u0000"+
+		"\u0000\u00dd\u00dc\u0001\u0000\u0000\u0000\u00de\u000f\u0001\u0000\u0000"+
+		"\u0000\u00df\u00e1\u0003\u0012\t\u0000\u00e0\u00df\u0001\u0000\u0000\u0000"+
+		"\u00e1\u00e2\u0001\u0000\u0000\u0000\u00e2\u00e0\u0001\u0000\u0000\u0000"+
+		"\u00e2\u00e3\u0001\u0000\u0000\u0000\u00e3\u00e5\u0001\u0000\u0000\u0000"+
+		"\u00e4\u00e6\u0003\u0014\n\u0000\u00e5\u00e4\u0001\u0000\u0000\u0000\u00e5"+
+		"\u00e6\u0001\u0000\u0000\u0000\u00e6\u0011\u0001\u0000\u0000\u0000\u00e7"+
+		"\u00e8\u0005*\u0000\u0000\u00e8\u00e9\u0003\b\u0004\u0000\u00e9\u00ea"+
+		"\u0005/\u0000\u0000\u00ea\u00eb\u0003\u0006\u0003\u0000\u00eb\u00ec\u0005"+
+		"8\u0000\u0000\u00ec\u0013\u0001\u0000\u0000\u0000\u00ed\u00ee\u0005+\u0000"+
+		"\u0000\u00ee\u00ef\u0005/\u0000\u0000\u00ef\u00f0\u0003\u0006\u0003\u0000"+
+		"\u00f0\u0015\u0001\u0000\u0000\u0000\u000e\u001d$as\u007f\u0086\u00a9"+
+		"\u00b2\u00cf\u00d1\u00d7\u00dd\u00e2\u00e5";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -12,7 +12,6 @@ com :  op=(DECR|INCR) ID                                            # preDecrInc
      | ID LBRACK exp RBRACK ASSIGN exp                              # arrayAssign
      | IF LPAR exp RPAR LBRACE com RBRACE                           # if
      | IF LPAR exp RPAR LBRACE com RBRACE ELSE LBRACE com RBRACE    # ifElse
-     | ID ASSIGN exp QUESTIONMARK exp COLON exp                     # ifStatement
      | WHILE LPAR exp RPAR LBRACE com RBRACE                        # while
      | com SEMICOLON com                                            # seq
      | OUT exp                                                      # out
@@ -35,7 +34,6 @@ exp : ID LBRACK exp RBRACK                # arrayAccess
     | STRING_START exp RBRACE             # complexString
     | LPAR exp RPAR                       # parExp
     | <assoc=right> exp POW exp           # pow
-    //| TOSTR LPAR exp RPAR                 # tostr
     | NOT exp                             # not
     | exp op=(MUL | DIV | MOD) exp        # mulDivMod
     | exp op=(ADD | SUB) exp              # addSub
@@ -43,6 +41,7 @@ exp : ID LBRACK exp RBRACK                # arrayAccess
     | exp op=(EQQ | NEQ) exp              # eqExp
     | exp op=(AND | OR) exp               # andOr
     | exp CONCAT exp                      # concat
+    | <assoc=right> exp QUESTIONMARK exp COLON exp      # ifStatement
     | ID                                  # id
     | LBRACK exp (COMMA exp)* RBRACK      # array
     | op=(DECR|INCR) ID                   # preDecrIncExp
@@ -109,7 +108,6 @@ DOLL : '$'  ;
 
 // operazioni con le stringhe
 CONCAT : COLON COLON;
-TOSTR  : 'toStr' ;
 STRING_START : DOLL LBRACE;
 
 // comandi
@@ -164,5 +162,5 @@ fragment CHARCHR : ~['\\\r\n] | ESC ;
 ID : [a-zA-Z]+ ;
 
 COMMENT : '//' ~[\r\n]* -> skip;
-COMMENT_ML : '/' .? '*/' -> skip;
+COMMENT_ML : '/*' (.)*? '*/' -> skip;
 WS : [ \t\r\n]+ -> skip ;

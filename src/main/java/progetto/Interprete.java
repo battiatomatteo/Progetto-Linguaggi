@@ -120,10 +120,12 @@ public class Interprete extends LinguaggioBaseVisitor<Value>{
 
     @Override
     public ExpValue<?> visitIfStatement(LinguaggioParser.IfStatementContext ctx) {
-        ExpValue<?> value = visitBoolExp(ctx.exp(0)).toJavaValue()
-                ? visitExp(ctx.exp(1))
-                : visitExp(ctx.exp(2));
-        return value;
+        BoolValue cond = visitBoolExp(ctx.exp(0));
+        if (cond.toJavaValue()) {
+            return visitExp(ctx.exp(1));
+        } else {
+            return visitExp(ctx.exp(2));
+        }
     }
 
     @Override
@@ -540,8 +542,6 @@ public class Interprete extends LinguaggioBaseVisitor<Value>{
 
     @Override
     public ComValue visitExit(LinguaggioParser.ExitContext ctx) {
-        System.out.println("Chiusura programma...");
-        System.exit(0);
-        return null;
+        throw new InterpreterExitException("Programma terminato");
     }
 }

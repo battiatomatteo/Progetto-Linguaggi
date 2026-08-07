@@ -1,18 +1,13 @@
 package TestClasses;
 
-public abstract class GenericTest {
+import progetto.utils.FormattedLogs;
 
-    public static final String RESET = "\u001B[0m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String RED = "\u001B[31m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String PURPLE = "\u001B[35m";
+public abstract class GenericTest {
 
     public void printTests(){
         System.out.println();
-        System.out.println(CYAN + "Test disponibili per la tipologia" + RESET);
-        System.out.println(RED + "0 - Chiudi" + RESET);
+        FormattedLogs.println(FormattedLogs.CYAN,"Test disponibili per la tipologia");
+        FormattedLogs.println(FormattedLogs.RED,"0 - Chiudi");
     }
     public abstract String getTests(int i);
 }

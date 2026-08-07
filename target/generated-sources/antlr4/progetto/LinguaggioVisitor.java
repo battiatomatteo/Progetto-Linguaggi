@@ -57,13 +57,6 @@ public interface LinguaggioVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFastAssign(LinguaggioParser.FastAssignContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link LinguaggioParser#com}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIfStatement(LinguaggioParser.IfStatementContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code switchCmd}
 	 * labeled alternative in {@link LinguaggioParser#com}.
 	 * @param ctx the parse tree
@@ -203,6 +196,13 @@ public interface LinguaggioVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitConcat(LinguaggioParser.ConcatContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ifStatement}
+	 * labeled alternative in {@link LinguaggioParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStatement(LinguaggioParser.IfStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code complexString}
 	 * labeled alternative in {@link LinguaggioParser#exp}.

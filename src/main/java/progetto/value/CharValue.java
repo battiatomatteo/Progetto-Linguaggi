@@ -3,6 +3,7 @@ package progetto.value;
 import progetto.exception.CastException;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
+import progetto.utils.FormattedLogs;
 
 public class CharValue extends ExpValue<Character> {
 
@@ -33,7 +34,7 @@ public class CharValue extends ExpValue<Character> {
             return false;
         }
         if (!isSafeCast(destType)) {
-            System.out.println("Unsafe cast from " + thisType + " to " + destType);
+            FormattedLogs.println(FormattedLogs.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
         }
         return true;
     }

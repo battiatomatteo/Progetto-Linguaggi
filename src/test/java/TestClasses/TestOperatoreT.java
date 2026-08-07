@@ -1,11 +1,11 @@
 package TestClasses;
 
+import progetto.utils.FormattedLogs;
+
 public class TestOperatoreT extends GenericTest{
     public final static int TEST_IF_STATEMENT = 1;
     public final static int TEST_TO_DO = 2;
     public final static int TEST_TO_DO_2 = 3;
-    public static final String BRIGHT_GREEN   = "\u001B[92m";
-    public static final String RESET  = "\u001B[0m";
 
     private static final String test1 =
             """
@@ -40,7 +40,7 @@ public class TestOperatoreT extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        System.out.println(BRIGHT_GREEN + "1 - test operatore ternario " + RESET);
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test operatore ternario ");
     }
 
     @Override

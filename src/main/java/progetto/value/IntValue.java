@@ -11,10 +11,8 @@ public class IntValue extends NumValue<Integer> {
 
     public ExpValue<?> cast(ExpType type){
         if(!super.checkCast(type)) {
-            //System.out.println("impossibile convertire");
             return null;
         }
-        //System.out.println("converto");
         return switch (type){
             case SimpleType.STRING -> super.castToStringValue();
             case SimpleType.CHAR -> super.castToCharValue();

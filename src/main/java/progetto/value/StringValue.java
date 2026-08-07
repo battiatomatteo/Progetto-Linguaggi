@@ -2,6 +2,7 @@ package progetto.value;
 
 import progetto.exception.CastException;
 import progetto.type.*;
+import progetto.utils.FormattedLogs;
 
 
 public class StringValue extends ExpValue<String> {
@@ -36,7 +37,7 @@ public class StringValue extends ExpValue<String> {
             return false;
         }
         if (!isSafeCast(destType)) {
-            System.out.println("Unsafe cast from " + thisType + " to " + destType);
+            FormattedLogs.println(FormattedLogs.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
         }
         return true;
     }

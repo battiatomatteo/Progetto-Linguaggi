@@ -1,13 +1,13 @@
 package TestClasses;
 
+import progetto.utils.FormattedLogs;
+
 public class TestCast extends GenericTest{
     public final static int TEST_CAST_TO_INTEGER = 1;
     public final static int TEST_CAST_TO_DECIMAL = 2;
     public final static int TEST_CAST_TO_BOOLEAN = 3;
     public final static int TEST_CAST_TO_STRING  = 4;
     public final static int TEST_CAST_TO_CHAR     = 5;
-    public static final String BRIGHT_GREEN   = "\u001B[92m";
-    public static final String RESET  = "\u001B[0m";
 
 
     private static final String test1 =
@@ -140,11 +140,11 @@ public class TestCast extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        System.out.println(BRIGHT_GREEN + "1 - Cast di valori verso int" + RESET);
-        System.out.println(BRIGHT_GREEN + "2 - Cast di valori verso dec" + RESET);
-        System.out.println(BRIGHT_GREEN + "3 - Cast di valori verso bool" + RESET);
-        System.out.println(BRIGHT_GREEN + "4 - Cast di valori verso string" + RESET);
-        System.out.println(BRIGHT_GREEN + "5 - Cast di valori verso char" + RESET);
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - Cast di valori verso int");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - Cast di valori verso dec");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - Cast di valori verso bool");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "4 - Cast di valori verso string");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "5 - Cast di valori verso char");
     }
 
     @Override

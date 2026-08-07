@@ -3,6 +3,7 @@ package progetto.value;
 import progetto.exception.CastException;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
+import progetto.utils.FormattedLogs;
 
 public class BoolValue extends ExpValue<Boolean> {
 
@@ -30,11 +31,10 @@ public class BoolValue extends ExpValue<Boolean> {
             return false;
         }
         if (!isSafeCast(destType)) {
-            System.out.println("Unsafe cast from " + thisType + " to " + destType);
+            FormattedLogs.println(FormattedLogs.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
         }
         return true;
     }
-
     private boolean isSafeCast(ExpType type) {
         return switch (type) {
             case SimpleType.BOOL, SimpleType.INT, SimpleType.DEC, SimpleType.STRING -> true;
