@@ -85,3 +85,48 @@ array e modifica ad ArrayValue , modifica in Mem ed ArrayType per le modifiche a
 Aggiunti i due metododi visitArrayAccess, visitArrayAssign e visitArray nel file TypedImp , non da più errori in rosso quando si fa run
 
 Ricordarsi di non mettere righe vuote nei test , l'ultimo comando non deve avere il ;
+
+
+
+
+
+
+
+
+
+
+Cose nuove del nostro progetto rispetto al resto:
+- La concatenazione tra due stringhe, utilizzando "::"
+-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

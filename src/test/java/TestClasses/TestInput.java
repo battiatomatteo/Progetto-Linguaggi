@@ -34,6 +34,7 @@ public class TestInput extends GenericTest{
             input a;
             print a
             """;
+
     @Override
     public void printTests() {
         super.printTests();

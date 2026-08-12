@@ -85,10 +85,10 @@ public class Test {
     }
 
     private static void mostraTest(GenericTest classObj, String test){
-        if(!(classObj instanceof TestAutoCode)){
+        //if(!(classObj instanceof TestAutoCode)){
             FormattedLogs.println(FormattedLogs.CYAN, "\nTest da eseguire: " );
             FormattedLogs.println(FormattedLogs.GREEN,test);
-        }
+       // }
         FormattedLogs.println(FormattedLogs.GREEN,TEST_SEPARATOR);
         FormattedLogs.println(FormattedLogs.CYAN, "Output del programma ");
     }
