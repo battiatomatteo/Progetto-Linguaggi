@@ -16,37 +16,47 @@ public class TestAutoCode extends GenericTest{
         ArrayList<String> codiceIntero = new ArrayList<>();
         StringBuilder codice = new StringBuilder();
 
-        System.out.println("Inserisci il codice da eseguire (scrivi END per terminare):");
+        FormattedLogs.println(FormattedLogs.YELLOW,"\n" +
+                        "Inserisci il codice da eseguire :\n" +
+                        "- La sintassi del codice deve essere la stessa degli altri test \n" +
+                        "- Scrivi END per terminare \n" +
+                        "- Per eliminare una riga usare (può essere fatto in ogni punto del codice) \n" +
+                        "  REMOVE Numero di riga -> riga di codice da sostituire \n");
 
         while (true) {
             String riga = sc.nextLine().trim();
             // REMOVE NUM -> .....codice.....
             if (riga.equals("END")) break;
             if (riga.startsWith(REMOVE_COM)){
-                FormattedLogs.println(FormattedLogs.PURPLE, "riga scritta <<" + riga +">>");
-                String numeroRiga = riga.substring(REMOVE_COM.length(),riga.indexOf(NEW_LINE_COM));
-                FormattedLogs.println(FormattedLogs.PURPLE, "numero riga <<" + numeroRiga +">>");
+                int inizioComando = riga.indexOf(NEW_LINE_COM);
+                if(inizioComando == -1){
+                    FormattedLogs.println(FormattedLogs.RED,"Manca la riga da sostituire" );
+                    continue;
+                }
                 try{
+                    //FormattedLogs.println(FormattedLogs.PURPLE, "riga scritta <<" + riga +">>");
+                    String numeroRiga = riga.substring(REMOVE_COM.length(),inizioComando);
+                    //FormattedLogs.println(FormattedLogs.PURPLE, "numero riga <<" + numeroRiga +">>");
                     int indice = Integer.parseInt(numeroRiga);
-                    String nuovaRiga = riga.substring(riga.indexOf(NEW_LINE_COM) + NEW_LINE_COM.length());
-                    FormattedLogs.println(FormattedLogs.PURPLE, "da sostituire <<" + nuovaRiga +">>");
-                    codiceIntero.remove(indice );
-                    codiceIntero.add(indice - 1,nuovaRiga);
+                    if(indice < 1 || indice > codiceIntero.size()){
+                        FormattedLogs.println(FormattedLogs.RED,"Il numero di riga deve essere un numero valido");
+                        continue;
+                    }
+                    String nuovaRiga = riga.substring(inizioComando + NEW_LINE_COM.length());
+                    //FormattedLogs.println(FormattedLogs.PURPLE, "da sostituire <<" + nuovaRiga +">>");
+                    codiceIntero.set(indice - 1,nuovaRiga);
                     continue;
                 }
                 catch (Exception e){
-                    FormattedLogs.println(FormattedLogs.RED,"Comando REMOVE usato incorrettamente" );
+                    FormattedLogs.println(FormattedLogs.RED,"Comando REMOVE usato incorrettamente" +
+                            "il formato e' REMOVE Numero di riga -> riga di codice da sostituire" );
                 }
             }
             codiceIntero.add(riga);
         }
-        //FormattedLogs.println(FormattedLogs.PURPLE, "codice intero <<" + codiceIntero +">>");
-        //Arrays.toString(codiceIntero.toArray());
-        for (int i = 0; i < codiceIntero.toArray().length ; i++) {
-            codice.append(codiceIntero.get(i)).append("\n");
+        for (String riga : codiceIntero) {
+            codice.append(riga).append("\n");
         }
-
-
         return  codice.toString();
     }
 
@@ -54,6 +64,7 @@ public class TestAutoCode extends GenericTest{
     public void printTests() {
         super.printTests();
         FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test input codice personale ");
+
     }
 
     @Override
