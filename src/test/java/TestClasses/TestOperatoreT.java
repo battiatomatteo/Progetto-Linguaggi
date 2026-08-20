@@ -31,16 +31,56 @@ public class TestOperatoreT extends GenericTest{
 
     private static final String test2 =
             """
+            int x;
+            int y;
+            bool a;
+            bool b;
+            x = 10;
+            y = 20;
+            a = true;
+            b = false;
+            print (a and b) ? x : y;
+            print (a or b) ? x + 5 : y + 5
             """;
 
     private static final String test3 =
             """
+            int x;
+            int y;
+            int z;
+            int[] a;
+            int[] b;
+            int[] result;
+            bool condition;
+
+            a = [1,2,3];
+            b = [10,20,30];
+
+            x = 5;
+            y = 10;
+
+            condition = x < y;
+
+            z = condition
+                    ? ((x + y > 10) ? 100 : 200)
+                    : ((x - y < 0) ? 300 : 400);
+
+            result = (z > 150)
+                    ? a
+                    : b;
+
+            print x;
+            print y;
+            print z;
+            print result
             """;
 
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test operatore ternario ");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test operatore ternario semplice");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - test operatore ternario true / fals");
+        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - test operatore ternario completo");
     }
 
     @Override

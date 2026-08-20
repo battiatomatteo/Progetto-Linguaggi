@@ -1,19 +1,27 @@
 package config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import progetto.utils.FormattedLogs;
-
-import java.io.*;
-import java.util.Properties;
+import java.io.File;
+import java.io.IOException;
 
 public class ProgramConfig {
 
-    private static final String CONFIG_FILE = "src/main/java/config/config.properties";
+    private static final String CONFIG_FILE =
+            "src/main/java/config/config.json";
 
     private static boolean showWarning = true;
 
+    private static final ObjectMapper objectMapper = new ObjectMapper()
+            .enable(SerializationFeature.INDENT_OUTPUT);
+
     static {
         loadSettings();
-        FormattedLogs.println(FormattedLogs.PURPLE,"file caricato");
+        FormattedLogs.println(
+                FormattedLogs.PURPLE,
+                "File di configurazione caricato"
+        );
     }
 
     public static void setWarningVisibility(boolean visibility) {
@@ -28,20 +36,26 @@ public class ProgramConfig {
     private static void loadSettings() {
 
         File configFile = new File(CONFIG_FILE);
+
         if (!configFile.exists()) {
             createDefaultConfig();
             return;
         }
 
-        Properties properties = new Properties();
-        try (InputStream input = new FileInputStream(configFile)) {
-            properties.load(input);
-            showWarning = Boolean.parseBoolean(
-                    properties.getProperty("showWarning", "true")
-            );
+        try {
+            ConfigData configData =
+                    objectMapper.readValue(configFile, ConfigData.class);
+
+            showWarning = configData.showWarning;
 
         } catch (IOException e) {
+            System.err.println(
+                    "Errore durante il caricamento della configurazione:"
+            );
             e.printStackTrace();
+
+            // Valori di default in caso di errore
+            showWarning = true;
         }
     }
 
@@ -51,20 +65,30 @@ public class ProgramConfig {
     }
 
     private static void saveSettings() {
-        Properties properties = new Properties();
-        properties.setProperty(
-                "showWarning",
-                String.valueOf(showWarning)
-        );
 
-        try (OutputStream output = new FileOutputStream(CONFIG_FILE)) {
-            properties.store(
-                    output,
-                    "Program Configuration"
+        ConfigData configData = new ConfigData();
+        configData.showWarning = showWarning;
+
+        try {
+            objectMapper.writeValue(
+                    new File(CONFIG_FILE),
+                    configData
             );
 
         } catch (IOException e) {
+            System.err.println(
+                    "Errore durante il salvataggio della configurazione:"
+            );
             e.printStackTrace();
+        }
+    }
+
+    // Classe che rappresenta il contenuto del JSON
+    public static class ConfigData {
+
+        public boolean showWarning;
+
+        public ConfigData() {
         }
     }
 }

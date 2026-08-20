@@ -1,5 +1,6 @@
 import TestMenu.TestMenu;
 import TestMenu.TestMenuEntry;
+import config.ProgramConfig;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -25,6 +26,7 @@ public class Test {
                 " quale tipologia di test osservare e provare , \nin seguito verrà mostrato un sotto menu nel quale le verranno proposti diversi test \ninerenti al tipo scelto precedentemente " +
                 ", sarà possibile visionare il codice del test prima \ndel suo risultato , sarà inoltre possibile ripetere più test , grazie e buon proseguimento ;) .");
         // creo il menu'
+        ProgramConfig programConfig = new ProgramConfig();
         TestMenu menu = new TestMenu();
 
         while(testTopicSelection(menu));
