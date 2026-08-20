@@ -70,6 +70,7 @@ delle scelte viene eseguito. Il costrutto pu`o avere o meno una scelta predefini
 
 ### Struttura file
 
+```
 documentazione.md
 documentazione.pdf
 pom.xml
@@ -97,3 +98,5 @@ src/
         ├── TestClasses/ tutte le tipologie di test divise per classi
         ├── TestMenu/ tutti i file menu compreso il main che lo gestisce
         └── Test.java
+
+```
