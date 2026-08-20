@@ -66,4 +66,34 @@ Viceversa, se n `e un numero primo nulla viene stampato ed il ciclo viene interr
 ad un certo punto, dal comando break. In alternativa, supporto per un costrutto
 condizionale a scelta multipla (switch), nel quale l’espressione di controllo pu`o assumere uno dei valori tra quelli a scelta. Solo il blocco di codice relativo ad una
 delle scelte viene eseguito. Il costrutto pu`o avere o meno una scelta predefinita
-(default) da eseguire quando nessuna scelta `e percorribile
+(default) da eseguire quando nessuna scelta `e percorribile .
+
+### Struttura file
+
+documentazione.md
+documentazione.pdf
+pom.xml
+src/
+├── main
+│   ├──  java/ 
+│   │   ├── config/
+│   │   │   └── config.json - ProgramConfig.java
+│   │   └── progetto/
+│   │       ├── exception/ tutti i file exception
+│   │       ├── type/ tutti i file con le tipologie
+│   │       ├── utils/ tutti i file che contengono metodi ed altro che vengono usati nel progetto
+│   │       ├── value/ tutti i file value
+│   │       ├── Interprete.java
+│   │       ├── Main.java
+│   │       ├── Mem.java
+│   │       └── TypedImoTS.java
+│   ├──  antlr4/ 
+│   │   └── progetto/Linguaggio.g4
+│   └──   resources /           
+│
+├── test/
+    └── java/
+        ├── output/
+        ├── TestClasses/ tutte le tipologie di test divise per classi
+        ├── TestMenu/ tutti i file menu compreso il main che lo gestisce
+        └── Test.java
