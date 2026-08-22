@@ -2,6 +2,7 @@ package TestMenu;
 
 import TestClasses.*;
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,15 +20,15 @@ public class TestMenu {
     - test 10
      */
     public void printMenu(){
-        FormattedLogs.println(FormattedLogs.GREEN,"\nScegliere il numero corrispondente alla tipologia di test da eseguire: ");
-        FormattedLogs.println(FormattedLogs.GREEN,"╔════════════════════════════════════════════════╗");
-        FormattedLogs.println(FormattedLogs.GREEN,"║                 MENU PRINCIPALE                ║");
-        FormattedLogs.println(FormattedLogs.GREEN,"╠════════════════════════════════════════════════╣");
-        FormattedLogs.printFramed("║  ",padRightString(  "0 - Chiudi programma di test",44), FormattedLogs.GREEN,FormattedLogs.RED);
+        FormattedLogs.println(OutputColor.GREEN,"\nScegliere il numero corrispondente alla tipologia di test da eseguire: ");
+        FormattedLogs.println(OutputColor.GREEN,"╔════════════════════════════════════════════════╗");
+        FormattedLogs.println(OutputColor.GREEN,"║                 MENU PRINCIPALE                ║");
+        FormattedLogs.println(OutputColor.GREEN,"╠════════════════════════════════════════════════╣");
+        FormattedLogs.printFramed("║  ",padRightString(  "0 - Chiudi programma di test",44), OutputColor.GREEN,OutputColor.RED);
         for (Map.Entry<Integer, TestMenuEntry> entry : menu.entrySet()) {
-            FormattedLogs.println(FormattedLogs.GREEN,"║ " + String.format("%2d", entry.getKey()) + " - " + entry.getValue().getDisplayName() + "    ║");
+            FormattedLogs.println(OutputColor.GREEN,"║ " + String.format("%2d", entry.getKey()) + " - " + entry.getValue().getDisplayName() + "    ║");
         }
-        FormattedLogs.println(FormattedLogs.GREEN,"╚════════════════════════════════════════════════╝");
+        FormattedLogs.println(OutputColor.GREEN,"╚════════════════════════════════════════════════╝");
     }
 
     public TestMenuEntry getTestMenuEntry(int id){
@@ -46,6 +47,7 @@ public class TestMenu {
         addEntry( 9,new TestOperatoreT(),"Operatore ternario");
         addEntry(10,new TestCompleti(),"Test strutturati su piu' funzionalita'");
         addEntry(11,new TestAutoCode(),"Test di Auto code");
+        addEntry(12,new ImpostazioniMenu(), "Impostazioni menu");
     }
 
     private void addEntry( int index, GenericTest classObj, String displayName){

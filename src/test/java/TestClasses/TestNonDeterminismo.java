@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestNonDeterminismo extends GenericTest{
     public static final int TEST_NON_DETERMINISMO = 1;
@@ -66,9 +67,9 @@ public class TestNonDeterminismo extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test operatore non deterministico semplice");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - test operatore non deterministico a più operatori");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - test operatore non deterministico complesso");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - test operatore non deterministico semplice");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - test operatore non deterministico a più operatori");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - test operatore non deterministico complesso");
     }
 
     @Override

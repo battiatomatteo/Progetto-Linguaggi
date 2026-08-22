@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestIncrementi extends GenericTest{
     public final static int TEST_INCREMENT_IN_ASSIGNMENT = 1;
@@ -58,9 +59,9 @@ public class TestIncrementi extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test incremento e decrementi nelle espressioni");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - test incremento e decrementi come comandi");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - test incremento e assegnazione semplice");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - test incremento e decrementi nelle espressioni");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - test incremento e decrementi come comandi");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - test incremento e assegnazione semplice");
     }
 
     @Override

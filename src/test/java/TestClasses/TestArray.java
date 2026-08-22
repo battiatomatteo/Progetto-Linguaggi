@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestArray extends GenericTest {
     public final static int TEST_ARRAY_GENERIC = 1;
@@ -119,9 +120,9 @@ public class TestArray extends GenericTest {
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - esempio di utilizzo di array");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - assegnamento tra array (passaggio per indirizzo)");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - accesso agli elementi di un array");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - esempio di utilizzo di array");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - assegnamento tra array (passaggio per indirizzo)");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - accesso agli elementi di un array");
 
     }
 

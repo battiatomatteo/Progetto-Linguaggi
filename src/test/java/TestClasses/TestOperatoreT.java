@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestOperatoreT extends GenericTest{
     public final static int TEST_IF_STATEMENT = 1;
@@ -78,9 +79,9 @@ public class TestOperatoreT extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test operatore ternario semplice");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - test operatore ternario true / fals");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - test operatore ternario completo");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - test operatore ternario semplice");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - test operatore ternario true / fals");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - test operatore ternario completo");
     }
 
     @Override

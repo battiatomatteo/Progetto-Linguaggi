@@ -12,6 +12,7 @@ import progetto.TypedImpTS;
 import TestClasses.*;
 import progetto.exception.InterpreterExitException;
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        FormattedLogs.println(FormattedLogs.CYAN,"\nBenvenuto \nAttraverso l'utilizzo del menu riportato potrà interagire col nostro programma , \ncol primo menu principale potrà scegliere" +
+        FormattedLogs.println(OutputColor.CYAN,"\nBenvenuto \nAttraverso l'utilizzo del menu riportato potrà interagire col nostro programma , \ncol primo menu principale potrà scegliere" +
                 " quale tipologia di test osservare e provare , \nin seguito verrà mostrato un sotto menu nel quale le verranno proposti diversi test \ninerenti al tipo scelto precedentemente " +
                 ", sarà possibile visionare il codice del test prima \ndel suo risultato , sarà inoltre possibile ripetere più test , grazie e buon proseguimento ;) .");
         // creo il menu'
@@ -34,7 +35,7 @@ public class Test {
 
     private static boolean testTopicSelection(TestMenu menu){
         menu.printMenu();
-        FormattedLogs.print(FormattedLogs.YELLOW,"► Scelta: ");
+        FormattedLogs.print(OutputColor.YELLOW,"► Scelta: ");
 
         int categoria = getConsoleChoice();
 
@@ -44,14 +45,14 @@ public class Test {
         }
         // casting fallito (non e' stato inserito un numero)
         if (categoria == -1) {
-            FormattedLogs.println(FormattedLogs.RED,"Si prega di inserire un numero e non una stringa");
+            FormattedLogs.println(OutputColor.RED,"Si prega di inserire un numero e non una stringa");
             return true;
         }
 
         TestMenuEntry testMenuEntry = menu.getTestMenuEntry(categoria);
         // il numero inserito non e' nell'elenco
         if (testMenuEntry == null) {
-            FormattedLogs.println(FormattedLogs.RED,"Scelta non valida.");
+            FormattedLogs.println(OutputColor.RED,"Scelta non valida.");
         }
         //continuo a eseguire test sulla tipologia scelta
         else while(testSelection(testMenuEntry.getTestObj()));
@@ -60,7 +61,7 @@ public class Test {
 
     private static boolean testSelection(GenericTest classObj){
         classObj.printTests();
-        FormattedLogs.print(FormattedLogs.YELLOW,"► Selezionare il test: ");
+        FormattedLogs.print(OutputColor.YELLOW,"► Selezionare il test: ");
 
         int numeroTest = getConsoleChoice();
 
@@ -70,13 +71,13 @@ public class Test {
         }
         // casting fallito (non e' stato inserito un numero)
         if (numeroTest == -1) {
-            FormattedLogs.println(FormattedLogs.RED,"Si prega di inserire un numero e non una stringa");
+            FormattedLogs.println(OutputColor.RED,"Si prega di inserire un numero e non una stringa");
             return true;
         }
         String test = classObj.getTests(numeroTest);
         // il numero inserito non e' nell'elenco
         if (test == null)
-            FormattedLogs.println(FormattedLogs.RED,"Test non trovato.");
+            FormattedLogs.println(OutputColor.RED,"Test non trovato.");
         //eseguo il test scelto
         else {
             mostraTest(classObj,test);
@@ -88,11 +89,11 @@ public class Test {
 
     private static void mostraTest(GenericTest classObj, String test){
         //if(!(classObj instanceof TestAutoCode)){
-            FormattedLogs.println(FormattedLogs.CYAN, "\nTest da eseguire: " );
-            FormattedLogs.println(FormattedLogs.GREEN,test);
+            FormattedLogs.println(OutputColor.CYAN, "\nTest da eseguire: " );
+            FormattedLogs.println(OutputColor.GREEN,test);
        // }
-        FormattedLogs.println(FormattedLogs.GREEN,TEST_SEPARATOR);
-        FormattedLogs.println(FormattedLogs.CYAN, "Output del programma ");
+        FormattedLogs.println(OutputColor.GREEN,TEST_SEPARATOR);
+        FormattedLogs.println(OutputColor.CYAN, "Output del programma ");
     }
 
     private static void runTest(String test){
@@ -109,8 +110,8 @@ public class Test {
             interpreter.visit(tree);
         }catch (InterpreterExitException e){}
         catch (RuntimeException re) {
-            FormattedLogs.println(FormattedLogs.RED,"Typing error(s) found.");
-            FormattedLogs.println(FormattedLogs.RED,re.getMessage());
+            FormattedLogs.println(OutputColor.RED,"Typing error(s) found.");
+            FormattedLogs.println(OutputColor.RED,re.getMessage());
             //re.printStackTrace();
         }
         System.out.println(TEST_SEPARATOR);

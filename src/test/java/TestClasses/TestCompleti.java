@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestCompleti extends GenericTest{
     public static final int TEST_1= 1;
@@ -107,9 +108,9 @@ public class TestCompleti extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.GREEN, "1 - Mini menu a scelta");
-        FormattedLogs.println(FormattedLogs.GREEN, "2 - Modifica di un array intero inserito da console");
-        FormattedLogs.println(FormattedLogs.GREEN, "3 - Estrazione fortunata");
+        FormattedLogs.println(OutputColor.GREEN, "1 - Mini menu a scelta");
+        FormattedLogs.println(OutputColor.GREEN, "2 - Modifica di un array intero inserito da console");
+        FormattedLogs.println(OutputColor.GREEN, "3 - Estrazione fortunata");
     }
 
     @Override

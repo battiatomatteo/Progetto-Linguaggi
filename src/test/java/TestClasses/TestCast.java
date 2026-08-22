@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestCast extends GenericTest{
     public final static int TEST_CAST_TO_INTEGER = 1;
@@ -140,11 +141,11 @@ public class TestCast extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - Cast di valori verso int");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - Cast di valori verso dec");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - Cast di valori verso bool");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "4 - Cast di valori verso string");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "5 - Cast di valori verso char");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - Cast di valori verso int");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - Cast di valori verso dec");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - Cast di valori verso bool");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "4 - Cast di valori verso string");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "5 - Cast di valori verso char");
     }
 
     @Override

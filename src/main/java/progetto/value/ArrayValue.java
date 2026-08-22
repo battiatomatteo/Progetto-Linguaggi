@@ -5,6 +5,7 @@ import progetto.type.ArrayType;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class ArrayValue<T extends ExpValue<?>> extends ExpValue<ArrayList<T>> {
             return false;
         }
         if (!isSafeCast(destType)) {
-            FormattedLogs.println(FormattedLogs.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
+            FormattedLogs.println(OutputColor.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
         }
         return true;
     }

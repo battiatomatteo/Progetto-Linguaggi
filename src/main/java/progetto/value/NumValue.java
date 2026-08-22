@@ -4,6 +4,7 @@ import progetto.exception.CastException;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class NumValue<T extends Number> extends ExpValue<T> {
 
@@ -31,7 +32,7 @@ public class NumValue<T extends Number> extends ExpValue<T> {
             return false;
         }
         if (!isSafeCast(destType)) {
-            FormattedLogs.println(FormattedLogs.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
+            FormattedLogs.println(OutputColor.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
         }
         return true;
     }

@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestAssegnamenti extends GenericTest{
     public final static int TEST_FAST_ASSIGN = 1;
@@ -36,7 +37,7 @@ public class TestAssegnamenti extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - Assegnamenti composti");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - Assegnamenti composti");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestInput extends GenericTest{
     public static final int TEST_INPUT = 1;
@@ -38,8 +39,8 @@ public class TestInput extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test input stringa semplice");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - test input serie di valori interi");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - test input stringa semplice");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - test input serie di valori interi");
     }
 
     @Override

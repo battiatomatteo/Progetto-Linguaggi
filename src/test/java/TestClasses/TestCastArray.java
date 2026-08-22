@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 public class TestCastArray extends GenericTest{
     public final static int TEST_CAST_TO_INTEGER = 1;
@@ -118,11 +119,11 @@ public class TestCastArray extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - Cast di array verso int");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "2 - Cast di array verso dec");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "3 - Cast di array verso bool");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "4 - Cast di array verso string");
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "5 - Cast di array verso char");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - Cast di array verso int");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - Cast di array verso dec");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - Cast di array verso bool");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "4 - Cast di array verso string");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "5 - Cast di array verso char");
     }
 
     @Override

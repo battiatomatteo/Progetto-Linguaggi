@@ -1,6 +1,7 @@
 package TestClasses;
 
 import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class TestAutoCode extends GenericTest{
         ArrayList<String> codiceIntero = new ArrayList<>();
         StringBuilder codice = new StringBuilder();
 
-        FormattedLogs.println(FormattedLogs.YELLOW,"\n" +
+        FormattedLogs.println(OutputColor.YELLOW,"\n" +
                         "Inserisci il codice da eseguire :\n" +
                         "- La sintassi del codice deve essere la stessa degli altri test \n" +
                         "- Scrivi END per terminare \n" +
@@ -30,7 +31,7 @@ public class TestAutoCode extends GenericTest{
             if (riga.startsWith(REMOVE_COM)){
                 int inizioComando = riga.indexOf(NEW_LINE_COM);
                 if(inizioComando == -1){
-                    FormattedLogs.println(FormattedLogs.RED,"Manca la riga da sostituire" );
+                    FormattedLogs.println(OutputColor.RED,"Manca la riga da sostituire" );
                     continue;
                 }
                 try{
@@ -39,7 +40,7 @@ public class TestAutoCode extends GenericTest{
                     //FormattedLogs.println(FormattedLogs.PURPLE, "numero riga <<" + numeroRiga +">>");
                     int indice = Integer.parseInt(numeroRiga);
                     if(indice < 1 || indice > codiceIntero.size()){
-                        FormattedLogs.println(FormattedLogs.RED,"Il numero di riga deve essere un numero valido");
+                        FormattedLogs.println(OutputColor.RED,"Il numero di riga deve essere un numero valido");
                         continue;
                     }
                     String nuovaRiga = riga.substring(inizioComando + NEW_LINE_COM.length());
@@ -48,7 +49,7 @@ public class TestAutoCode extends GenericTest{
                     continue;
                 }
                 catch (Exception e){
-                    FormattedLogs.println(FormattedLogs.RED,"Comando REMOVE usato incorrettamente" +
+                    FormattedLogs.println(OutputColor.RED,"Comando REMOVE usato incorrettamente" +
                             "il formato e' REMOVE Numero di riga -> riga di codice da sostituire" );
                 }
             }
@@ -63,7 +64,7 @@ public class TestAutoCode extends GenericTest{
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(FormattedLogs.BRIGHT_GREEN, "1 - test input codice personale ");
+        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - test input codice personale ");
 
     }
 
