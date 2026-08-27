@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestNonDeterminismo extends GenericTest{
+public class TestNonDeterminismo extends GenericEntry{
     public static final int TEST_NON_DETERMINISMO = 1;
     public static final int TEST_NON_DETERMINISMO_DUE = 2;
     public static final int TEST_NON_DETERMINISMO_TRE = 3;

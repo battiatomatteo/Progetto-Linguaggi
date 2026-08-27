@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestCompleti extends GenericTest{
+public class TestCompleti extends GenericEntry{
     public static final int TEST_1= 1;
     public static final int TEST_2= 2;
     public static final int TEST_3= 3;

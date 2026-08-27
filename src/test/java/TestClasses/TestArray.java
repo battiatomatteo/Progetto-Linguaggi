@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestArray extends GenericTest {
+public class TestArray extends GenericEntry {
     public final static int TEST_ARRAY_GENERIC = 1;
     public final static int TEST_ARRAY_ASSIGNMENT = 2;
     public final static int TEST_ARRAY_ACCESS = 3;

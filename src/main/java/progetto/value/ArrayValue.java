@@ -1,11 +1,8 @@
 package progetto.value;
 
-import progetto.exception.CastException;
 import progetto.type.ArrayType;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
-import progetto.utils.FormattedLogs;
-import progetto.utils.OutputColor;
 
 import java.util.ArrayList;
 
@@ -26,56 +23,27 @@ public class ArrayValue<T extends ExpValue<?>> extends ExpValue<ArrayList<T>> {
 
     @Override
     public ExpValue<?> cast(ExpType type) {
-        if (!checkCast(type)) {
+        if (!(type instanceof ArrayType arrayType)) {
             return null;
         }
-        SimpleType st = ArrayType.toSimpleType((ArrayType) type);
+        SimpleType st = ArrayType.toSimpleType(arrayType);
         if (st == null) {
             return null;
         }
-        else{
-            return castTo(st);
-        }
-    }
-
-
-    private boolean checkCast(ExpType destType) {
-        ArrayType thisType = ArrayType.fromValue(this);
-        if (!thisType.isCastable(destType)) {
-            return false;
-        }
-        if (!isSafeCast(destType)) {
-            FormattedLogs.println(OutputColor.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
-        }
-        return true;
-    }
-
-    private boolean isSafeCast(ExpType type) {
-        return true;
+        return castTo(st);
     }
 
 
     private ArrayValue<ExpValue<?>> castTo(SimpleType type) {
         ArrayValue<ExpValue<?>> array = new ArrayValue<>();
         ArrayList<T> value = this.toJavaValue();
-        //System.out.println("Il tipo dell'array e' " + type);
-        for (int i = 0; i < value.size(); i++) {
-
-            try{
-                ExpValue<?> element = value.get(i);
-                //System.out.println("guardo l'elemento " + i + " " + element);
-                ExpValue<?> casted = element.cast(type);
-                //System.out.println("elemento " + i + " convertito in  " + casted);
-                array.toJavaValue().add(casted);
-                //System.out.println("elemento " + i + " salvato nel nuovo oggetto  " + array.toJavaValue().get(i));
-            }
-            catch(Exception e){
-                //System.out.println("errore nella conversione a indice" + i);
-                //System.out.println(e.getMessage());
+        for (T t : value) {
+            ExpValue<?> casted = t.cast(type);
+            if (casted == null) {
                 return null;
             }
+            array.toJavaValue().add(casted);
         }
-        //System.out.println("array convertito in  " + array.toJavaValue());
         return array;
     }
 

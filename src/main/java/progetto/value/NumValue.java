@@ -1,10 +1,7 @@
 package progetto.value;
 
-import progetto.exception.CastException;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
-import progetto.utils.FormattedLogs;
-import progetto.utils.OutputColor;
 
 public class NumValue<T extends Number> extends ExpValue<T> {
 
@@ -13,37 +10,16 @@ public class NumValue<T extends Number> extends ExpValue<T> {
     }
 
     public ExpValue<?> cast(ExpType type){
-        if(!checkCast(type)) {
+        if (!(type instanceof SimpleType simpleType)) {
             return null;
         }
-        return switch (type){
+        return switch (simpleType){
             case SimpleType.BOOL -> castToBoolValue();
             case SimpleType.STRING -> castToStringValue();
             case SimpleType.CHAR -> castToCharValue() ;
             case SimpleType.DEC, SimpleType.INT -> this;
-
             default -> null;
         };
-    }
-
-    protected boolean checkCast(ExpType destType) {
-        SimpleType thisType = SimpleType.fromValue(this);
-        if (!thisType.isCastable(destType)) {
-            return false;
-        }
-        if (!isSafeCast(destType)) {
-            FormattedLogs.println(OutputColor.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
-        }
-        return true;
-    }
-
-    private boolean isSafeCast(ExpType type) {
-        return switch (type) {
-            case SimpleType.INT, SimpleType.DEC, SimpleType.STRING-> true;
-            case SimpleType.CHAR, SimpleType.BOOL  -> false;
-            default -> throw new CastException("type not supported");
-        };
-
     }
 
     protected ExpValue<?> castToCharValue() {
@@ -55,7 +31,7 @@ public class NumValue<T extends Number> extends ExpValue<T> {
         }
         i = Math.floor(i);
         if( i >= 0 && i <= 9 ){
-           return new CharValue(String.valueOf(i).charAt(0));
+            return new CharValue(String.valueOf(i).charAt(0));
         }
         else {
             return null;
@@ -78,7 +54,6 @@ public class NumValue<T extends Number> extends ExpValue<T> {
             case 0 -> new BoolValue(false);
             case 1 -> new BoolValue(true);
             default -> null;
-            //default -> throw new RuntimeException("La stringa " + this.toJavaValue() + " non puo' essere convertita in valore booleano ");
         };
     }
 

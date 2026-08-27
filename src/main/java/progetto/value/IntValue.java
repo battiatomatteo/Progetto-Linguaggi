@@ -10,10 +10,10 @@ public class IntValue extends NumValue<Integer> {
     }
 
     public ExpValue<?> cast(ExpType type){
-        if(!super.checkCast(type)) {
+        if (!(type instanceof SimpleType simpleType)) {
             return null;
         }
-        return switch (type){
+        return switch (simpleType){
             case SimpleType.STRING -> super.castToStringValue();
             case SimpleType.CHAR -> super.castToCharValue();
             case SimpleType.BOOL -> super.castToBoolValue() ;
@@ -24,6 +24,6 @@ public class IntValue extends NumValue<Integer> {
     }
 
     private ExpValue<?> castToDecValue() {
-           return new DecValue(Double.valueOf(this.toJavaValue()));
+        return new DecValue(Double.valueOf(this.toJavaValue()));
     }
 }

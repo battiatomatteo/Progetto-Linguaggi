@@ -6,13 +6,12 @@ public interface ExpType extends Type {
 
     String getName();
     boolean isCastable(ExpType type);
+    boolean isSafeCast(ExpType type);
     static ExpType fromValue(ExpValue<?> value){
-        //System.out.println("check tipo simple");
         SimpleType type = SimpleType.fromValue(value);
         if (type != null) {
             return type;
         }
-        //System.out.println("check tipo array");
         ArrayType arrayType = ArrayType.fromValue(value);
         if (arrayType != null) {
             return arrayType;

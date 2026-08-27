@@ -3,10 +3,8 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestAssegnamenti extends GenericTest{
+public class TestAssegnamenti extends GenericEntry{
     public final static int TEST_FAST_ASSIGN = 1;
-    public final static int TEST_TO_DO = 2;
-    public final static int TEST_TO_DO_2 = 3;
 
     private static final String test1 =
             """
@@ -26,14 +24,6 @@ public class TestAssegnamenti extends GenericTest{
             print x
             """;
 
-    private static final String test2 =
-            """
-            """;
-
-    private static final String test3 =
-            """
-            """;
-
     @Override
     public void printTests() {
         super.printTests();
@@ -44,8 +34,6 @@ public class TestAssegnamenti extends GenericTest{
     public  String getTests(int i){
         return switch (i){
             case TEST_FAST_ASSIGN -> test1;
-            case TEST_TO_DO -> test2;
-            case TEST_TO_DO_2 -> test3;
             default -> null;
         };
     }

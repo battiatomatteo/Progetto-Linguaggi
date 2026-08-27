@@ -1,28 +1,37 @@
 package TestMenu;
 
-import TestClasses.GenericTest;
+import TestClasses.GenericEntry;
 import config.ProgramConfig;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class ImpostazioniMenu extends GenericTest {
+public class ImpostazioniMenu extends GenericEntry {
 
     public static final int COLORI_OUT = 1;
     public static final int AVVISI = 2;
 
+    public ImpostazioniMenu() {
+        super(true,false);
+    }
+
     public String cambioColore(){
-        ProgramConfig.setColorVisibility(!ProgramConfig.getColorVisibility());
-        return "il colore del menu è stato cambiato";
+        boolean newOptionSetting = !ProgramConfig.getColorVisibility();
+        ProgramConfig.setColorVisibility(newOptionSetting);
+        return "il colore del menu è " + (newOptionSetting ? "abilitato " : "disabilitato");
     }
 
     public String cambioWarning(){
-        ProgramConfig.setWarningVisibility(!ProgramConfig.getWarningVisibility());
-        return "le impostazioni della visibilità dei warning sono state cambiare";
+        boolean newOptionSetting = !ProgramConfig.getWarningVisibility();
+        ProgramConfig.setWarningVisibility(newOptionSetting);
+        return "la visibilità dei warning è " + (newOptionSetting ? "abilitata " : "disabilitata");
     }
+
 
     @Override
     public void printTests() {
-        super.printTests();
+        System.out.println();
+        FormattedLogs.println(OutputColor.CYAN, "Configurazione del programma di test");
+        FormattedLogs.println(OutputColor.RED, "0 - Chiudi");
         FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - Impostazioni colori output");
         FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - Impostazioni warning");
     }

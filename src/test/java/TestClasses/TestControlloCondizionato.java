@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestControlloCondizionato extends GenericTest {
+public class TestControlloCondizionato extends GenericEntry {
 
     public static final int TEST_IN = 1;
     public static final int TEST_IN2 = 2;
@@ -124,7 +124,6 @@ public class TestControlloCondizionato extends GenericTest {
     @Override
     public void printTests() {
         super.printTests();
-        FormattedLogs.println(OutputColor.BRIGHT_GREEN, "SISTEMARE TEST 1, 2, 3");
         FormattedLogs.println(OutputColor.BRIGHT_GREEN, "1 - forElse e if + forElse e switch");
         FormattedLogs.println(OutputColor.BRIGHT_GREEN, "2 - forElse + break");
         FormattedLogs.println(OutputColor.BRIGHT_GREEN, "3 - forElse + switchCase");

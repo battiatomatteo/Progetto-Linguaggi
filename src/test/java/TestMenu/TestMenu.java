@@ -50,7 +50,7 @@ public class TestMenu {
         addEntry(12,new ImpostazioniMenu(), "Impostazioni menu");
     }
 
-    private void addEntry( int index, GenericTest classObj, String displayName){
+    private void addEntry( int index, GenericEntry classObj, String displayName){
         menu.put(index,new TestMenuEntry(classObj,padRightString(displayName,38)));
     }
 

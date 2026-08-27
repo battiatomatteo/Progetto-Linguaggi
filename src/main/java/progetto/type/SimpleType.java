@@ -28,7 +28,31 @@ public enum SimpleType implements ExpType {
 
     @Override
     public boolean isCastable(ExpType type) {
-       return type instanceof SimpleType;
+        return type instanceof SimpleType;
+    }
+
+    @Override
+    public boolean isSafeCast(ExpType type) {
+        if (!(type instanceof SimpleType destination)) {
+            return false;
+        }
+
+        return switch (this) {
+            case INT, DEC ->
+                    destination == INT ||
+                    destination == DEC ||
+                    destination == STRING;
+
+            case BOOL, STRING ->
+                    destination == BOOL ||
+                    destination == INT ||
+                    destination == DEC ||
+                    destination == STRING;
+
+            case CHAR ->
+                    destination == CHAR ||
+                    destination == STRING;
+        };
     }
 
     public static SimpleType fromString(String str) {
@@ -53,7 +77,6 @@ public enum SimpleType implements ExpType {
             return SimpleType.STRING;
         if (value instanceof CharValue)
             return SimpleType.CHAR;
-        //System.out.println("Il tipo di  " + value + " non e' SimpleType");
         return null;
     }
 }

@@ -6,11 +6,15 @@ import progetto.utils.OutputColor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TestAutoCode extends GenericTest{
+public class TestAutoCode extends GenericEntry {
 
     public static final int TEST_INPUT = 1;
     public final String REMOVE_COM = "REMOVE ";
     public final String NEW_LINE_COM = " -> ";
+
+    public TestAutoCode() {
+        super(false,true);
+    }
 
     private String testAutoCode(){
         Scanner sc = new Scanner(System.in);
@@ -18,11 +22,11 @@ public class TestAutoCode extends GenericTest{
         StringBuilder codice = new StringBuilder();
 
         FormattedLogs.println(OutputColor.YELLOW,"\n" +
-                        "Inserisci il codice da eseguire :\n" +
-                        "- La sintassi del codice deve essere la stessa degli altri test \n" +
-                        "- Scrivi END per terminare \n" +
-                        "- Per eliminare una riga usare (può essere fatto in ogni punto del codice) \n" +
-                        "  REMOVE Numero di riga -> riga di codice da sostituire \n");
+                "Inserisci il codice da eseguire :\n" +
+                "- La sintassi del codice deve essere la stessa degli altri test \n" +
+                "- Scrivi END per terminare \n" +
+                "- Per eliminare una riga usare (può essere fatto in ogni punto del codice) \n" +
+                "  REMOVE Numero di riga -> riga di codice da sostituire \n");
 
         while (true) {
             String riga = sc.nextLine().trim();
@@ -35,16 +39,13 @@ public class TestAutoCode extends GenericTest{
                     continue;
                 }
                 try{
-                    //FormattedLogs.println(FormattedLogs.PURPLE, "riga scritta <<" + riga +">>");
                     String numeroRiga = riga.substring(REMOVE_COM.length(),inizioComando);
-                    //FormattedLogs.println(FormattedLogs.PURPLE, "numero riga <<" + numeroRiga +">>");
                     int indice = Integer.parseInt(numeroRiga);
                     if(indice < 1 || indice > codiceIntero.size()){
                         FormattedLogs.println(OutputColor.RED,"Il numero di riga deve essere un numero valido");
                         continue;
                     }
                     String nuovaRiga = riga.substring(inizioComando + NEW_LINE_COM.length());
-                    //FormattedLogs.println(FormattedLogs.PURPLE, "da sostituire <<" + nuovaRiga +">>");
                     codiceIntero.set(indice - 1,nuovaRiga);
                     continue;
                 }

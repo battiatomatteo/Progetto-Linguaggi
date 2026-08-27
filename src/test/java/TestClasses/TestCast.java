@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestCast extends GenericTest{
+public class TestCast extends GenericEntry{
     public final static int TEST_CAST_TO_INTEGER = 1;
     public final static int TEST_CAST_TO_DECIMAL = 2;
     public final static int TEST_CAST_TO_BOOLEAN = 3;

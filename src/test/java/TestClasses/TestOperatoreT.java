@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestOperatoreT extends GenericTest{
+public class TestOperatoreT extends GenericEntry{
     public final static int TEST_IF_STATEMENT = 1;
     public final static int TEST_TO_DO = 2;
     public final static int TEST_TO_DO_2 = 3;

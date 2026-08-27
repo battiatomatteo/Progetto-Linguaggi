@@ -1,10 +1,7 @@
 package progetto.value;
 
-import progetto.exception.CastException;
 import progetto.type.ExpType;
 import progetto.type.SimpleType;
-import progetto.utils.FormattedLogs;
-import progetto.utils.OutputColor;
 
 public class CharValue extends ExpValue<Character> {
 
@@ -14,10 +11,10 @@ public class CharValue extends ExpValue<Character> {
 
     @Override
     public ExpValue<?> cast(ExpType type) {
-        if (!checkCast(type)) {
+        if (!(type instanceof SimpleType simpleType)) {
             return null;
         }
-        return switch ((SimpleType) type) {
+        return switch (simpleType){
             case SimpleType.CHAR -> this;
             case SimpleType.STRING -> castToStringValue();
             case SimpleType.INT -> castToIntValue();
@@ -25,28 +22,6 @@ public class CharValue extends ExpValue<Character> {
             case SimpleType.BOOL -> castToBoolValue();
             default -> null;
         };
-    }
-
-
-    private boolean checkCast(ExpType destType) {
-        SimpleType thisType = SimpleType.fromValue(this);
-        //System.out.println("tipo destinazione: " + thisType);
-        if (!thisType.isCastable(destType)) {
-            return false;
-        }
-        if (!isSafeCast(destType)) {
-            FormattedLogs.println(OutputColor.YELLOW,"Unsafe cast from " + thisType + " to " + destType);
-        }
-        return true;
-    }
-
-    private boolean isSafeCast(ExpType type) {
-        return switch (type) {
-            case SimpleType.CHAR, SimpleType.STRING -> true;
-            case SimpleType.BOOL, SimpleType.INT, SimpleType.DEC -> false;
-            default -> throw new CastException("type not supported");
-        };
-
     }
 
     private ExpValue<?> castToBoolValue() {

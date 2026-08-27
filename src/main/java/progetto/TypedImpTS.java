@@ -1,9 +1,12 @@
 package progetto;
 
+import config.ProgramConfig;
 import progetto.exception.CastException;
 import progetto.exception.TypeMismatchException;
 import progetto.exception.VarDeclarationException;
 import progetto.type.*;
+import progetto.utils.FormattedLogs;
+import progetto.utils.OutputColor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,18 +53,28 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
         ExpType type = (ExpType) visit(ctx.exp());
         String typeName = ctx.type().getText();
 
-        ExpType result;
+        ExpType destinationType;
         if (typeName.endsWith("[]")) {
-            result = ArrayType.fromString(typeName);
+            destinationType = ArrayType.fromString(typeName);
         } else {
-            result = SimpleType.fromString(typeName);
+            destinationType = SimpleType.fromString(typeName);
         }
 
-        if(!type.isCastable(result)) {
+        if (destinationType == null) {
             throw new CastException(getError(ctx,
-                    "Type mismatch: impossibile effettuare il casting dal tipo " + type + " a " + result));
+                    "Unknown destination type: " + typeName));
         }
-        return result;
+
+        if(!type.isCastable(destinationType)) {
+            throw new CastException(getError(ctx,
+                    "Type mismatch: impossibile effettuare il casting dal tipo " + type + " a " + destinationType));
+        }
+
+        if (!type.isSafeCast(destinationType) && ProgramConfig.getWarningVisibility()) {
+            FormattedLogs.println(OutputColor.YELLOW,
+                    getError(ctx,"Warning: unsafe cast from " + type.getName() + " to " + destinationType.getName()));
+        }
+        return destinationType;
     }
 
 
@@ -90,10 +103,10 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
 
     @Override
     public ComType visitDecl(LinguaggioParser.DeclContext ctx) {
-            for(LinguaggioParser.VarDecContext decCtx : ctx.varDec()){
-                String id = decCtx.ID().getText();
-                String typeText = decCtx.type().getText();   // es: "int", "int[]", "string[]"
-                ExpType varType = matchType(typeText);
+        for(LinguaggioParser.VarDecContext decCtx : ctx.varDec()){
+            String id = decCtx.ID().getText();
+            String typeText = decCtx.type().getText();   // es: "int", "int[]", "string[]"
+            ExpType varType = matchType(typeText);
 
             if (typeMap.containsKey(id)) {
                 throw new VarDeclarationException(getError(ctx,
@@ -106,7 +119,8 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
             if (exp != null) {
                 ExpType expType = (ExpType) visit(exp);
                 if (!varType.isCompatible(expType)) {
-                    throw new TypeMismatchException("assigned value " + exp.getText() + " of type " +  expType + " is not compatible with type " + varType);
+                    throw new TypeMismatchException(getError(ctx,
+                            "assigned value " + exp.getText() + " of type " +  expType + " is not compatible with type " + varType));
                 }
             }
 
@@ -136,13 +150,8 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
             ExpType t = (ExpType) visit(ctx.exp(i));
             if (!first.isCompatible(t)) {
                 throw new TypeMismatchException(getError(ctx,
-                       "Array elements must have the same type."));
+                        "Array elements must have the same type."));
             }
-            // blocco array annidato
-            /*
-            if (t instanceof ArrayType) {
-                throw new TypeMismatchException("Array annidati non permessi");
-            }*/
         }
 
         // mappa tipo semplice → tipo array
@@ -185,14 +194,14 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
         ExpType t = exists(id, ctx);
 
         if (!(t instanceof ArrayType arrType)) {
-            throw new TypeMismatchException("Variable " + id + " is not an array.\n@" +
-                    ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine());
+            throw new TypeMismatchException(getError(ctx,
+                    "Variable " + id + " is not an array."));
         }
         // indice deve essere int
         ExpType indexType = (ExpType) visit(ctx.exp());
         if (!indexType.isCompatible(SimpleType.INT)) {
-            throw new TypeMismatchException("Array index must be int.\n@" +
-                    ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine());
+            throw new TypeMismatchException(getError(ctx,
+                    "Array index must be int."));
         }
         // ritorna il tipo degli elementi
         return ArrayType.toSimpleType(arrType);
@@ -258,13 +267,13 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
     }
 
     private String getError(LinguaggioParser.ComContext ctx, String error) {
-        return error + "\n@" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine() + "\n";
+        return error + " @" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine() + "\n";
     }
     private String getError(LinguaggioParser.ExpContext ctx,String error) {
-        return error + "\n@" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine() + "\n";
+        return error + " @" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine() + "\n";
     }
     private String getError(LinguaggioParser.DeclContext ctx,String error) {
-        return error + "\n@" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine() + "\n";
+        return error + " @" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine() + "\n";
     }
 
     @Override
@@ -305,7 +314,7 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
         if (isNotNumericType(varType)) {
             throw new TypeMismatchException(getError(ctx,
                     "Cannot use increment on non numeric variable " + varType));
-            }
+        }
         return varType;
     }
 
@@ -521,13 +530,12 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
         int i = 1;
         ExpType type = (ExpType) visit(ctx.exp());
         for (LinguaggioParser.CaseBranchContext Case : ctx.switchBody().caseBranch()) {
-            //System.out.println("eseguo case numero " + i + "valore" + Case.exp().getText() + "comando" + Case.com().getText() );
-            visitCom(Case.com());
             ExpType typeCase = (ExpType) visit(Case.exp());
             if (!(type.isCompatible(typeCase))) {
-                 throw new TypeMismatchException(getError(ctx,
-                         "Errore: tipo non compatibile nel case numero : " + i));
+                throw new TypeMismatchException(getError(ctx,
+                        "Errore: tipo non compatibile nel case numero : " + i));
             }
+            visitCom(Case.com());
             i++;
         }
 

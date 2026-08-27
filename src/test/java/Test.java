@@ -1,6 +1,5 @@
 import TestMenu.TestMenu;
 import TestMenu.TestMenuEntry;
-import config.ProgramConfig;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -23,11 +22,13 @@ public class Test {
 
     public static void main(String[] args) {
 
-        FormattedLogs.println(OutputColor.CYAN,"\nBenvenuto \nAttraverso l'utilizzo del menu riportato potrà interagire col nostro programma , \ncol primo menu principale potrà scegliere" +
-                " quale tipologia di test osservare e provare , \nin seguito verrà mostrato un sotto menu nel quale le verranno proposti diversi test \ninerenti al tipo scelto precedentemente " +
-                ", sarà possibile visionare il codice del test prima \ndel suo risultato , sarà inoltre possibile ripetere più test , grazie e buon proseguimento ;) .");
+        FormattedLogs.println(OutputColor.CYAN, "\nBenvenuto " +
+                "\nAttraverso l'utilizzo del menu riportato potrà interagire col nostro programma , " +
+                "\ncol primo menu principale potrà scegliere quale tipologia di test osservare e provare , " +
+                "\nin seguito verrà mostrato un sotto menu nel quale le verranno proposti diversi test " +
+                "\ninerenti al tipo scelto precedentemente , sarà possibile visionare il codice del test prima " +
+                "\ndel suo risultato , sarà inoltre possibile ripetere più test , grazie e buon proseguimento ;) .");
         // creo il menu'
-        ProgramConfig programConfig = new ProgramConfig();
         TestMenu menu = new TestMenu();
 
         while(testTopicSelection(menu));
@@ -59,7 +60,7 @@ public class Test {
         return true;
     }
 
-    private static boolean testSelection(GenericTest classObj){
+    private static boolean testSelection(GenericEntry classObj){
         classObj.printTests();
         FormattedLogs.print(OutputColor.YELLOW,"► Selezionare il test: ");
 
@@ -78,23 +79,22 @@ public class Test {
         // il numero inserito non e' nell'elenco
         if (test == null)
             FormattedLogs.println(OutputColor.RED,"Test non trovato.");
-        //eseguo il test scelto
+            //eseguo il test scelto
         else {
-            mostraTest(classObj,test);
-            runTest(test);
-        }
+            if(classObj.isShowTest()){
+                FormattedLogs.println(OutputColor.CYAN, "\nTest da eseguire: " );
+                FormattedLogs.println(OutputColor.GREEN,test);
+            }
+            if(classObj.isRunTest()){
+                FormattedLogs.println(OutputColor.GREEN,TEST_SEPARATOR);
+                FormattedLogs.println(OutputColor.CYAN, "Output del programma ");
+                runTest(test);
+            }
 
+        }
         return true;
     }
 
-    private static void mostraTest(GenericTest classObj, String test){
-        //if(!(classObj instanceof TestAutoCode)){
-            FormattedLogs.println(OutputColor.CYAN, "\nTest da eseguire: " );
-            FormattedLogs.println(OutputColor.GREEN,test);
-       // }
-        FormattedLogs.println(OutputColor.GREEN,TEST_SEPARATOR);
-        FormattedLogs.println(OutputColor.CYAN, "Output del programma ");
-    }
 
     private static void runTest(String test){
 
@@ -108,13 +108,13 @@ public class Test {
             typeSystem.visit(tree);
             Interprete interpreter = new Interprete();
             interpreter.visit(tree);
-        }catch (InterpreterExitException e){}
+        }catch (InterpreterExitException _){}
         catch (RuntimeException re) {
             FormattedLogs.println(OutputColor.RED,"Typing error(s) found.");
             FormattedLogs.println(OutputColor.RED,re.getMessage());
             //re.printStackTrace();
         }
-        System.out.println(TEST_SEPARATOR);
+        FormattedLogs.println(OutputColor.GREEN,TEST_SEPARATOR);
     }
 
     private static int getConsoleChoice() {

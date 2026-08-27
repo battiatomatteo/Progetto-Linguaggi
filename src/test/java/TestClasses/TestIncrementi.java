@@ -3,7 +3,7 @@ package TestClasses;
 import progetto.utils.FormattedLogs;
 import progetto.utils.OutputColor;
 
-public class TestIncrementi extends GenericTest{
+public class TestIncrementi extends GenericEntry{
     public final static int TEST_INCREMENT_IN_ASSIGNMENT = 1;
     public final static int TEST_INCREMENT_COMMAND = 2;
     public final static int TEST_INCREMENT_SIMPLE = 3;
