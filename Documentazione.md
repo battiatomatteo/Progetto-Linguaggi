@@ -1,6 +1,6 @@
-# Valyrix
+Valyrix
 
-
+*Valyrix* è un linguaggio di programmazione general-purpose che utilizza una sintassi simile a java ma non presenta la possibilita' di instanziare classi.
 
 ## Indice
 
@@ -13,20 +13,19 @@
 
 ## 1. Introduzione
 
-**Valyrix è un linguaggio di programmazione .
-
+*Valyrix* è un linguaggio di programmazione imperativo tipizzato general-purpose ma non presenta la possibilita' di instanziare classi.
 ### Caratteristiche principali
 
-- **Tipizzazione statica** con tipi di dominio dedicati alla cucina (`Gram`, `Ml`, `Temp`).
-- **Due sezioni distinte**: una sezione per dichiarare gli ingredienti, ed una sezione per il codice eseguibile.
+- **Tipizzazione statica** con i tipi di dato piu' comuni (int,dec,bool,string,char)
+- **Due sezioni distinte**: una sezione per dichiarare le variabili, ed una sezione per il codice eseguibile.
 - **Espressioni aritmetico-logiche** complete con precedenza degli operatori.
 - **Costrutti iterativi e condizionali**: `while`, `for`, `if`-`else`.
-- **Arrays** come struttura dati di base.
+- **Arrays** come strutture dati statiche monodimensionali .
 - **Zucchero sintattico**: assegnamenti composti (`+=`, `-=`, `*=`, `/=`), incremento e decremento unitatio (`++`, `--`), operatore ternario (`_ ? _ : _`), e interpolazione di espressioni nelle stringhe (`i"...${expr}..."`).
 - **Gestione degli errori**: divisione per zero, accesso fuori dai limiti di un array, variabile non dichiarata, errori di tipo (tutti gestiti con messaggi esplicativi).
 
 
-### Contesto applicativo
+### Contesto applicativo***
 
 CookLang nasce dall'idea di offrire agli appassionati di cucina (e a sviluppatori di applicazioni gastronomiche) un linguaggio espressivo e leggibile per codificare ricette in modo eseguibile. Un programma CookLang non è solo documentazione: è un programma che può calcolare quantità ridimensionate, simulare fasi di cottura, e stampare istruzioni personalizzate.
 
@@ -38,10 +37,8 @@ CookLang nasce dall'idea di offrire agli appassionati di cucina (e a sviluppator
 
 - **Java 11** o superiore, necessario per ANTLR
 - **ANTLR 4** (versione 4.11 o superiore) 
-- **Python 3** (versione 3.9 o superiore), necessario per eseguire l'interprete
-  - Runtime ANTLR per Python, installabile tramite: `pip install antlr4-python3-runtime`
 
-### Generare il parser
+### Generare il parser***
 
 ```bash
 # dalla directory radice del progetto:
@@ -50,7 +47,7 @@ antlr4 -Dlanguage=Python3 -visitor -no-listener CookLang.g4 -o source
 
 Questo genera i file `CookLangLexer.py`, `CookLangParser.py`, e `CookLangVisitor.py` nella cartella `source`.
 
-### Eseguire un programma
+### Eseguire un programma***
 
 ```bash
 python3 source/main.py programs/hello.cook
@@ -58,7 +55,7 @@ python3 source/main.py programs/hello.cook
 
 Questo eseguire l'interprete del linguaggio sul programma `hello.cook` contenuto nella cartella `programs`.
 
-### Hello World
+### Hello World***
 
 Un semplice programma in CookLang.
 ```
@@ -95,42 +92,38 @@ procedure: {
 Un programma CookLang è composto da due sezioni:
 
 ```
-program : ingredientSection? procedureSection
+program : decl? com
 ```
 
-- **`ingredientSection`**: sezione opzionale dichiarativa per gli ingredienti. Le variabili qui dichiarate sono visibili nell'intera sezione `procedureSection`.
-- **`procedureSection`**: sezione eseguibile. Contiene il corpo del programma racchiuso in un blocco `{ ... }`.
+- **`decl`**: sezione opzionale dichiarativa per dichiarare e inizializzare le variabili che verranno usate nel programma.
+- **`com`**: sezione eseguibile. Contiene il corpo del programma rappresentato come serie di comandi terminati da ";" , l'ultima istruzione di ogni blocco non necessita del terminatore.
 
 ### 3.2 Tipi di dato
 
-| Tipo     | Descrizione                                  | Esempio di valore |
-|----------|----------------------------------------------|-------------------|
-| `Int`    | Intero con segno                             | `42`, `-3`        |
-| `Float`  | Numero in virgola mobile                     | `3.14`, `-0.5`    |
-| `Bool`   | Valore booleano                              | `true`, `false`   |
-| `String` | Stringa di testo                             | `"ciao"`          |
-| `Gram`   | Peso in grammi (sottotipo di `Int`)          | `250`             |
-| `Ml`     | Volume in millilitri (sottotipo di `Int`)    | `100`             |
-| `Temp`   | Temperatura in °C (sottotipo di `Float`)     | `180.0`, `24.5`   |
-| `T[]`    | Array di elementi di tipo `T`                | `[1, 2, 3]`       |
-
-I tipi `Gram` e `Ml` sono tipi di dominio che estendono `Int`, mentre `Temp` è un tipo di dominio che estende `Float`. I tipi `Gram` e `Ml` sono compatibili nelle espressioni aritmetiche con `Int` e tra loro (con conversione implicita a `Int`). Il tipo `Temp` è compatibile nelle espressioni aritmetiche con `Float` (con conversione implicita a `Float`).
+| Tipo     | Descrizione              | Esempio di valore |
+| -------- | ------------------------ | ----------------- |
+| `Int`    | Intero con segno         | `42`, `-3`        |
+| `dec`    | Numero in virgola mobile | `3.14`, `-0.5`    |
+| `Bool`   | Valore booleano          | `true`, `false`   |
+| `String` | Stringa di testo         | `"ciao"`          |
+| `char`   | Carattere ascii          | 'a' , 'b'         |
 
 ### 3.3 Dichiarazione di variabili
 
 ```
-Int x = 10;
-Float y;          // inizializzata al valore di default 0.0
-String s = "ok";
-Int[] arr = [1, 2, 3];
+int x = 8;
+dec z;    // la variabile deve essere valorizzata prima dell'utilizzo
+string s = "prova";
+int[] array = [1, 2, 3];
 ```
 
-Le variabili dichiarate nella sezione `ingredientSection` sono visibili nell'intero programma. Le variabili dichiarate all'interno di un blocco `{ ... }` sono visibili solo all'interno di quel blocco (**scoping lessicale con shadowing**).
+ Nella fase di dichiarazione l'inizializzazione e' opzionale, ma deve essere effettuata nel codice prima dell'utilizzo della variabile, in caso contrario avviene un errore di mancata inizializzazione. Le variabili sono globali e posso essere dichiarate solo all'inizio del programma, non esiste di conseguenza  shadowing delle variabili nel codice.
 
 ### 3.4 Assegnamenti
 
 ```
-x = 42;
+int x = 30;
+int y = 5;
 x += 5;    // equivalente a x = x + 5
 x -= 2;    // equivalente a x = x - 2
 x *= 3;    // equivalente a x = x * 3
@@ -139,27 +132,29 @@ x /= 4;    // equivalente a x = x / 4
 x++;       // post-incremento, incremento unitario dopo la valutazione
 --x;       // pre-decremento, decremento unitario prima della valutazione
 x--;       // post-decremento, decremento unitario dopo la valutazione
+y = x++ - 5; // y = 30 - 5 --> y = 25, x = 31 poiche' l'incremento viene effettuato dopo aver terminato l'istruzione
+y = x++ - 5; // y = 32 - 5 --> y = 27, x = 32 poiche' in questo caso l'incremento viene effettuato subito 
 ```
 
-Come statement isolati, pre/post incremento/decremento hanno lo stesso effetto di un assegnamento. La distinzione è rilevante solo quando usati come sotto-espressioni.
-
+Gli operatori di pre e post incremento / decremento possono essere usati sia da soli che all'interno delle espressioni. 
 ### 3.5 Espressioni
 
 Le espressioni supportano la **precedenza standard** degli operatori (dal più basso al più alto):
 
-| Livello | Operatori                                           |
-|---------|-----------------------------------------------------|
-| 1       | `_ ? _ : _` (ternario)                              |
-| 2       | `\|\|`, `&&` (or, and logici)                       |
-| 3       | `==`, `!=`, `<`, `>`, `<=`, `>=` (comparatori)      |
-| 4       | `+`, `-` (somma, sottrazione)                       |
-| 5       | `*`, `/`, `%` (moltiplicazione, divisione, modulo)  |
-| 6       | `!` (negazione logica), `-` (negazione numerica)    |
-| 7       | Accesso array `arr[i]`                              |
+| Livello | Operatori                                          |
+| ------- | -------------------------------------------------- |
+| 1       | `_ ? _ : _` (ternario)                             |
+| 2       | `\|\|`, `&&` (or, and logici)                      |
+| 3       | `==`, `!=`, `<`, `>`, `<=`, `>=` (comparatori)     |
+| 4       | `+`, `-` (somma, sottrazione)                      |
+| 5       | `*`, `/`, `%` (moltiplicazione, divisione, modulo) |
+| 6       | `!` (negazione logica)                             |
+| 7       | Accesso array `arr[i]`                             |
 
 **Operatore ternario:**
 ```
-String msg = (porzioni > 1) ? "porzioni" : "porzione";
+int numero = 5;
+String msg = (numero > 1) ? "porzioni" : "porzione";
 ```
 La variabile `msg` viene assegnata con la stringa *"porzioni"* se la variabile `porzioni` è maggiore di 1. VIene assegnato con la stringa *"porzione"* altrimenti.
 
@@ -178,7 +173,7 @@ if (temperatura > 200) {
 ```
 Int i = 0;
 while (i < 5) {
-    print i"Passo ${i}";
+    print "numero " :: ${i};
     i++;
 }
 ```
@@ -186,10 +181,11 @@ while (i < 5) {
 **Ciclo for:**
 ```
 for i from 1 to 10 {
-    print i"Ingrediente numero ${i}";
+    print "numero " :: ${i};
 }
 ```
-Il ciclo `for i from a to b` itera `i` da `a` a `b` inclusi, `a` e `b` possono essere solo numeri interi non negativi.
+Il ciclo `for i from a to b` itera `i` da `a` incluso a `b` escluso `a` e `b` possono essere solo numeri interi.
+I cicli while e for possono terminare anticipatamente con l'utilizzo dell'istruzione "break".
 
 ### 3.7 Stampa e interpolazione nelle stringhe
 
@@ -199,7 +195,7 @@ print i"Risultato: ${x + y} unità";
 print i"Il doppio di ${n} è ${n * 2}";
 ```
 
-Le stringhe interpolate iniziano con `i"` e terminano con `"`. Le espressioni sono racchiuse in `${...}`.
+Le stringhe interpolate sono comprese tra "${" e "}", e contengono espressioni di qualsiasi tipo e possono essere concatenate con le stringhe semplici 
 
 ### 3.8 Array
 

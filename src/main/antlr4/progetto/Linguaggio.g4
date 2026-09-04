@@ -15,7 +15,6 @@ com :  op=(DECR|INCR) ID                                            # preDecrInc
      | WHILE LPAR exp RPAR LBRACE com RBRACE                        # while
      | com SEMICOLON com                                            # seq
      | OUT exp                                                      # out
-     | NOP                                                          # nop
      | INPUT ID                                                     # input
      | DLOW com (AT com)+ DGRT                                      # nonDet
      | FOR ID FROM exp TO exp LBRACE com RBRACE (ELSE LBRACE com RBRACE)?   # forWithFinal
@@ -117,7 +116,6 @@ WHILE  : 'while' ;
 ASSIGN : '='     ;
 OUT    : 'print' ;
 INPUT  : 'input' ;
-NOP    : 'nop'   ;
 FOR     : 'for';
 FROM    : 'from';
 TO      : 'to';
