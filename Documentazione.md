@@ -21,13 +21,14 @@ Valyrix
 - **Espressioni aritmetico-logiche** complete con precedenza degli operatori.
 - **Costrutti iterativi e condizionali**: `while`, `for`, `if`-`else`.
 - **Arrays** come strutture dati statiche monodimensionali .
-- **Zucchero sintattico**: assegnamenti composti (`+=`, `-=`, `*=`, `/=`), incremento e decremento unitatio (`++`, `--`), operatore ternario (`_ ? _ : _`), e interpolazione di espressioni nelle stringhe (`i"...${expr}..."`).
+- **Zucchero sintattico**: assegnamenti composti (`+=`, `-=`, `*=`, `/=`), incremento e decremento unitario (`++`, `--`), operatore ternario (`_ ? _ : _`), e interpolazione di espressioni nelle stringhe (`${expr}`).
 - **Gestione degli errori**: divisione per zero, accesso fuori dai limiti di un array, variabile non dichiarata, errori di tipo (tutti gestiti con messaggi esplicativi).
-
-
+- **Operatore Non Deterministico** presenza di un operatore che esegue una istruzione casuale tra un insieme di comandi
+- **Casting esplicito** casting esplicito, permette conversione tra tutti i tipi di dato semplici e tra tutti i tipi di dato array 
+- **Flusso di Controllo Condizionato** Supporto per un costrutto iterativo con possibilita' di uscita prematura dall’iterazione tramite un apposito comando. Compatibile con solo con il ciclo for.
 ### Contesto applicativo***
 
-CookLang nasce dall'idea di offrire agli appassionati di cucina (e a sviluppatori di applicazioni gastronomiche) un linguaggio espressivo e leggibile per codificare ricette in modo eseguibile. Un programma CookLang non è solo documentazione: è un programma che può calcolare quantità ridimensionate, simulare fasi di cottura, e stampare istruzioni personalizzate.
+Valiryx punta ad essere un linguaggio semplice con una sintassi simile a C e Java.
 
 ---
 
@@ -57,46 +58,53 @@ Questo eseguire l'interprete del linguaggio sul programma `hello.cook` contenuto
 
 ### Hello World***
 
-Un semplice programma in CookLang.
+Un programma per iniziare con Valiryx .
+```valiryx
+string name;
+input name;
+print "Ciao " :: name 
 ```
-procedure: {
-    String nome = "Pasta al Pomodoro";
-    print i"Benvenuto in CookLang! Ricetta: ${nome}";
-}
-```
-> **Output** <br>
-> Benvenuto in CookLang! Ricetta: Pasta al Pomodoro
+>**Input**
+   Mario
 
-Un esempio di programma in CookLang che utilizza tipi di dominio.
-```
-ingredients:
-    Gram farina = 500;
-    Ml acqua = 300;
-    Temp forno = 180;
+**Output** <br>
+> Ciao Mario
 
-procedure: {
-    Int porzioni = 4;
-    Gram farinaPerPorzione = farina / porzioni;
-    print i"Farina per porzione: ${farinaPerPorzione}g";
-    print i"Temperatura forno: ${forno}°C";
+Un esempio di programma in Valiryx che effettua semplici operazioni aritmiche
+```valiryx
+int num = 5;
+int i;
+int end = 10;
+print "tabellina del 5";
+for i from 0 to end{
+	print num :: " X " :: ${i + 1} :: " = " :: ${(i + 1) * num}
 }
 ```
 > **Output**                 <br>
-> Farina per porzione: 125g  <br>
-> Temperatura forno: 180°C
+	tabellina del 5
+	5 X 1 = 5
+	5 X 2 = 10
+	5 X 3 = 15
+	5 X 4 = 20
+	5 X 5 = 25
+	5 X 6 = 30
+	5 X 7 = 35
+	5 X 8 = 40
+	5 X 9 = 45
+	5 X 10 = 50
 
 ## 3. Sintassi
 
 ### 3.1 Struttura di un programma
 
-Un programma CookLang è composto da due sezioni:
+Un programma Valiryx è composto da due sezioni:
 
-```
-program : decl? com
+```valiryx
+main : decl com EOF
 ```
 
 - **`decl`**: sezione opzionale dichiarativa per dichiarare e inizializzare le variabili che verranno usate nel programma.
-- **`com`**: sezione eseguibile. Contiene il corpo del programma rappresentato come serie di comandi terminati da ";" , l'ultima istruzione di ogni blocco non necessita del terminatore.
+- **`com`**: sezione eseguibile. Contiene il corpo del programma rappresentato come serie di comandi terminati da ";" , l'ultima istruzione di ogni blocco (anche nei blocchi annidati come nell'esempio precedente) non necessita del terminatore.
 
 ### 3.2 Tipi di dato
 
@@ -110,7 +118,7 @@ program : decl? com
 
 ### 3.3 Dichiarazione di variabili
 
-```
+```valiryx
 int x = 8;
 dec z;    // la variabile deve essere valorizzata prima dell'utilizzo
 string s = "prova";
@@ -121,7 +129,7 @@ int[] array = [1, 2, 3];
 
 ### 3.4 Assegnamenti
 
-```
+```valiryx
 int x = 30;
 int y = 5;
 x += 5;    // equivalente a x = x + 5
@@ -154,34 +162,37 @@ Le espressioni supportano la **precedenza standard** degli operatori (dal più b
 **Operatore ternario:**
 ```
 int numero = 5;
-String msg = (numero > 1) ? "porzioni" : "porzione";
+String msg = (numero % 2 == 0) ? "pari" : "dispari"
 ```
-La variabile `msg` viene assegnata con la stringa *"porzioni"* se la variabile `porzioni` è maggiore di 1. VIene assegnato con la stringa *"porzione"* altrimenti.
+La variabile `msg` viene assegnata con la stringa *"pari"* se la variabile numero e' divisibile per 2 con resto 0, altrimenti viene assegnato con la stringa *"dispari"* .
 
 ### 3.6 Costrutti di controllo
 
 **Condizionale:**
-```
-if (temperatura > 200) {
-    print "Alta temperatura!";
+```valiryx
+if (numero < 0) {
+    print "Numero negativo"
 } else {
-    print "Temperatura normale.";
+    print "Numero positivo"
 }
 ```
 
 **Ciclo while:**
-```
+```valiryx
 Int i = 0;
 while (i < 5) {
     print "numero " :: ${i};
-    i++;
+    i++
 }
 ```
 
 **Ciclo for:**
-```
+```valiryx
 for i from 1 to 10 {
     print "numero " :: ${i};
+    if(i == 5){
+    break
+    }
 }
 ```
 Il ciclo `for i from a to b` itera `i` da `a` incluso a `b` escluso `a` e `b` possono essere solo numeri interi.
@@ -189,7 +200,7 @@ I cicli while e for possono terminare anticipatamente con l'utilizzo dell'istruz
 
 ### 3.7 Stampa e interpolazione nelle stringhe
 
-```
+```valiryx
 print "Testo semplice";
 print i"Risultato: ${x + y} unità";
 print i"Il doppio di ${n} è ${n * 2}";
@@ -199,23 +210,23 @@ Le stringhe interpolate sono comprese tra "${" e "}", e contengono espressioni d
 
 ### 3.8 Array
 
-```
-Int[] ingredienti = [10, 20, 30];
-Int primo = ingredienti[0];
-ingredienti[1] = 99;
-
-Int[] vuoto = new Int[5];   // array di 5 interi inizializzati a 0
+```valiryx
+int[] a = [1, 2, 3];
+int n = 2;
+print a;  
+a[1] = 5 * n;  
+print a
 ```
 
 ### 3.9 Uscita dal programma
 
-```
+```valiryx
 exit;   // termina immediatamente l'esecuzione del programma
 ```
 
 ### 3.10 Commenti
 
-```cooklang
+```valiryx
 // Commento su una riga
 /* Commento
    su più righe */
@@ -223,10 +234,10 @@ exit;   // termina immediatamente l'esecuzione del programma
 
 ### 3.11 Regole lessicali principali
 
-- Gli identificatori iniziano con una lettera o `_`, seguiti da lettere, cifre, o `_`.
+- Gli identificatori iniziano con una lettera , seguiti da lettere, cifre.
 - Le keyword sono case-sensitive e riservate (ad esempio, `if`, `while`, `for`, `true`, `false`, i nomi dei tipi).
 - I blocchi sono delimitati da `{` e `}`.
-- Ogni statement termina con `;`.
+- Ogni statement termina con `;` tranne l'ultimo di ogni blocco.
 - Gli spazi bianchi e le tabulazioni sono ignorati.
 
 ## 4. Semantica
@@ -235,17 +246,19 @@ exit;   // termina immediatamente l'esecuzione del programma
 
 CookLang adotta **tipizzazione statica**: ogni variabile deve essere dichiarata con un tipo esplicito, e il tipo non cambia durante l'esecuzione. Le verifiche di tipo avvengono prima di eseguire un programma tramite un **type system**, il quale riporta errori segnalati con messaggi descrittivi. Gli errori gestiti staticamente includono:
 
-| Errore                        | Messaggio                                                  |
-|-------------------------------|------------------------------------------------------------|
-| Variabile non dichiarata      | *"Errore di tipo: variabile 'x' usata ma non dichiarata"*  |
-| Tipo incompatibile            | *"Errore di tipo: operazione non valida tra Int e Bool"*   |
-| Assegnamento di tipo errato   | *"Errore di tipo: atteso Gram, trovato String"*            |
+| Errore                      | Messaggio                                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------------------- |
+| Variabile non dichiarata    | *Variable a assigned but never declared. @1:0*                                               |
+| Tipo incompatibile          | Type mismatch: numeric expression expected. @3:10                                            |
+| Assegnamento di tipo errato | *assigned value [1,2] of type ArrayType.INT is not compatible with type SimpleType.INT @1:0* |
 
+| Warning         | Messaggio                                   |     |
+| --------------- | ------------------------------------------- | --- |
+| Casting critico | Warning: unsafe cast from char to int @20:4 |     |
+questo warning appare quando si fanno dei casting tra valori solitamente non compatibili es: char --> int, bool --> char, int --> bool
 ### 4.2 Visibilità e scoping
 
-CookLang adotta lo **scoping lessicale** con **shadowing**. Ogni blocco `{ ... }` introduce un nuovo ambiente. Una variabile dichiarata in un blocco interno può avere lo stesso nome di una variabile esterna (la variabile interna la nasconde all'interno del blocco). All'uscita dal blocco, la variabile esterna ritorna visibile.
-
-Gli ingredienti dichiarati nella sezione `ingredientSection` risiedono nella memoria globale del programma e sono visibili da qualsiasi punto del programma.
+Le variabili in Valiryx sono definite solo all'inizio del programma
 
 ### 4.3 Valutazione delle espressioni
 
@@ -256,35 +269,22 @@ Le espressioni sono valutate in modo standard: tutti gli operandi vengono valuta
 ```
 Bool
 String
-Float
-├── Int
-|   ├── Gram
-|   └── Ml
-└── Temp
+Char
+Dec
+Int
 ```
-I tipi di dominio `Gram` e `Ml` sono sottotipo di `Int`: un valore di tipo `Gram` può essere usato dove è atteso un `Int`. A sua volta, `Int` è sottotipo di `Float`. Il tipo di dominio `Temp` è sottotipo di `Float`, ma non di `Int`. Le conversioni numeriche seguono le catene:
 
-$$
-    \text{Gram} \subsetneq \text{Int} \subsetneq \text{Float} \\
-    \text{Ml} \subsetneq \text{Int} \subsetneq \text{Float} \\
-    \text{Temp} \subsetneq \text{Float}
-$$
-
-Sono previste le seguenti **conversioni implicite**, applicate *solo in espressioni miste*:
-- `Int` → `Float` 
-- `Gram` / `Ml` → `Int`
-- `Temp` → `Float`
-
-Il linguaggio nella versione attuale non prevede **conversioni esplicite**. Si può forzare una conversione tramite espressioni aritmetiche negli assegnamenti (ad esempio, `Float x = intVal + 0.0`).
+Il linguaggio nella versione attuale prevede **conversioni esplicite** utilizzando la sintassi del tipo: (TIPO) VAR
 
 ### 4.5 Gestione degli errori a runtime
 
 Gli errori a tempo d'esecuzione vengono intercettati dall'interprete e riportati con messaggi esplicativi, **senza terminare** bruscamente il programma. Gli errori gestiti includono:
 
-| Errore                        | Messaggio                                                  |
-|-------------------------------|------------------------------------------------------------|
-| Divisione per zero            | *"Errore a runtime: divisione per zero"*                   |
-| Indice array fuori limite     | *"Errore a runtime: indice 7 fuori dai limiti (size=5)"*   |
+| Errore                        | Messaggio                                                      |
+| ----------------------------- | -------------------------------------------------------------- |
+| Divisione per zero            | *"Division by zero"*                                           |
+| Indice array fuori limite     | *"Index out of bounds 7 array size 2"*                         |
+| Esponente negativo con base 0 | *"Exponential base cannot be zero with exponent lower than 0"* |
 
 ### 4.6 Semantica operazionale
 

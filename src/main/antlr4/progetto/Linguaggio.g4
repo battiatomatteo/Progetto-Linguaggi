@@ -157,7 +157,7 @@ fragment STRCHR : ~["\\\r\n] | ESC ;
 fragment ESC    : '\\' [btnfr"'\\] ;
 fragment CHARCHR : ~['\\\r\n] | ESC ;
 
-ID : [a-zA-Z]+ ;
+ID : [a-zA-Z] [a-zA-Z0-9]* ;
 
 COMMENT : '//' ~[\r\n]* -> skip;
 COMMENT_ML : '/*' (.)*? '*/' -> skip;
