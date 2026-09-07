@@ -39,22 +39,29 @@ Valyrix punta ad essere un linguaggio semplice con una sintassi simile a C e Jav
 - **Java 11** o superiore, necessario per ANTLR
 - **ANTLR 4** (versione 4.11 o superiore) 
 
-### Generare il parser
+### Installazione programma
 
-```bash
-# dalla directory radice del progetto:
-antlr4 -Dlanguage=Python3 -visitor -no-listener CookLang.g4 -o source
+```powershell
+mvn clean install
+mvn clean compile
 ```
 
-Questo genera i file `CookLangLexer.py`, `CookLangParser.py`, e `CookLangVisitor.py` nella cartella `source`.
+`mvn clean compile` pulisce i file generati in precedenza e compila il progetto. `mvn clean install`, oltre a pulire e compilare, esegue i test, crea il pacchetto del progetto e lo installa nel repository locale di Maven.
 
-### Eseguire un programma***
+### Eseguire un programma
 
 ```bash
-python3 source/main.py programs/hello.cook
+mvn exec:java "-Dexec.mainClass=progetto.Main" "-Dexec.args=.\programs\helloWorld.vlrx"
 ```
 
-Questo eseguire l'interprete del linguaggio sul programma `hello.cook` contenuto nella cartella `programs`.
+Questo esegue l'interprete del linguaggio sul programma `helloWorld.vlrx` contenuto nella cartella `programs`.
+
+> Per effettuare eventuali test :
+
+```bash
+mvn test-compile
+mvn test-compile exec:java "-Dexec.mainClass=Test" "-Dexec.classpathScope=test"
+```
 
 ### Hello World
 
