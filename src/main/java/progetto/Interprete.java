@@ -367,11 +367,6 @@ public class Interprete extends LinguaggioBaseVisitor<Value>{
     }
 
     @Override
-    public ComValue visitNop(LinguaggioParser.NopContext ctx) {
-        return ComValue.INSTANCE;
-    }
-
-    @Override
     public NumValue<?> visitNumeric(LinguaggioParser.NumericContext ctx) {
         return (NumValue<?>) visit(ctx.num());
     }

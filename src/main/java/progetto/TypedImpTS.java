@@ -383,11 +383,6 @@ public class TypedImpTS extends LinguaggioBaseVisitor<Type> {
         return ComType.INSTANCE;
     }
 
-    @Override
-    public ComType visitNop(LinguaggioParser.NopContext ctx) {
-        return ComType.INSTANCE;
-    }
-
     private SimpleType aritmeticOperation(LinguaggioParser.ExpContext ctx, SimpleType left, SimpleType right) {
         if (left != right) {
             throw new TypeMismatchException(getError(ctx,
