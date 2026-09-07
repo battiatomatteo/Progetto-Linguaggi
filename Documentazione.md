@@ -13,10 +13,10 @@ Valyrix
 
 ## 1. Introduzione
 
-*Valyrix* è un linguaggio di programmazione imperativo tipizzato general-purpose ma non presenta la possibilita' di instanziare classi.
+*Valyrix* è un linguaggio di programmazione imperativo tipizzato general-purpose ma non presenta la possibilità di instanziare classi.
 ### Caratteristiche principali
 
-- **Tipizzazione statica** con i tipi di dato piu' comuni (int,dec,bool,string,char)
+- **Tipizzazione statica** con i tipi di dato più comuni (int,dec,bool,string,char)
 - **Due sezioni distinte**: una sezione per dichiarare le variabili, ed una sezione per il codice eseguibile.
 - **Espressioni aritmetico-logiche** complete con precedenza degli operatori.
 - **Costrutti iterativi e condizionali**: `while`, `for`, `if`-`else`.
@@ -125,7 +125,7 @@ string s = "prova";
 int[] array = [1, 2, 3];
 ```
 
- Nella fase di dichiarazione l'inizializzazione e' opzionale, ma deve essere effettuata nel codice prima dell'utilizzo della variabile, in caso contrario avviene un errore di mancata inizializzazione. Le variabili sono globali e posso essere dichiarate solo all'inizio del programma, non esiste di conseguenza  shadowing delle variabili nel codice.
+ Nella fase di dichiarazione l'inizializzazione è opzionale, ma deve essere effettuata nel codice prima dell'utilizzo della variabile, in caso contrario avviene un errore di mancata inizializzazione. Le variabili sono globali e posso essere dichiarate solo all'inizio del programma, non esiste di conseguenza  shadowing delle variabili nel codice.
 
 ### 3.4 Assegnamenti
 
@@ -164,7 +164,7 @@ Le espressioni supportano la **precedenza standard** degli operatori (dal più b
 int numero = 5;
 String msg = (numero % 2 == 0) ? "pari" : "dispari"
 ```
-La variabile `msg` viene assegnata con la stringa *"pari"* se la variabile numero e' divisibile per 2 con resto 0, altrimenti viene assegnato con la stringa *"dispari"* .
+La variabile `msg` viene assegnata con la stringa *"pari"* se la variabile numero è divisibile per 2 con resto 0, altrimenti viene assegnato con la stringa *"dispari"* .
 
 ### 3.6 Costrutti di controllo
 
@@ -244,7 +244,7 @@ exit;   // termina immediatamente l'esecuzione del programma
 
 ### 4.1 Tipizzazione
 
-CookLang adotta **tipizzazione statica**: ogni variabile deve essere dichiarata con un tipo esplicito, e il tipo non cambia durante l'esecuzione. Le verifiche di tipo avvengono prima di eseguire un programma tramite un **type system**, il quale riporta errori segnalati con messaggi descrittivi. Gli errori gestiti staticamente includono:
+ Valyrix adotta **tipizzazione statica**: ogni variabile deve essere dichiarata con un tipo esplicito, e il tipo non cambia durante l'esecuzione. Le verifiche di tipo avvengono prima di eseguire un programma tramite un **type system**, il quale riporta errori segnalati con messaggi descrittivi. Gli errori gestiti staticamente includono:
 
 | Errore                      | Messaggio                                                                                    |
 | --------------------------- | -------------------------------------------------------------------------------------------- |
