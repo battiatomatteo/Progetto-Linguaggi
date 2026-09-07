@@ -252,9 +252,9 @@ exit;   // termina immediatamente l'esecuzione del programma
 | Tipo incompatibile          | Type mismatch: numeric expression expected. @3:10                                            |
 | Assegnamento di tipo errato | *assigned value [1,2] of type ArrayType.INT is not compatible with type SimpleType.INT @1:0* |
 
-| Warning         | Messaggio                                   |     |
-| --------------- | ------------------------------------------- | --- |
-| Casting critico | Warning: unsafe cast from char to int @20:4 |     |
+| Warning         | Messaggio                                   |
+| --------------- | ------------------------------------------- |
+| Casting critico | Warning: unsafe cast from char to int @20:4 |
 questo warning appare quando si fanno dei casting tra valori solitamente non compatibili es: char --> int, bool --> char, int --> bool
 ### 4.2 Visibilità e scoping
 
