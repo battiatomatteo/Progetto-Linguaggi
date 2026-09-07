@@ -421,7 +421,7 @@ public class Interprete extends LinguaggioBaseVisitor<Value>{
         NumValue<?> base = visitNumExp(ctx.exp(0));
         NumValue<?> exponent = visitNumExp(ctx.exp(1));
 
-        if(unwrapToDouble(base) == 0.0){
+        if(unwrapToDouble(base) == 0.0 && unwrapToDouble(exponent) < 0.0) {
             throw new ArithmeticException("Exponential base cannot be zero");
         }
 
@@ -440,7 +440,7 @@ public class Interprete extends LinguaggioBaseVisitor<Value>{
         NumValue<?> left = visitNumExp(ctx.exp(0));
         NumValue<?> right = visitNumExp(ctx.exp(1));
         if(ctx.op.getType() == LinguaggioParser.DIV ||  ctx.op.getType() == LinguaggioParser.MOD){
-            if(unwrapToDouble(right) == 0.0){
+            if(unwrapToDouble(right) == 0.0) {
                 throw new ArithmeticException("Division by zero");
             }
         }

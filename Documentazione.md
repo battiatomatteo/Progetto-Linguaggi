@@ -26,9 +26,9 @@ Valyrix
 - **Operatore Non Deterministico** presenza di un operatore che esegue una istruzione casuale tra un insieme di comandi
 - **Casting esplicito** casting esplicito, permette conversione tra tutti i tipi di dato semplici e tra tutti i tipi di dato array 
 - **Flusso di Controllo Condizionato** Supporto per un costrutto iterativo con possibilita' di uscita prematura dall’iterazione tramite un apposito comando. Compatibile con solo con il ciclo for.
-### Contesto applicativo***
+### Contesto applicativo
 
-Valiryx punta ad essere un linguaggio semplice con una sintassi simile a C e Java.
+Valyrix punta ad essere un linguaggio semplice con una sintassi simile a C e Java.
 
 ---
 
@@ -39,7 +39,7 @@ Valiryx punta ad essere un linguaggio semplice con una sintassi simile a C e Jav
 - **Java 11** o superiore, necessario per ANTLR
 - **ANTLR 4** (versione 4.11 o superiore) 
 
-### Generare il parser***
+### Generare il parser
 
 ```bash
 # dalla directory radice del progetto:
@@ -56,9 +56,9 @@ python3 source/main.py programs/hello.cook
 
 Questo eseguire l'interprete del linguaggio sul programma `hello.cook` contenuto nella cartella `programs`.
 
-### Hello World***
+### Hello World
 
-Un programma per iniziare con Valiryx .
+Un programma per iniziare con Valyrix .
 ```valiryx
 string name;
 input name;
@@ -97,7 +97,7 @@ for i from 0 to end{
 
 ### 3.1 Struttura di un programma
 
-Un programma Valiryx è composto da due sezioni:
+Un programma Valyrix è composto da due sezioni:
 
 ```valiryx
 main : decl com EOF
@@ -258,7 +258,7 @@ CookLang adotta **tipizzazione statica**: ogni variabile deve essere dichiarata 
 questo warning appare quando si fanno dei casting tra valori solitamente non compatibili es: char --> int, bool --> char, int --> bool
 ### 4.2 Visibilità e scoping
 
-Le variabili in Valiryx sono definite solo all'inizio del programma
+Le variabili in Valyrix sono definite solo all'inizio del programma
 
 ### 4.3 Valutazione delle espressioni
 
@@ -288,32 +288,7 @@ Gli errori a tempo d'esecuzione vengono intercettati dall'interprete e riportati
 
 ### 4.6 Semantica operazionale
 
-Di seguito alcune regole di transizione della semantica operazionale di CookLang. Lo stato è una coppia $(\overline{\sigma}, c)$ dove $\overline{\sigma} = \sigma_1 \cdot \sigma_2 \cdot \ldots \cdot \sigma_n$ è una pila di memorie (una memoria $\sigma$ è una mappa da identificatori a valori) e $c$ è il comando (o l'espressione) da valutare. La pila, con ultimo elemento inserito a sinistra, è necessaria per gestire lo scoping delle variabili all'interno di blocchi di codice.
-
-**Blocco**
-
-$$
-    \text{Block} ~ \frac{
-        -
-    }{
-        (\overline{\sigma},\ \{ c \}) \rightarrow (\sigma \cdot \overline{\sigma},\ \mathtt{block}(c))
-    }
-    ~ \sigma = \varnothing
-    \quad \quad
-    \text{BlockP} ~ \frac{
-        (\overline{\sigma},\ c) \rightarrow (\overline{\sigma}',\ c')
-    }{
-        (\overline{\sigma},\ \mathtt{block}(c)) \rightarrow (\overline{\sigma}',\ \mathtt{block}(c'))
-    }
-    \quad \quad
-    \text{BlockE} ~ \frac{
-        -
-    }{
-        (\sigma \cdot \overline{\sigma},\ \mathtt{block}(\epsilon)) \rightarrow (\overline{\sigma}',\ \epsilon)
-    }
-$$
-
-dove $\sigma = \varnothing$ indica che la memoria $\sigma$ è vuota, mentre $\sigma \cdot \overline{\sigma}$ indica una pila con ultimo elemento inserito $\sigma$ e continuazione $\overline{\sigma}$.
+....
 
 **Ciclo while**
 
@@ -346,25 +321,40 @@ $$
 
 ## 5. Implementazione
 
+...
+
+...
+
 ### 5.1 Struttura del progetto
 
 ```
-CookLang/
-├── CookLang.g4          # Grammatica ANTLR4
-├── source/
-│   ├── main.py          # Entry point
-│   ├── interpreter.py   # Visitor principale (interprete)
-|   ├── ts.py            # Visitor secondario (type system)
-│   ├── memory.py        # Gestione delle memorie/scope
-│   ├── types.py         # Gerarchia dei tipi e controllo
-│   └── errors.py        # Classi di errore custom
-├── programs/            # Programmi d'esempio
-│   ├── hello.cook
-│   ├── pasta.cook
-│   ├── biscotti.cook
-│   ├── fibonacci.cook
-│   └── errori.cook
-└── doc.md               # Documentazione
+documentazione.md
+documentazione.pdf
+pom.xml
+src/
+├── main
+│   ├──  java/ 
+│   │   ├── config/
+│   │   │   └── config.json - ProgramConfig.java
+│   │   └── progetto/
+│   │       ├── exception/ tutti i file exception
+│   │       ├── type/ tutti i file con le tipologie
+│   │       ├── utils/ tutti i file che contengono metodi ed altro che vengono usati nel progetto
+│   │       ├── value/ tutti i file value
+│   │       ├── Interprete.java
+│   │       ├── Main.java
+│   │       ├── Mem.java
+│   │       └── TypedImoTS.java
+│   ├──  antlr4/ 
+│   │   └── progetto/Linguaggio.g4
+│   └──   resources /           
+│
+└── test/
+    └── java/
+        ├── output/
+        ├── TestClasses/ tutte le tipologie di test divise per classi
+        ├── TestMenu/ tutti i file menu compreso il main che lo gestisce
+        └── Test.java
 ```
 
 ### 5.2 L'interprete
@@ -374,8 +364,6 @@ L'interprete è implementato come un **visitor** generato da ANTLR4 (`CookLangVi
 Il metodo `visitProgram` inizializza la memoria globale con gli ingredienti e poi avvia la visita della sezione `procedureSection`. Lo stato è mantenuto attraverso una pila di memorie (`Environment`), uno per ogni blocco annidato.
 
 ### 5.3 Gestione dello scope
-
-La classe `Environment` implementa una pila di memorie. Ogni inserimento (*push*) crea un nuovo frame locale, mentre ogni estrazione (*pop*) lo rimuove. La ricerca di una variabile avviene risalendo la pila. Le scritture avvengono nel frame più in alto che dichiara la variabile (o nel frame corrente per le nuove dichiarazioni).
 
 ### 5.4 Zucchero sintattico
 
