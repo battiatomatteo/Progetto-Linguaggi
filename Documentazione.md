@@ -1,6 +1,6 @@
 ### **Valyrix**
 
-*Valyrix* è un linguaggio di programmazione general-purpose che utilizza una sintassi simile a java ma non presenta la possibilità di instanziare classi.
+*Valyrix* è un linguaggio di programmazione general-purpose.
 
 ## Indice
 
@@ -25,7 +25,7 @@
 - **Gestione degli errori**: divisione per zero, accesso fuori dai limiti di un array, variabile non dichiarata, errori di tipo (tutti gestiti con messaggi esplicativi).
 - **Operatore Non Deterministico** presenza di un operatore che esegue una istruzione casuale tra un insieme di comandi
 - **Casting esplicito** casting esplicito, permette conversione tra tutti i tipi di dato semplici e tra tutti i tipi di dato array 
-- **Flusso di Controllo Condizionato** Supporto per un costrutto iterativo con possibilita' di uscita prematura dall’iterazione tramite un apposito comando. Compatibile con solo con il ciclo for.
+- **Flusso di Controllo Condizionato** Supporto per un costrutto iterativo con possibilità di uscita prematura dall’iterazione tramite un apposito comando. Compatibile con solo con il ciclo for.
 ### Contesto applicativo
 
 Valyrix punta ad essere un linguaggio semplice con una sintassi simile a C e Java.
@@ -38,6 +38,7 @@ Valyrix punta ad essere un linguaggio semplice con una sintassi simile a C e Jav
 
 - **Java 11** o superiore, necessario per ANTLR
 - **ANTLR 4** (versione 4.11 o superiore) 
+- **MAVEN** ( versione 3.7.1 o superiore )
 
 ### Installazione programma
 
@@ -66,7 +67,7 @@ mvn test-compile exec:java "-Dexec.mainClass=Test" "-Dexec.classpathScope=test"
 ### Hello World
 
 Un programma per iniziare con Valyrix .
-```valiryx
+```Valyrix
 string name;
 input name;
 print "Ciao " :: name 
@@ -78,7 +79,7 @@ print "Ciao " :: name
 > Ciao Mario
 
 Un esempio di programma in Valyrix che effettua semplici operazioni aritmiche
-```valiryx
+```Valyrix
 int num = 5;
 int i;
 int end = 10;
@@ -106,7 +107,7 @@ for i from 0 to end{
 
 Un programma Valyrix è composto da due sezioni:
 
-```valiryx
+```ANTLR
 main : decl com EOF
 ```
 
@@ -125,7 +126,7 @@ main : decl com EOF
 
 ### 3.3 Dichiarazione di variabili
 
-```valiryx
+```Valyrix
 int x = 8;
 dec z;    // la variabile deve essere valorizzata prima dell'utilizzo
 string s = "prova";
@@ -136,7 +137,7 @@ int[] array = [1, 2, 3];
 
 ### 3.4 Assegnamenti
 
-```valiryx
+```Valyrix
 int x = 30;
 int y = 5;
 x += 5;    // equivalente a x = x + 5
@@ -167,7 +168,7 @@ Le espressioni supportano la **precedenza standard** degli operatori (dal più b
 | 7       | Accesso array `arr[i]`                             |
 
 **Operatore ternario:**
-```
+``` Valyrix
 int numero = 5;
 String msg = (numero % 2 == 0) ? "pari" : "dispari"
 ```
@@ -176,7 +177,7 @@ La variabile `msg` viene assegnata con la stringa *"pari"* se la variabile numer
 ### 3.6 Costrutti di controllo
 
 **Condizionale:**
-```valiryx
+```Valyrix
 if (numero < 0) {
     print "Numero negativo"
 } else {
@@ -185,7 +186,7 @@ if (numero < 0) {
 ```
 
 **Ciclo while:**
-```valiryx
+```Valyrix
 Int i = 0;
 while (i < 5) {
     print "numero " :: ${i};
@@ -194,7 +195,7 @@ while (i < 5) {
 ```
 
 **Ciclo for:**
-```valiryx
+```Valyrix
 for i from 1 to 10 {
     print "numero " :: ${i};
     if(i == 5){
@@ -207,7 +208,7 @@ I cicli while e for possono terminare anticipatamente con l'utilizzo dell'istruz
 
 ### 3.7 Stampa e interpolazione nelle stringhe
 
-```valiryx
+```Valyrix
 print "Testo semplice";
 print i"Risultato: ${x + y} unità";
 print i"Il doppio di ${n} è ${n * 2}";
@@ -217,7 +218,7 @@ Le stringhe interpolate sono comprese tra "${" e "}", e contengono espressioni d
 
 ### 3.8 Array
 
-```valiryx
+```Valyrix
 int[] a = [1, 2, 3];
 int n = 2;
 print a;  
@@ -227,13 +228,13 @@ print a
 
 ### 3.9 Uscita dal programma
 
-```valiryx
+```Valyrix
 exit;   // termina immediatamente l'esecuzione del programma
 ```
 
 ### 3.10 Commenti
 
-```valiryx
+```Valyrix
 // Commento su una riga
 /* Commento
    su più righe */
@@ -281,7 +282,7 @@ Dec
 Int
 ```
 
-Il linguaggio nella versione attuale prevede **conversioni esplicite** utilizzando la sintassi del tipo: (TIPO) VAR
+Il linguaggio nella versione attuale prevede **conversioni esplicite** utilizzando la sintassi del tipo: **(TIPO) VAR**
 
 ### 4.5 Gestione degli errori a runtime
 
@@ -367,15 +368,17 @@ $$
 documentazione.md
 documentazione.pdf
 pom.xml
-src/
+programs/  programmi di test
+sources/
 ├── main
 │   ├──  java/ 
 │   │   ├── config/
+│   │   │   ├── ProgramConfig.java
 │   │   │   └── config.json - ProgramConfig.java
 │   │   └── progetto/
 │   │       ├── exception/ tutti i file exception
 │   │       ├── type/ tutti i file con le tipologie
-│   │       ├── utils/ tutti i file che contengono metodi ed altro che vengono usati nel progetto
+│   │       ├── utils/ file contenenti metodi utilizzati nel progetto
 │   │       ├── value/ tutti i file value
 │   │       ├── Interprete.java
 │   │       ├── Main.java
@@ -387,7 +390,6 @@ src/
 │
 └── test/
     └── java/
-        ├── output/
         ├── TestClasses/ tutte le tipologie di test divise per classi
         ├── TestMenu/ tutti i file menu compreso il main che lo gestisce
         └── Test.java
@@ -434,7 +436,7 @@ Il costrutto può avere o meno una scelta predefinita (default) da eseguire quan
 
 ### `helloworld.vlrx` – Hello world
 
-```
+``` Valyrix
 int numeroFortunato = 5;  
 print "Hello World!" :: "\nnumero di oggi " :: numeroFortunato
 ```
