@@ -1,0 +1,21 @@
+int scelta = 0;
+int ind;
+string t;
+int estratto;
+for ind from 0 to 3{
+    print "tenta la fortuna inserendo un numero intero";
+    input t;
+    scelta = (int) t;
+    <<estratto = scelta @ estratto = scelta @ estratto = -100>>;
+    if(estratto != -100){
+        print "hai vinto "
+    }
+    else{
+        if(scelta == -100){
+            print "non avevi possibilita' di vincere, hai messo il numero perdente"
+        }
+        else{
+            print "hai perso "
+        }
+    }
+}

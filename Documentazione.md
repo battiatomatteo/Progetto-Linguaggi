@@ -1,6 +1,6 @@
 Valyrix
 
-*Valyrix* è un linguaggio di programmazione general-purpose che utilizza una sintassi simile a java ma non presenta la possibilita' di instanziare classi.
+*Valyrix* è un linguaggio di programmazione general-purpose che utilizza una sintassi simile a java ma non presenta la possibilità di instanziare classi.
 
 ## Indice
 
@@ -16,7 +16,7 @@ Valyrix
 *Valyrix* è un linguaggio di programmazione imperativo tipizzato general-purpose ma non presenta la possibilità di instanziare classi.
 ### Caratteristiche principali
 
-- **Tipizzazione statica** con i tipi di dato più comuni (int,dec,bool,string,char)
+- **Tipizzazione statica** con i tipi di dato più comuni (int, dec, bool, string, char)
 - **Due sezioni distinte**: una sezione per dichiarare le variabili, ed una sezione per il codice eseguibile.
 - **Espressioni aritmetico-logiche** complete con precedenza degli operatori.
 - **Costrutti iterativi e condizionali**: `while`, `for`, `if`-`else`.
@@ -77,7 +77,7 @@ print "Ciao " :: name
 **Output** <br>
 > Ciao Mario
 
-Un esempio di programma in Valiryx che effettua semplici operazioni aritmiche
+Un esempio di programma in Valyrix che effettua semplici operazioni aritmiche
 ```valiryx
 int num = 5;
 int i;
@@ -295,7 +295,40 @@ Gli errori a tempo d'esecuzione vengono intercettati dall'interprete e riportati
 
 ### 4.6 Semantica operazionale
 
-....
+ **Semantica dell'if-else**
+
+Per il comando:
+
+$$
+if(e)\;c_1\;else\;c_2\
+$$
+
+si hanno due regole di transizione, a seconda del valore della condizione (true o false).
+La memoria $\sigma$ non viene modificata durante la scelta del ramo.
+Se la condizione $e$ valutata nella memoria  $\sigma$ restituisce `true`, viene eseguito il comando $c_1$ 
+altrimenti se la valutazione restituisce `false` viene eseguito il comando $c_2$
+#### Condizione vera
+
+$$
+\frac{
+e \rightarrow true
+}{
+(\sigma,\;if(e)\{c_1\}\;else\;\{c_2\})
+\rightarrow
+(\sigma,c_1)
+}
+$$
+#### Condizione falsa
+
+$$
+\frac{
+e \rightarrow false
+}{
+(\sigma,\;if(e)\{c_1\}\;else\;\{c_2\})
+\rightarrow
+(\sigma,c_2)
+}
+$$
 
 **Ciclo while**
 
@@ -327,10 +360,6 @@ $$
 
 
 ## 5. Implementazione
-
-...
-
-...
 
 ### 5.1 Struttura del progetto
 
@@ -388,167 +417,159 @@ L'interpolazione delle stringhe (`i"...${expr}..."`) è gestita con una sezione 
 
 ## 6. Programmi di Test
 
-### `hello.cook` – Hello world
+### `helloworld.vlrx` – Hello world
 
 ```
-procedure: {
-    String nome = "Pasta al Pomodoro";
-    print i"Benvenuto in CookLang! Ricetta: ${nome}";
-}
+int numeroFortunato = 5;  
+print "Hello World!" :: "\nnumero di oggi " :: numeroFortunato
 ```
 > **Output atteso** <br>
-> Benvenuto in CookLang! Ricetta: Pasta al Pomodoro
+> Hello World!
+   numero di oggi 5
 
-### `pasta.cook` – Cottura con ciclo e operatore ternario
+### `estrazione.vlrx` – Cottura con ciclo e operatore ternario
 
-```
-// Simulazione cottura pasta con controllo temperatura
-ingredients:
-    Temp temperaturaAcqua = 20;
-    Int  minutiCottura    = 0;
-    Int  tempoRichiesto   = 10;
-
-procedure: {
-    // Portare l'acqua a ebollizione
-    print "Riscaldamento acqua...";
-    while (temperaturaAcqua < 100) {
-        temperaturaAcqua += 10;
-    }
-    print i"Acqua in ebollizione: ${temperaturaAcqua}°C";
-
-    // Cuocere la pasta
-    print "Cottura pasta in corso...";
-    for minutiCottura from 1 to tempoRichiesto {
-        String stato = (minutiCottura < tempoRichiesto) ? "in cottura" : "pronta!";
-        print i"Minuto ${minutiCottura}: pasta ${stato}";
-    }
-
-    print "Buon appetito!";
+``` Valyrix
+int scelta = 0;  
+int ind;  
+string t;  
+int estratto;  
+for ind from 0 to 3{  
+    print "tenta la fortuna inserendo un numero intero";  
+    input t;  
+    scelta = (int) t;  
+    <<estratto = scelta @ estratto = scelta @ estratto = -100>>;  
+    if(estratto != -100){  
+        print "hai vinto "  
+    }  
+    else{  
+        if(scelta == -100){  
+            print "non avevi possibilita' di vincere, hai messo il numero perdente"  
+        }  
+        else{  
+            print "hai perso "  
+        }  
+    }  
 }
 ```
 > **Output atteso**             <br>
-> Riscaldamento acqua...        <br>
-> Acqua in ebollizione: 100°C   <br>
-> Cottura pasta in corso...     <br>
-> Minuto 1: pasta in cottura    <br>
-> Minuto 2: pasta in cottura    <br>
-> ...                           <br>
-> Minuto 10: pasta pronta!      <br>
-> Buon appetito!
+> tenta la fortuna inserendo un numero intero
+   5 
+   hai vinto  <br>
+   tenta la fortuna inserendo un numero intero
+   3
+   hai vinto    <br>
+   tenta la fortuna inserendo un numero intero
+   8
+   hai vinto
 
-### `biscotti.cook` – Ridimensionamento ricetta con operatori composti
+### `mod_array_int.cook` – Modifica di un array intero inserito da console
 
-```
-// Ricetta biscotti al burro – ridimensionamento automatico
-ingredients:
-    Gram farina   = 300;
-    Gram burro    = 150;
-    Gram zucchero = 120;
-    Int  uova     = 2;
-    Int  porzioni = 12;
-
-procedure: {
-    Int nuovePorzioni = 24;
-    Float fattore = nuovePorzioni / porzioni;
-
-    farina   *= fattore;
-    burro    *= fattore;
-    zucchero *= fattore;
-    uova     *= fattore;
-
-    print i"-- Ricetta per ${nuovePorzioni} biscotti";
-    print i"Farina:   ${farina}g";
-    print i"Burro:    ${burro}g";
-    print i"Zucchero: ${zucchero}g";
-    print i"Uova:     ${uova}";
-}
+``` Valyrix
+int[] x = [0, 0, 0, 0, 0];  
+int num;  
+int ind;  
+string t;  
+print "Quanti numeri vuoi inserire ?";  
+input t;  
+num = (int) t;  
+if(num > 5){  
+    print("Mi dispiace sono troppi non ne voglio di piu' di 5 ;) ");  
+    num = 5  
+};  
+if(num < 1){  
+    print("Se non vuoi inserire numeri potevi anche non avviare il programma ;) ");  
+    exit  
+};  
+for ind from 0 to num {  
+    print "inserire un numero intero:";  
+    input t;  
+    x[ind] = (int) t  
+};  
+print "Array inserito " :: x;  
+for ind from 0 to num {  
+    if(ind % 2 == 0){  
+        x[ind] = x[ind] * 5  
+    }  
+    else{  
+        x[ind] = x[ind] - 2  
+    }  
+};  
+print "Array modificato " :: x
 ```
 > **Output atteso**           <br>
-> -- Ricetta per 24 biscotti  <br>
-> Farina:   600g              <br>
-> Burro:    300g              <br>
-> Zucchero: 240g              <br>
-> Uova:     4
+> Quanti numeri vuoi inserire ?
+   4
+   inserire un numero intero:
+   1
+   inserire un numero intero:
+   2
+   inserire un numero intero:
+   3
+   inserire un numero intero:
+   4   <br>
+   Array inserito [1, 2, 3, 4, 0]
+   Array modificato [5, 0, 15, 2, 0]
 
-### `fibonacci.cook` – Algoritmo con array e scoping
+### `mini_menu_scelta.vlrx` – Mini menu a scelta
 
 ```
-// Calcolo dei primi N numeri di Fibonacci con array
-procedure: {
-    Int N = 10;
-
-    Int[] fib = new Int[N];
-    fib[0] = 0;
-    fib[1] = 1;
-
-    Int i = 2;
-    while (i < N) {
-        fib[i] = fib[i - 1] + fib[i - 2];
-        i++;
-    }
-
-    print i"Primi ${N} numeri di Fibonacci:";
-    for j from 0 to N - 1 {
-        print i"fib[${j}] = ${fib[j]}";
-    }
-
-    // Scoping: questa variabile locale non è visibile fuori dal blocco
-    {
-        Int somma = 0;
-        for k from 0 to N - 1 {
-            somma += fib[k];
-        }
-        print i"Somma: ${somma}";
-    }
-    // Qui 'somma' non è più accessibile
+int a;  
+int scelta;  
+int i;  
+int x;  
+string s;  
+print "Benvenuto";  
+print "Scegli quale tra le opzioni vuoi provare";  
+print "1 - countdown da 10 ";  
+print "2 - while";  
+input s;  
+a = 0;  
+scelta = (int) s;  
+print "";  
+if (scelta == 1 ) {  
+    for i from 0 to 10 {  
+        // print "for";  
+        a = i;  
+        print (string) a  
+    }  
+}  
+else{  
+    x = 0;  
+    while(x < 5){  
+        if(x == 2){  
+            print ">>fine anticipata";  
+            break  
+        }  
+        else{  
+            print ">>ciao"  
+        };  
+        x++  
+    }  
 }
 ```
 > **Output atteso**              <br>
-> Primi 10 numeri di Fibonacci:  <br>
-> fib[0] = 0                     <br>
-> fib[1] = 1                     <br>
-> fib[2] = 1                     <br>
-> fib[3] = 2                     <br>
-> fib[4] = 3                     <br>
-> fib[5] = 5                     <br>
-> fib[6] = 8                     <br>
-> fib[7] = 13                    <br>
-> fib[8] = 21                    <br>
-> fib[9] = 34                    <br>
-> Somma: 88
+> Benvenuto
+   Scegli quale tra le opzioni vuoi provare
+   1 - countdown da 10
+   2 - while
+   1 <br>
+   0
+   1
+   2
+   3
+   4
+   5
+   6
+   7
+   8
+   9 <br>
+   Benvenuto
+   Scegli quale tra le opzioni vuoi provare
+   1 - countdown da 10
+   2 - while
+   2   <br>
+   ciao
+   ciao
+   fine anticipata
 
-### `errori.cook` – Gestione errori a runtime
-
-```
-// Test della gestione degli errori
-procedure: {
-    Int x = 10;
-    Int y = 0;
-
-    // Test divisione per zero
-    // L'interprete segnala l'errore e continua
-    Int z = x / y;      // Errore runtime: divisione per zero
-
-    /*
-    Variabile non dichiarata
-    Il type system segnala l'errore ed il programma non esegue
-    print w;            // Errore di tipo: variabile 'w' usata ma non dichiarata
-    */
-    
-    // Test accesso illegale array
-    // L'interprete segnala l'errore e continua
-    Int[] arr = [1, 2, 3];
-    print arr[0];   
-    print arr[5];       // Errore runtime: indice 5 fuori dai limiti (size=3)
-
-    // Uscita anticipata
-    print "Fine programma";
-    exit;
-    print "Questa riga non viene stampata";
-}
-```
-> **Output atteso**                                                <br>
-> Errore runtime: divisione per zero alla riga 8                   <br>
-> 1                                                                <br>
-> Errore runtime: indice 5 fuori dai limiti (size=3) alla riga 20  <br>
-> Fine programma

@@ -18,7 +18,7 @@ public class TestCompleti extends GenericEntry{
             print "Benvenuto";
             print "Scegli quale tra le opzioni vuoi provare";
             print "1 - countdown da 10 ";
-            print "2 - ...";
+            print "2 - while";
             input s;
             a = 0;
             scelta = (int) s;

@@ -1,0 +1,30 @@
+int[] x = [0, 0, 0, 0, 0];
+int num;
+int ind;
+string t;
+print "Quanti numeri vuoi inserire ?";
+input t;
+num = (int) t;
+if(num > 5){
+    print("Mi dispiace sono troppi non ne voglio di piu' di 5 ;) ");
+    num = 5
+};
+if(num < 1){
+    print("Se non vuoi inserire numeri potevi anche non avviare il programma ;) ");
+    exit
+};
+for ind from 0 to num {
+    print "inserire un numero intero:";
+    input t;
+    x[ind] = (int) t
+};
+print "Array inserito " :: x;
+for ind from 0 to num {
+    if(ind % 2 == 0){
+        x[ind] = x[ind] * 5
+    }
+    else{
+        x[ind] = x[ind] - 2
+    }
+};
+print "Array modificato " :: x
