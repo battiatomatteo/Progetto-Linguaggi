@@ -395,19 +395,34 @@ src/
 
 ### 5.2 L'interprete
 
-L'interprete è implementato come un **visitor** generato da ANTLR4 (`CookLangVisitor`) in Python. La classe principale `CookLangInterpreter` estende `CookLangVisitor` e sovrascrive il metodo `visit*` per ogni produzione della grammatica.
+L'interprete è implementato come un **visitor** generato da ANTLR4 (`LinguaggioVisitor`) in Java. La classe principale `Interprete` estende `LinguaggioVisitor` e sovrascrive il metodo `visit*` per ogni produzione della grammatica.
 
-Il metodo `visitProgram` inizializza la memoria globale con gli ingredienti e poi avvia la visita della sezione `procedureSection`. Lo stato è mantenuto attraverso una pila di memorie (`Environment`), uno per ogni blocco annidato.
+Il metodo `visitMain` è il punto iniziale del programma  e poi avvia la visita della sezione `decl`. 
+### 5.3 Zucchero sintattico
 
-### 5.3 Gestione dello scope
+Gli operatori composti e gli operatori di incremento/decremento unitario sono gestiti direttamente nel visitor.
 
-### 5.4 Zucchero sintattico
+Come metodo alternativo serve per la scrittura delle espressioni che verranno interpretate come stringhe `${expr}`.
+Nel metodo `print` non serve utilizzare questo costrutto poiché viene effettuato il casting a stringa in modo implicito.
 
-Gli operatori composti e gli operatori di incremento/decremento unitario sono gestiti direttamente nel visitor: vengono tradotti nella corrispondente operazione semplice più un aggiornamento della memoria.
+### 5.4 Non determinismo 
 
-L'interpolazione delle stringhe (`i"...${expr}..."`) è gestita con una sezione lessicale separata nel lexer ANTLR. L'interprete per questo sotto-linguaggio costruisce la stringa finale valutando ogni parte testuale e ogni espressione embedded, convertendo il risultato a stringa, e concatenando tutte le componenti.
+L'operatore non deterministico esegue un comando tratto da una lista con una probabilità proporzionale alla dimensione della lista. Ad esempio, la valutazione del comando x = 1 @ x = 2 esegue il comando x = 1 con probabilità 1/2 (o il comando x = 2 con probabilità 1/2), mentre
+la valutazione del comando x = 1 @ x = 2 @ x = 3 esegue il comando x = 1 con
+probabilità 1/3. 
 
-### 5.5 Difficoltà tecniche
+Per ottenere input da tastiera si utilizza il comando `input` ( `var` ) dove `var` è una variabile di tipo stringa in cui verrà salvata una serie di caratteri fino allo `\n` prelevati da `console`.
+
+### 5.5 Flusso di controllo condizionato
+
+All'interno del linguaggio esiste un costrutto ( `break` ) per interrompere le iterazioni di un ciclo e causarne  l'uscita prematura. Il costrutto `for` prevede inoltre un blocco di codice da eseguire se e solo se la condizione d’iterazione diventa falsa (quindi il comando di uscita prematura non viene eseguito). 
+Ad esempio, nel seguente comando for i from 2 to (n-1) { if (n % i == 0) break }{ print "Not prime!"} la stampa a video avviene solo quando n non è un numero primo.
+Viceversa, se n è un numero primo nulla viene stampato ed il ciclo viene interrotto, ad un certo punto, dal comando break.
+Il linguaggio supporta un costrutto condizionale a scelta multipla (switch), nel quale l’espressione di controllo può assumere uno dei valori tra quelli a scelta. Solo il blocco di codice relativo ad una
+delle scelte viene eseguito.
+Il costrutto può avere o meno una scelta predefinita (default) da eseguire quando nessuna scelta è percorribile .
+
+### 5.6 Difficoltà tecniche
 
 - **Interpolazione nelle stringhe**: la gestione dei token nel lexer di ANTLR ha richiesto attenzione per evitare conflitti tra i simboli `{` e `}` (usati sia per delimitare blocchi di codice, sia per delimitare espressioni nelle stringhe). La soluzione adottata è stata quella di utilizzare i medesimi token in entrambi i casi, affidandosi alla priorità delle sezioni lessicali per disambiguare.
 
