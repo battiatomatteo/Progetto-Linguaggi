@@ -282,7 +282,10 @@ Dec
 Int
 ```
 
-Il linguaggio nella versione attuale prevede **conversioni esplicite** utilizzando la sintassi del tipo: **(TIPO) VAR**
+Il linguaggio nella versione attuale prevede **conversioni esplicite** utilizzando la sintassi del tipo: **(TIPO) VAR**.
+
+> NB :
+> Il tipo `dec` è implementato come tipo `double` in java .
 
 ### 4.5 Gestione degli errori a runtime
 
@@ -426,9 +429,9 @@ Il costrutto può avere o meno una scelta predefinita (default) da eseguire quan
 
 ### 5.6 Difficoltà tecniche
 
-- **Interpolazione nelle stringhe**: la gestione dei token nel lexer di ANTLR ha richiesto attenzione per evitare conflitti tra i simboli `{` e `}` (usati sia per delimitare blocchi di codice, sia per delimitare espressioni nelle stringhe). La soluzione adottata è stata quella di utilizzare i medesimi token in entrambi i casi, affidandosi alla priorità delle sezioni lessicali per disambiguare.
+- **Interpolazione nelle stringhe**: è stato necessario gestire con attenzione i simboli `{` e `}`, usati sia per i blocchi di codice sia per le espressioni all'interno delle stringhe.
 
-- **Tipizzazione statica**: poiché ANTLR non permette di specificare delle regole ti tipaggio, il controllo dei tipi avviene durante una prima visita con un interprete specifico  (type system), mentre l'esecuzione del programma avviene durante una seconda visita (interprete).
+- **Tipizzazione statica**: ANTLR non permette di definire direttamente le regole di tipaggio. Per questo, i tipi vengono controllati durante una prima visita del programma tramite un apposito interprete (type system), mentre l'esecuzione avviene durante una seconda visita tramite l'interprete.
 
 - **Gestione file progetto**: abbiamo riscontrato delle difficoltà a far interagire correttamente `MAVEN , ANTLR ed i file sorgenti`.
 
