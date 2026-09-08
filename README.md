@@ -43,17 +43,10 @@ probabilit`a 1/3. Supporto per un comando che cattura l’input da tastiera.
 
 #### Zucchero Sintattico  
 
-Supporto per operatori di pre e post incremento o decremento
-unitario, adottando la semantica degli operatori analoghi di Java. Supporto per
-comandi di assegnamento composto per le operazioni aritmetiche di base. Gli
-assegnamenti composti preservano la semantica degli assegnamenti semplici. Ad
-esempio, l’assegnamento composto x += 5 equivale all’assegnamento semplice x =
-x + 5. Supporto per un operatore ternario per le espressioni analogo all’operatore
-cond ? exp1 : exp2 di Java, il quale restituisce la valutazione di exp1 quando
-la valutazione di cond risulta vera. Restituisce la valutazione di exp2 quando la
-valutazione di cond risulta falsa. Supporto di espressioni all’interno delle stringhe
-del linguaggio. Ad esempio, il comando print "Risultato: ${x + y}" stampa a
-video ‘Risultato: 5’ se le variabili x e y contengono i valori 3 e 2, rispettivamente.
+Gli operatori composti e gli operatori di incremento/decremento unitario sono gestiti direttamente nel visitor: vengono tradotti nella corrispondente operazione semplice più un aggiornamento della memoria.
+
+Come metodo alternativo serve per la scrittura delle espressioni che verranno interpretate come stringhe `${expr}`.
+Nel metodo `print` non serve utilizzare questo costrutto poiché viene effettuato il casting a stringa in modo implicito.
 
 #### Flusso di Controllo Condizionato
 
