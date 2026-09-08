@@ -1,4 +1,4 @@
-Valyrix
+### **Valyrix**
 
 *Valyrix* è un linguaggio di programmazione general-purpose che utilizza una sintassi simile a java ma non presenta la possibilità di instanziare classi.
 
@@ -529,38 +529,41 @@ print "Array modificato " :: x
 ### `mini_menu_scelta.vlrx` – Mini menu a scelta
 
 ```
-int a;  
-int scelta;  
-int i;  
-int x;  
-string s;  
-print "Benvenuto";  
-print "Scegli quale tra le opzioni vuoi provare";  
-print "1 - countdown da 10 ";  
-print "2 - while";  
-input s;  
-a = 0;  
-scelta = (int) s;  
-print "";  
-if (scelta == 1 ) {  
-    for i from 0 to 10 {  
-        // print "for";  
-        a = i;  
-        print (string) a  
-    }  
-}  
-else{  
-    x = 0;  
-    while(x < 5){  
-        if(x == 2){  
-            print ">>fine anticipata";  
-            break  
-        }  
-        else{  
-            print ">>ciao"  
-        };  
-        x++  
-    }  
+int a;
+int scelta;
+int i;
+int x;
+string s;
+print "Benvenuto";
+print "Scegli quale tra le opzioni vuoi provare";
+print "1 - countdown da 10 ";
+print "2 - while";
+input s;
+a = 0;
+scelta = (int) s;
+print "";
+if (scelta == 1 ) {
+	for i from 0 to 10 {
+		// print "for";
+		a = i;
+		print (string) a
+	}
+};
+if(scelta == 2 ) {
+	x = 0;
+	while(x < 5){
+		if(x == 2){
+			print ">>fine anticipata";
+			break
+		}
+		else{
+			print ">>ciao"
+		};
+		x++
+	}
+}
+else{
+	print "Scelta non valida"
 }
 ```
 > **Output atteso**              <br>

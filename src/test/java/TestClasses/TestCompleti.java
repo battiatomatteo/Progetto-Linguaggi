@@ -29,8 +29,8 @@ public class TestCompleti extends GenericEntry{
                     a = i;
                     print (string) a
                 }
-            }
-            else{
+            };
+            if(scelta == 2 ) {
                 x = 0;
                 while(x < 5){
                     if(x == 2){
@@ -42,6 +42,9 @@ public class TestCompleti extends GenericEntry{
                     };
                     x++
                 }
+            }
+            else{
+                print "Scelta non valida"
             }
             """;
 
