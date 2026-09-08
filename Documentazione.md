@@ -428,7 +428,7 @@ Il costrutto può avere o meno una scelta predefinita (default) da eseguire quan
 
 - **Tipizzazione statica**: poiché ANTLR non permette di specificare delle regole ti tipaggio, il controllo dei tipi avviene durante una prima visita con un interprete specifico  (type system), mentre l'esecuzione del programma avviene durante una seconda visita (interprete).
 
-- **Scoping con shadowing**: la propagazione delle modifiche alle variabili esterne (ma non la creazione di nuove variabili locali nell'ambiente esterno) ha richiesto una logica di ricerca nella pila delle memorie distinta dalla logica di dichiarazione.
+- **Gestione file progetto**: abbiamo riscontrato delle difficoltà a far interagire correttamente `MAVEN , ANTLR ed i file sorgenti`.
 
 ## 6. Programmi di Test
 
