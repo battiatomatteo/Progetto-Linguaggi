@@ -80,7 +80,6 @@ public class TestCompleti extends GenericEntry{
                 }
             };
             print "Array modificato " :: x
-            
             """;
 
     public static final String test3 =

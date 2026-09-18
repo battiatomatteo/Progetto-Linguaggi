@@ -447,7 +447,7 @@ print "Hello World!" :: "\nnumero di oggi " :: numeroFortunato
 > Hello World!
    numero di oggi 5
 
-### `estrazione.vlrx` – Cottura con ciclo e operatore ternario
+### `estrazione.vlrx` – estrazione casuale
 
 ``` Valyrix
 int scelta = 0;  
@@ -483,7 +483,7 @@ for ind from 0 to 3{
    8
    hai vinto
 
-### `mod_array_int.cook` – Modifica di un array intero inserito da console
+### `mod_array_int.vlrx` – Modifica di un array intero inserito da console
 
 ``` Valyrix
 int[] x = [0, 0, 0, 0, 0];  
